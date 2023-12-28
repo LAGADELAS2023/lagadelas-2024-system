@@ -1,0 +1,39 @@
+<nav class="nav-cat">
+    <div class="nav-text">
+        LAGADELAS 2024
+    </div>
+    <div class="nav-text">
+        {{counter | formatTime}}
+    </div>
+</nav>
+<div class="flex">
+    <div class="sidebar">
+        <div *ngFor="let i of generateArray(50); let last = last" class="loop">
+            <a href="" class="indikator text-center flex align-items-center justify-content-center">
+                {{ i + 1 }}
+            </a>
+        </div>
+    </div>
+
+
+    <div class="soal-cat w-full">
+        <div *ngFor="let item of soal">
+            <p class="text-5xl mt-3">
+                {{ item.QUESTION_TEXT }}
+            </p>
+            <div *ngFor="let item_option of item.OPTIONS">
+                <div class="flex align-items-center mt-2 text-2xl">
+                    <p-radioButton [name]="item.QUEST_ID" [value]="item_option.ID_OPTIONS"
+                        [(ngModel)]="item.selectedOption" [inputId]="item_option.ID_OPTIONS"></p-radioButton>
+                    <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button *ngIf="soal.length != 0" pButton pRipple class="p-button-info" label="next"
+                (click)="nextQuestion()"></button>
+        </div>
+    </div>
+
+
+</div>
