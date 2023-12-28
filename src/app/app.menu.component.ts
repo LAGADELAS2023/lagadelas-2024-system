@@ -29,6 +29,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'REKAP NILAI', routerLink: ['/'] },
                     { label: 'VERIFIKASI REGU', routerLink: ['/verifikasi'] },
+                    { label: 'BUAT PIN SESI', routerLink: ['/admin/pin-session'] },
                 ]
             },
             {

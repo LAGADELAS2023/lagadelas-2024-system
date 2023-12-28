@@ -10,6 +10,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { GeneratepupukComponent } from './components/generatepupuk/generatepupuk.component';
 import { PupukComponent } from './components/pupuk/pupuk.component';
+import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
     imports: [
@@ -19,16 +21,17 @@ import { PupukComponent } from './components/pupuk/pupuk.component';
                 children: [
                     { path: '', component: DashboardComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
+                    { path: 'admin/pin-session', component: CreatePinSessionComponent },
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
             },
-            { path: 'cat/pupuk/:pages', component: PupukComponent },
+            { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },
             { path: 'pages/error', component: ErrorComponent },
             { path: 'pages/notfound', component: NotfoundComponent },
             { path: 'pages/access', component: AccessComponent },
-            { path: '**', redirectTo: 'pages/notfound' },
+            { path: '**', redirectTo: 'pages/login' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
     ],
     exports: [RouterModule]

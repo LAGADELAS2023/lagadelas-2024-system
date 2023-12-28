@@ -17,7 +17,7 @@ export class PupukComponent implements OnInit, OnDestroy {
   counter = 60;
   tick = 1000;
   soal = [];
-  selectedOption: any;
+  selectedOption: any[] = [];
   directUrl = "pages/login";
   page: number;
 
@@ -43,6 +43,7 @@ export class PupukComponent implements OnInit, OnDestroy {
       }
       --this.counter;
     });
+    this.setInitialSelectedOptions();
   }
   ngOnDestroy() {
     this.countDown = null;
@@ -52,18 +53,47 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.api.soalPupuk(key).then(
       (result: any) => {
         this.soal = result.data['data'];
-        console.log(this.soal);
+        // console.log(this.soal);
 
       })
   }
 
+  setInitialSelectedOptions(): void {
+    const savedSoal = localStorage.getItem('soal');
+    let soal = JSON.parse(savedSoal);
+    console.log(soal);
+
+    soal.forEach(question => {
+      if (question) {
+        this.selectedOption = question.OPTIONS[0];
+        console.log(question.selectedOption);
+
+      }
+    });
+  }
+
+
+
   nextQuestion() {
     this.page = this.page + 1;
-    this.router.navigate(['cat/pupuk/' + this.page])
+    this.router.navigate(['../', this.page], { relativeTo: this.activedRouter });
   }
 
   clickIndikator(keypage) {
-    this.router.navigate(['cat/pupuk/' + Math.ceil((keypage + 1) / 2)]);
+    this.router.navigate(['../' + Math.ceil((keypage + 1) / 2)], { relativeTo: this.activedRouter });
+  }
+
+  onClickOption(questionId: string, optionId: string): void {
+    // Find the question in 'soal' based on 'questionId'
+    const question = this.soal.find(item => item.QUEST_ID === questionId);
+
+    // Update the selected option for the question
+    if (question) {
+      question.selectedOption = optionId;
+
+      // Save the updated 'soal' array to localStorage
+      localStorage.setItem('soal', JSON.stringify(this.soal));
+    }
   }
 
   generateArray(count: number): number[] {

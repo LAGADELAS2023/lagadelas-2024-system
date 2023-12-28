@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="p-fluid">
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="session_name">Pilih Sesi</label>
+                <p-dropdown [options]="sessionName" [(ngModel)]="selectedSession" optionLabel="name" [showClear]="true"
+                    placeholder="Pilih sesi"></p-dropdown>
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="start_session">Tanggal Sesi</label>
+                <p-calendar [(ngModel)]="dateSession" [touchUI]="true" [readonlyInput]="true"></p-calendar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="field col-6">
+                <div class="flex flex-column gap-2">
+                    <label class="font-bold" for="start_session">Sesi Mulai</label>
+                    <input type="time" pInputText [(ngModel)]="start_session" />
+                </div>
+            </div>
+            <div class="field col-6">
+                <div class="flex flex-column gap-2">
+                    <label class="font-bold" for="end_session">Sesi Selesai</label>
+                    <input type="time" pInputText [(ngModel)]="end_session" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

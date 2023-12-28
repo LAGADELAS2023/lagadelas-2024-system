@@ -20,13 +20,12 @@
 
     <div class="soal-cat w-full">
         <div *ngFor="let item of soal">
-            <p class="text-5xl mt-3">
-                {{ item.QUESTION_TEXT }}
-            </p>
+            <p class="text-5xl mt-3">{{ item.QUESTION_TEXT }}</p>
             <div *ngFor="let item_option of item.OPTIONS">
                 <div class="flex align-items-center mt-2 text-2xl">
                     <p-radioButton [name]="item.QUEST_ID" [value]="item_option.ID_OPTIONS"
-                        [(ngModel)]="item.selectedOption" [inputId]="item_option.ID_OPTIONS"></p-radioButton>
+                        [(ngModel)]="item.selectedOption" [inputId]="item_option.ID_OPTIONS"
+                        (click)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
                     <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
                 </div>
             </div>
@@ -36,6 +35,7 @@
                 (click)="nextQuestion()"></button>
         </div>
     </div>
+
 
 
 </div>

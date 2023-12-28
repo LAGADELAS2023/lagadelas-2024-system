@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Product } from '../../api/product';
-import { ProductService } from '../../service/productservice';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../service/app.config.service';
 import { AppConfig } from '../../api/appconfig';
- 
+
 @Component({
     templateUrl: './dashboard.component.html',
 })
@@ -23,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
     config: AppConfig;
 
-    constructor(private productService: ProductService, public configService: ConfigService) {}
+    constructor(public configService: ConfigService) { }
 
     ngOnInit() {
         this.config = this.configService.config;
@@ -31,11 +30,10 @@ export class DashboardComponent implements OnInit {
             this.config = config;
             this.updateChartOptions();
         });
-        this.productService.getProductsSmall().then(data => this.products = data);
-          
+
         this.items = [
-            {label: 'Add New', icon: 'pi pi-fw pi-plus'},
-            {label: 'Remove', icon: 'pi pi-fw pi-minus'}
+            { label: 'Add New', icon: 'pi pi-fw pi-plus' },
+            { label: 'Remove', icon: 'pi pi-fw pi-minus' }
         ];
 
         this.chartData = {
@@ -84,7 +82,7 @@ export class DashboardComponent implements OnInit {
                         color: '#ebedef'
                     },
                     grid: {
-                        color:  'rgba(160, 167, 181, .3)',
+                        color: 'rgba(160, 167, 181, .3)',
                     }
                 },
                 y: {
@@ -92,7 +90,7 @@ export class DashboardComponent implements OnInit {
                         color: '#ebedef'
                     },
                     grid: {
-                        color:  'rgba(160, 167, 181, .3)',
+                        color: 'rgba(160, 167, 181, .3)',
                     }
                 },
             }
@@ -100,7 +98,7 @@ export class DashboardComponent implements OnInit {
     }
 
     applyLightTheme() {
-            this.chartOptions = {
+        this.chartOptions = {
             plugins: {
                 legend: {
                     labels: {
@@ -114,7 +112,7 @@ export class DashboardComponent implements OnInit {
                         color: '#495057'
                     },
                     grid: {
-                        color:  '#ebedef',
+                        color: '#ebedef',
                     }
                 },
                 y: {
@@ -122,7 +120,7 @@ export class DashboardComponent implements OnInit {
                         color: '#495057'
                     },
                     grid: {
-                        color:  '#ebedef',
+                        color: '#ebedef',
                     }
                 },
             }

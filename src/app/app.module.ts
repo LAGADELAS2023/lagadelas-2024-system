@@ -101,15 +101,9 @@ import { EmptyComponent } from './components/empty/empty.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { GeneratepupukComponent } from './components/generatepupuk/generatepupuk.component';
 import { PupukComponent, FormatTimePipe } from './components/pupuk/pupuk.component';
+import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
 
 import { ApiService } from './service/api.service';
-import { CountryService } from './service/countryservice';
-import { CustomerService } from './service/customerservice';
-import { EventService } from './service/eventservice';
-import { IconService } from './service/iconservice';
-import { NodeService } from './service/nodeservice';
-import { PhotoService } from './service/photoservice';
-import { ProductService } from './service/productservice';
 import { MenuService } from './service/app.menu.service';
 import { ConfigService } from './service/app.config.service';
 import { LoginComponent } from './components/login/login.component';
@@ -223,12 +217,12 @@ import { AccessComponent } from './components/access/access.component';
         AccessComponent,
         GeneratepupukComponent,
         PupukComponent,
+        CreatePinSessionComponent,
         FormatTimePipe
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, ConfigService, ApiService
+        MenuService, ConfigService, ApiService
     ],
     bootstrap: [AppComponent]
 })

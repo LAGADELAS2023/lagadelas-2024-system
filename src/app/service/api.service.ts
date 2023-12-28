@@ -19,4 +19,13 @@ export class ApiService {
       })
     })
   }
+
+  public login(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}auth-pupuk`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
 }
