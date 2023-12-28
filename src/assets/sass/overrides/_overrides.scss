@@ -50,11 +50,24 @@
     gap: 10px;
 }
 
+.sidebar a {
+    text-decoration: none;
+    color: black;
+}
+
 .sidebar .indikator {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-width: 2px;
-    border-color: black;
     padding: 12px;
+    font-weight: bold;
+}
+
+.active {
+    background-color: #05e04a;
+}
+
+.skip {
+    background-color: #fbff09;
 }
 
 .loop {

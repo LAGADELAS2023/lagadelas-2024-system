@@ -9,10 +9,12 @@
 <div class="flex">
     <div class="sidebar">
         <div *ngFor="let i of generateArray(50); let last = last" class="loop">
-            <a href="" class="indikator text-center flex align-items-center justify-content-center">
+            <a (click)="clickIndikator(i)" class="indikator text-center flex align-items-center justify-content-center"
+                [ngClass]="{'active': i >= 0 && i <= 9, 'skip': i === 10}">
                 {{ i + 1 }}
             </a>
         </div>
+
     </div>
 
 

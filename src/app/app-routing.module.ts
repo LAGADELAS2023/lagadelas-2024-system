@@ -22,7 +22,7 @@ import { PupukComponent } from './components/pupuk/pupuk.component';
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
             },
-            { path: 'cat/pupuk', component: PupukComponent },
+            { path: 'cat/pupuk/:pages', component: PupukComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },
             { path: 'pages/error', component: ErrorComponent },

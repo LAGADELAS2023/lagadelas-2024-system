@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -19,15 +19,21 @@ export class PupukComponent implements OnInit, OnDestroy {
   soal = [];
   selectedOption: any;
   directUrl = "pages/login";
-  page = 1
+  page: number;
 
   constructor(
     protected api: ApiService,
-    private router: Router
+    private router: Router,
+    private activedRouter: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.initAPI(this.page)
+    this.activedRouter.params.subscribe(params => {
+      this.page = +params['pages'];
+      this.initAPI(this.page);
+      console.log(this.page);
+
+    });
     this.countDown = timer(0, this.tick).subscribe((count) => {
       if (this.counter == 0 && count) {
         console.log('timer completed', count, this.counter);
@@ -53,7 +59,11 @@ export class PupukComponent implements OnInit, OnDestroy {
 
   nextQuestion() {
     this.page = this.page + 1;
-    this.ngOnInit()
+    this.router.navigate(['cat/pupuk/' + this.page])
+  }
+
+  clickIndikator(keypage) {
+    this.router.navigate(['cat/pupuk/' + Math.ceil((keypage + 1) / 2)]);
   }
 
   generateArray(count: number): number[] {
