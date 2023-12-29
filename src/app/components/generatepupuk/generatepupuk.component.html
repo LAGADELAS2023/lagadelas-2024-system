@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="flex flex-column gap-2">
                     <label for="pertanyaan" class="font-bold">Pertanyaan</label>
-                    <textarea rows="5" cols="30" pInputTextarea></textarea>
+                    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="QUESTIONTEXT"></textarea>
                 </div>
             </div>
             <div class="col-6">
@@ -13,7 +13,7 @@
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="1" [(ngModel)]="answerKey"
                                 value="1"></p-radioButton></p-inputGroupAddon>
-                        <input type="text" pInputText placeholder="Pilihan 1" />
+                        <input type="text" pInputText placeholder="Pilihan 1" [(ngModel)]="OPTIONTEXT1" />
                     </p-inputGroup>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="2" [(ngModel)]="answerKey"
                                 value="2"></p-radioButton></p-inputGroupAddon>
-                        <input type="text" pInputText placeholder="Pilihan 2" />
+                        <input type="text" pInputText placeholder="Pilihan 2" [(ngModel)]="OPTIONTEXT2" />
                     </p-inputGroup>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="3" [(ngModel)]="answerKey"
                                 value="3"></p-radioButton></p-inputGroupAddon>
-                        <input type="text" pInputText placeholder="Pilihan 3" />
+                        <input type="text" pInputText placeholder="Pilihan 3" [(ngModel)]="OPTIONTEXT3" />
                     </p-inputGroup>
                 </div>
             </div>
@@ -43,10 +43,12 @@
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="4" [(ngModel)]="answerKey"
                                 value="4"></p-radioButton></p-inputGroupAddon>
-                        <input type="text" pInputText placeholder="Pilihan 4" />
+                        <input type="text" pInputText placeholder="Pilihan 4" [(ngModel)]="OPTIONTEXT4" />
                     </p-inputGroup>
                 </div>
             </div>
         </div>
+        <button class="p-button p-button-primary" pButton pRipple label="Simpan Soal"
+            (click)="createSoalPupuk()"></button>
     </div>
 </div>

@@ -28,4 +28,31 @@ export class ApiService {
       })
     })
   }
+
+  public createPinSession(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}ins-session`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public sessionGet() {
+    return new Promise((resolve, reject) => {
+      return this.http.get(`${environment.url_local}session`).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public createSoalPupuk(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}ins-puk`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
 }

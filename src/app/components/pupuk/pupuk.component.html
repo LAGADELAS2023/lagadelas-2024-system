@@ -10,10 +10,11 @@
     <div class="sidebar">
         <div *ngFor="let i of generateArray(50); let last = last" class="loop">
             <a (click)="clickIndikator(i)" class="indikator text-center flex align-items-center justify-content-center"
-                [ngClass]="{'active': i >= 0 && i <= 9, 'skip': i === 10}">
+                [ngClass]="{'active': isIndikatorActive(i)}">
                 {{ i + 1 }}
             </a>
         </div>
+
 
     </div>
 
@@ -21,15 +22,16 @@
     <div class="soal-cat w-full">
         <div *ngFor="let item of soal">
             <p class="text-5xl mt-3">{{ item.QUESTION_TEXT }}</p>
-            <div *ngFor="let item_option of item.OPTIONS">
+            <div *ngFor="let item_option of item.OPTIONS; let innerIndex = index">
                 <div class="flex align-items-center mt-2 text-2xl">
-                    <p-radioButton [name]="item.QUEST_ID" [value]="item_option.ID_OPTIONS"
-                        [(ngModel)]="item.selectedOption" [inputId]="item_option.ID_OPTIONS"
-                        (click)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
+                    <p-radioButton [name]="item.QUEST_ID" [value]="innerIndex" [(ngModel)]="item.selectedOption"
+                        binary="true"
+                        (ngModelChange)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
                     <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
                 </div>
             </div>
         </div>
+
         <div class="text-right">
             <button *ngIf="soal.length != 0" pButton pRipple class="p-button-info" label="next"
                 (click)="nextQuestion()"></button>

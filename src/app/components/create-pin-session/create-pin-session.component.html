@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="card">
     <div class="p-fluid">
         <div class="field">
@@ -5,6 +7,12 @@
                 <label class="font-bold" for="session_name">Pilih Sesi</label>
                 <p-dropdown [options]="sessionName" [(ngModel)]="selectedSession" optionLabel="name" [showClear]="true"
                     placeholder="Pilih sesi"></p-dropdown>
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="start_session">Deskripsi (Keterangan)</label>
+                <input type="text" pInputText [(ngModel)]="description" />
             </div>
         </div>
         <div class="field">
@@ -27,5 +35,93 @@
                 </div>
             </div>
         </div>
+        <div class="field">
+            <button class="p-button p-button-info" pButton pRipple label="Simpan PIN"
+                (click)="createPinSession(selectedSession, description, dateSession, start_session, end_session)"></button>
+        </div>
     </div>
 </div>
+
+<div class="card">
+    <p-table [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [value]="masterSession"
+        styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }" [(selection)]="selectedRowSession">
+        <ng-template pTemplate="caption"> DAFTAR PIN SESI </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th rowspan="2" style="text-align: center;">PIN SESI</th>
+                <th rowspan="3" style="text-align: center;">NAMA SESI</th>
+                <th rowspan="4" style="text-align: center;">DESKRIPSI</th>
+                <th colspan="5" style="text-align: center;">MASA AKTIF SESI
+                </th>
+            </tr>
+            <tr>
+                <th style="text-align: center;">TANGGAL SESI</th>
+                <th style="text-align: center;">SESI MULAI</th>
+                <th style="text-align: center;">SESI AKHIR</th>
+                <th style="text-align: center;">ACTION</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-session>
+            <tr>
+                <td>{{ session.SESSION_PIN }}</td>
+                <td>{{ session.SESSION_NAME }}</td>
+                <td>{{ session.DESCRIPTION }}</td>
+                <td>{{ session.SESSION_DATE }}</td>
+                <td>{{ session.SESSION_START }}</td>
+                <td>{{ session.SESSION_END }}</td>
+                <td class="p-fluid">
+                    <button class="p-button p-button-warning " pButton pRipple label="Edit" icon="pi pi-pencil"
+                        (click)="editSession(session)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog header="Header" [(visible)]="editDialog" [style]="{width: '50vw'}" [modal]="true">
+    <div class="p-fluid">
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="session_name">PIN Sesi</label>
+                <input type="text" pInputText [(ngModel)]="selectedRowSession.SESSION_PIN" [readOnly]="true">
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="session_name">Sesi</label>
+                <input type="text" pInputText [(ngModel)]="selectedRowSession.SESSION_NAME" [readOnly]="true">
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="start_session">Deskripsi (Keterangan)</label>
+                <input type="text" pInputText [(ngModel)]="selectedRowSession.DESCRIPTION" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2">
+                <label class="font-bold" for="start_session">Tanggal Sesi</label>
+                <p-calendar [(ngModel)]="selectedRowSession.SESSION_DATE" dateFormat="yy-mm-dd"
+                    [readonlyInput]="true"></p-calendar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="field col-6">
+                <div class="flex flex-column gap-2">
+                    <label class="font-bold" for="start_session">Sesi Mulai</label>
+                    <input type="time" pInputText [(ngModel)]="selectedRowSession.SESSION_START" />
+                </div>
+            </div>
+            <div class="field col-6">
+                <div class="flex flex-column gap-2">
+                    <label class="font-bold" for="end_session">Sesi Selesai</label>
+                    <input type="time" pInputText [(ngModel)]="selectedRowSession.SESSION_END" />
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <button class="p-button p-button-info" pButton pRipple label="SIMPAN PERUBAHAN"
+                (click)="createPinSession(selectedSession, description, dateSession, start_session, end_session)"></button>
+        </div>
+    </div>
+</p-dialog>

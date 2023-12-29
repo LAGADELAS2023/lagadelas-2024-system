@@ -17,7 +17,6 @@ export class PupukComponent implements OnInit, OnDestroy {
   counter = 60;
   tick = 1000;
   soal = [];
-  selectedOption: any[] = [];
   directUrl = "pages/login";
   page: number;
 
@@ -43,7 +42,6 @@ export class PupukComponent implements OnInit, OnDestroy {
       }
       --this.counter;
     });
-    this.setInitialSelectedOptions();
   }
   ngOnDestroy() {
     this.countDown = null;
@@ -53,26 +51,29 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.api.soalPupuk(key).then(
       (result: any) => {
         this.soal = result.data['data'];
-        // console.log(this.soal);
+        this.soal = this.soal.map((element) => {
+          return { ...element, selectedOption: null };
+        });
+        const savedSoal = JSON.parse(localStorage.getItem('savedSoal'));
+        this.soal.forEach(val => {
+          const matchingSavedQuestion = savedSoal.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
+          val.selectedOption = matchingSavedQuestion.selectedOption;
+        });
+        console.log(this.soal);
 
       })
   }
 
-  setInitialSelectedOptions(): void {
-    const savedSoal = localStorage.getItem('soal');
-    let soal = JSON.parse(savedSoal);
-    console.log(soal);
+  isIndikatorActive(indikator: number): boolean {
+    const savedSoalString = localStorage.getItem('savedSoal');
+    if (savedSoalString) {
+      const savedSoal = JSON.parse(savedSoalString);
+      const index = indikator + 1;
+      return savedSoal.some((soal) => soal.QUEST_ID === "Q" + index && soal.selectedOption !== null);
+    }
 
-    soal.forEach(question => {
-      if (question) {
-        this.selectedOption = question.OPTIONS[0];
-        console.log(question.selectedOption);
-
-      }
-    });
+    return false;
   }
-
-
 
   nextQuestion() {
     this.page = this.page + 1;
@@ -83,29 +84,43 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.router.navigate(['../' + Math.ceil((keypage + 1) / 2)], { relativeTo: this.activedRouter });
   }
 
-  onClickOption(questionId: string, optionId: string): void {
-    // Find the question in 'soal' based on 'questionId'
-    const question = this.soal.find(item => item.QUEST_ID === questionId);
+  onClickOption(): void {
+    // Mengambil data yang sudah ada dari localStorage
+    const savedSoalString = localStorage.getItem('savedSoal');
 
-    // Update the selected option for the question
-    if (question) {
-      question.selectedOption = optionId;
-
-      // Save the updated 'soal' array to localStorage
-      localStorage.setItem('soal', JSON.stringify(this.soal));
+    // Jika data sudah ada
+    if (savedSoalString) {
+      const savedSoal = JSON.parse(savedSoalString);
+      for (let i = 0; i < this.soal.length; i++) {
+        const existingSoalIndex = savedSoal.findIndex((item) => item.QUEST_ID === this.soal[i].QUEST_ID);
+        if (existingSoalIndex !== -1) {
+          savedSoal[existingSoalIndex].OPTIONS = this.soal[i].OPTIONS;
+          savedSoal[existingSoalIndex].selectedOption = this.soal[i].selectedOption;
+        } else {
+          savedSoal.push(this.soal[i]);
+        }
+      }
+      localStorage.setItem('savedSoal', JSON.stringify(savedSoal));
+    } else {
+      localStorage.setItem('savedSoal', JSON.stringify(this.soal));
     }
+    this.soal.forEach((val) => {
+      console.log(val.OPTIONS[val.selectedOption]);
+    });
   }
+
+
 
   generateArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index);
   }
 
-  // @HostListener('document:visibilitychange', ['$event'])
-  // handleTabFocusChange(event: Event): void {
-  //   if (document.visibilityState === 'visible') {
-  //     this.router.navigate([this.directUrl]);
-  //   }
-  // }
+  @HostListener('document:visibilitychange', ['$event'])
+  handleTabFocusChange(event: Event): void {
+    if (document.visibilityState === 'visible') {
+      this.router.navigate([this.directUrl]);
+    }
+  }
 }
 
 @Pipe({
