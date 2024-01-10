@@ -3,27 +3,32 @@ import { timer, Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 
 
 @Component({
   selector: 'app-pupuk',
   templateUrl: './pupuk.component.html',
-  styleUrl: './pupuk.component.scss'
+  styleUrl: './pupuk.component.scss',
+  providers: [MessageService]
 })
 export class PupukComponent implements OnInit, OnDestroy {
 
   countDown: Subscription;
-  counter = 60;
+  counter = 0;
   tick = 1000;
   soal = [];
   directUrl = "pages/login";
   page: number;
+  skor = false;
+  nilai_akhir: any
 
   constructor(
     protected api: ApiService,
     private router: Router,
     private activedRouter: ActivatedRoute,
+    private message: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +38,33 @@ export class PupukComponent implements OnInit, OnDestroy {
       console.log(this.page);
 
     });
-    this.countDown = timer(0, this.tick).subscribe((count) => {
-      if (this.counter == 0 && count) {
-        console.log('timer completed', count, this.counter);
-        if (this.countDown) {
-          this.countDown.unsubscribe();
+    let time: any = localStorage.getItem('setTime');
+    console.log(time);
+
+    if (time == null) {
+      this.counter = 7200;
+      localStorage.setItem('setTime', "7200")
+      this.countDown = timer(0, this.tick).subscribe((count) => {
+        if (this.counter == 0 && count) {
+          console.log('timer completed', count, this.counter);
+          if (this.countDown) {
+            this.countDown.unsubscribe();
+          }
         }
-      }
-      --this.counter;
-    });
+        --this.counter;
+      });
+    } else {
+      this.counter = ++time;
+      this.countDown = timer(0, this.tick).subscribe((count) => {
+        if (this.counter == 0 && count) {
+          console.log('timer completed', count, this.counter);
+          if (this.countDown) {
+            this.countDown.unsubscribe();
+          }
+        }
+        --this.counter;
+      });
+    }
   }
   ngOnDestroy() {
     this.countDown = null;
@@ -51,29 +74,34 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.api.soalPupuk(key).then(
       (result: any) => {
         this.soal = result.data['data'];
-        this.soal = this.soal.map((element) => {
-          return { ...element, selectedOption: null };
+        this.soal = this.soal.map((element, index) => {
+          const nomor_soal = (key * 2 - 1 + index + 1) - 1; // Adjust the formula for numbering
+          return { ...element, selectedOption: null, nomor_soal };
         });
+
         const savedSoal = JSON.parse(localStorage.getItem('savedSoal'));
         this.soal.forEach(val => {
           const matchingSavedQuestion = savedSoal.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
           val.selectedOption = matchingSavedQuestion.selectedOption;
         });
         console.log(this.soal);
-
-      })
+      });
   }
+
 
   isIndikatorActive(indikator: number): boolean {
     const savedSoalString = localStorage.getItem('savedSoal');
+
     if (savedSoalString) {
       const savedSoal = JSON.parse(savedSoalString);
       const index = indikator + 1;
-      return savedSoal.some((soal) => soal.QUEST_ID === "Q" + index && soal.selectedOption !== null);
+
+      return savedSoal.some((soal) => soal.nomor_soal == index && soal.selectedOption !== null);
     }
 
     return false;
   }
+
 
   nextQuestion() {
     this.page = this.page + 1;
@@ -101,6 +129,7 @@ export class PupukComponent implements OnInit, OnDestroy {
         }
       }
       localStorage.setItem('savedSoal', JSON.stringify(savedSoal));
+      localStorage.setItem('setTime', JSON.stringify(this.counter));
     } else {
       localStorage.setItem('savedSoal', JSON.stringify(this.soal));
     }
@@ -109,18 +138,64 @@ export class PupukComponent implements OnInit, OnDestroy {
     });
   }
 
+  protected responseSave(q, a, t) {
+    const account = JSON.parse(localStorage.getItem('account'))
+    const params = {
+      ID_QUESTION: q,
+      ID_OPTIONS: a,
+      ID_USER: account.ID,
+      TIMECOUNTDOWN: t,
+    }
 
+    this.message.clear()
+    this.api.saveResponse(params).then(
+      (ressult: any) => {
+        this.message.add({
+          severity: "success",
+          summary: "SUCCESS",
+          detail: "Jawaban Tersimpan"
+        })
+      }).catch(
+        (error: any) => {
+          this.message.add({
+            severity: "error",
+            summary: "FAILED",
+            detail: "Jawaban tidak tersimpan"
+          })
+        })
+  }
+
+  getSkor() {
+    const account = JSON.parse(localStorage.getItem('account'));
+    const params = {
+      USERNAME: account.USERNAME,
+    }
+
+    this.api.getTotalSkor(params).then(
+      (ress: any) => {
+        this.skor = true;
+        this.nilai_akhir = ress.data[0]
+      }).catch(
+        (err: any) => {
+          this.message.add({
+            severity: 'error',
+            summary: 'GAGAL !',
+            detail: 'Terjadi kesalahan pada server.'
+          })
+        })
+  }
 
   generateArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index);
   }
 
-  @HostListener('document:visibilitychange', ['$event'])
-  handleTabFocusChange(event: Event): void {
-    if (document.visibilityState === 'visible') {
-      this.router.navigate([this.directUrl]);
-    }
-  }
+  // @HostListener('document:visibilitychange', ['$event'])
+  // handleTabFocusChange(event: Event): void {
+  //   if (document.visibilityState === 'visible') {
+  //     this.router.navigate([this.directUrl]);
+  //     localStorage.setItem('setTime', String(this.counter))
+  //   }
+  // }
 }
 
 @Pipe({
@@ -128,11 +203,15 @@ export class PupukComponent implements OnInit, OnDestroy {
 })
 export class FormatTimePipe implements PipeTransform {
   transform(value: number): string {
-    const minutes: number = Math.floor(value / 60);
-    return (
-      ('00' + minutes).slice(-2) +
-      ':' +
-      ('00' + Math.floor(value - minutes * 60)).slice(-2)
-    );
+    const hours = Math.floor(value / 3600);
+    const minutes = Math.floor((value % 3600) / 60);
+    const seconds = Math.floor(value % 60);
+
+    const formattedHours = ('00' + hours).slice(-2);
+    const formattedMinutes = ('00' + minutes).slice(-2);
+    const formattedSeconds = ('00' + seconds).slice(-2);
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   }
 }
+

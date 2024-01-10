@@ -1,0 +1,66 @@
+<div class="flex justify-content-center min-h-screen min-w-screen overflow-hidden py-3" style="background: #295BAC">
+    <div class="icon-header">
+        <a class="flex" style="align-items:center; justify-content: center; text-align: center;height: 100%;">
+            <img src="./assets/demo/images/logo/logo-primary.png" alt="Logo-Lagadelas" class="logo-header">
+        </a>
+    </div>
+    <div class="h-full w-full flex justify-content-center ">
+        <div class="card lg:col-6 col-11" style="margin-top: 6rem;">
+            <h4 class="text-center font-bold mb-5 " style="margin-top: 6rem;">
+                PENDAFTARAN PESERTA LAGADELAS
+            </h4>
+            <div class="p-fluid">
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <input pInputText id="nama-regu" />
+                        <label for="nama-regu">NAMA REGU</label>
+                    </div>
+                </div>
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <input pInputText id="nama-pangkalan" />
+                        <label for="nama-pangkalan">NAMA PANGKALAN</label>
+                    </div>
+                </div>
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <input pInputText id="nama-pendamping" />
+                        <label for="nama-pendamping">NAMA PENDAMPING</label>
+                    </div>
+                </div>
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <input pInputText id="nama-kwaran" />
+                        <label for="nama-kwaran">KWARAN</label>
+                    </div>
+                </div>
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <p-dropdown [options]="kategori" appendTo="body" [(ngModel)]="selectedKategori"
+                            optionLabel="name" [showClear]="true"></p-dropdown>
+                        <label for="kategori">KATEGORI</label>
+                    </div>
+                </div>
+                <div class="field mb-5">
+                    <p-fileUpload mode="basic" chooseLabel="FOTO ANGGOTA REGU" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                        maxFileSize="100000000"></p-fileUpload>
+
+                </div>
+                <div class="field mb-5">
+                    <p-fileUpload mode="basic" chooseLabel="SURAT TUGAS SEKOLAH" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                        maxFileSize="100000000"></p-fileUpload>
+
+                </div>
+                <div class="field mb-5">
+                    <p-fileUpload mode="basic" chooseLabel="SURAT TUGAS KWARAN" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                        maxFileSize="100000000"></p-fileUpload>
+                </div>
+                <div class="field"><button class="p-button p-button-success" pButton pRippel label="DAFTAR"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

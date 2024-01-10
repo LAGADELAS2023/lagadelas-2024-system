@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription = this.configService.configUpdate$.subscribe(config => {
       this.config = config;
     });
+    localStorage.removeItem('account')
   }
 
   ngOnDestroy(): void {
@@ -73,8 +74,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       (result: any) => {
         if (result.status == 200) {
           this.messages = [{ severity: 'success', summary: 'Success', detail: 'Berhasil Login' }];
+          localStorage.setItem('account', JSON.stringify(result.login[0]))
           localStorage.setItem('isLoggedIn', "true");
-          interval(1500)
+          interval(1000)
             .pipe(take(1))
             .subscribe(() => {
               this.router.navigate(['cat/pupuk/1']);

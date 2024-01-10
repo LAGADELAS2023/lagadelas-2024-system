@@ -12,6 +12,7 @@ import { GeneratepupukComponent } from './components/generatepupuk/generatepupuk
 import { PupukComponent } from './components/pupuk/pupuk.component';
 import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
 import { AuthGuard } from './guard/auth.guard';
+import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { AuthGuard } from './guard/auth.guard';
                 ],
             },
             { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
+            { path: 'pendaftaran/peserta', component: PendaftaranComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },
             { path: 'pages/error', component: ErrorComponent },

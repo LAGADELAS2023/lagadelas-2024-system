@@ -1,54 +1,78 @@
+<p-toast></p-toast>
 <div class="card">
     <div class="p-fluid">
         <div class="grid">
             <div class="col-12">
-                <div class="flex flex-column gap-2">
-                    <label for="pertanyaan" class="font-bold">Pertanyaan</label>
-                    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="QUESTIONTEXT"></textarea>
+
+                <div class="flex flex-column gap-2 mb-2">
+                    <label for="pertanyaan" class="font-bold">PERTANYAAN</label>
+                    <img *ngIf="gambarPertanyaan !== undefined" [src]="gambarPertanyaan" alt="Uploaded Image"
+                        width="100%">
+                    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="QUESTIONTEXT"
+                        autoResize="false"></textarea>
+                </div>
+
+                <div class="upload-file upload-file-button">
+                    <input type="file" (change)="onFileChange($event)" id="fileInput" accept="image/*" />
+                    <label for="fileInput" class="text-center"><i class="pi pi-image"></i></label>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="jawaban_1" class="font-bold">Pilihan 1</label>
+
+            <div class="col-6 mb-3">
+                <div class="flex flex-column gap-2 mb-2">
+                    <label for="jawaban_1" class="font-bold">PILIHAN 1</label>
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="1" [(ngModel)]="answerKey"
                                 value="1"></p-radioButton></p-inputGroupAddon>
                         <input type="text" pInputText placeholder="Pilihan 1" [(ngModel)]="OPTIONTEXT1" />
                     </p-inputGroup>
                 </div>
+                <p-fileUpload mode="basic" chooseLabel="GAMBAR PILIHAN 1" name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                    maxFileSize="1000000"></p-fileUpload>
             </div>
-            <div class="col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="jawaban_2" class="font-bold">Pilihan 2</label>
+            <div class="col-6 mb-3">
+                <div class="flex flex-column gap-2 mb-2">
+                    <label for="jawaban_2" class="font-bold">PILIHAN 2</label>
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="2" [(ngModel)]="answerKey"
                                 value="2"></p-radioButton></p-inputGroupAddon>
                         <input type="text" pInputText placeholder="Pilihan 2" [(ngModel)]="OPTIONTEXT2" />
                     </p-inputGroup>
                 </div>
+                <p-fileUpload mode="basic" chooseLabel="GAMBAR PILIHAN 2" name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                    maxFileSize="1000000"></p-fileUpload>
             </div>
             <div class="col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="jawaban_3" class="font-bold">Pilihan 3</label>
+                <div class="flex flex-column gap-2 mb-2">
+                    <label for="jawaban_3" class="font-bold">PILIHAN 3</label>
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="3" [(ngModel)]="answerKey"
                                 value="3"></p-radioButton></p-inputGroupAddon>
                         <input type="text" pInputText placeholder="Pilihan 3" [(ngModel)]="OPTIONTEXT3" />
                     </p-inputGroup>
                 </div>
+                <p-fileUpload mode="basic" chooseLabel="GAMBAR PILIHAN 3" name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                    maxFileSize="1000000"></p-fileUpload>
             </div>
             <div class="col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="jawaban_4" class="font-bold">Pilihan 4</label>
+                <div class="flex flex-column gap-2 mb-2">
+                    <label for="jawaban_4" class="font-bold">PILIHAN 4</label>
                     <p-inputGroup>
                         <p-inputGroupAddon><p-radioButton name="category" inputId="4" [(ngModel)]="answerKey"
                                 value="4"></p-radioButton></p-inputGroupAddon>
                         <input type="text" pInputText placeholder="Pilihan 4" [(ngModel)]="OPTIONTEXT4" />
                     </p-inputGroup>
                 </div>
+                <p-fileUpload mode="basic" chooseLabel="GAMBAR PILIHAN 4" name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                    maxFileSize="1000000"></p-fileUpload>
             </div>
         </div>
-        <button class="p-button p-button-primary" pButton pRipple label="Simpan Soal"
-            (click)="createSoalPupuk()"></button>
+        <hr>
+        <button class="p-button p-button-warning mt-5" pButton pRipple label="Simpan Soal"
+            (click)="createSoalPupuk($event)"></button>
     </div>
 </div>

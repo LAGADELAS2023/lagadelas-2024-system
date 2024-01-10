@@ -55,4 +55,31 @@ export class ApiService {
       })
     })
   }
+
+  public updateSession(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}update-session`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public saveResponse(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}submit`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public getTotalSkor(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}summary`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
 }

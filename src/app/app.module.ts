@@ -102,6 +102,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { GeneratepupukComponent } from './components/generatepupuk/generatepupuk.component';
 import { PupukComponent, FormatTimePipe } from './components/pupuk/pupuk.component';
 import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
+import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.component';
 
 import { ApiService } from './service/api.service';
 import { MenuService } from './service/app.menu.service';
@@ -218,6 +219,7 @@ import { AccessComponent } from './components/access/access.component';
         GeneratepupukComponent,
         PupukComponent,
         CreatePinSessionComponent,
+        PendaftaranComponent,
         FormatTimePipe
     ],
     providers: [

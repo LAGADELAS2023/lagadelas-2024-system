@@ -1,43 +1,78 @@
-<nav class="nav-cat">
-    <div class="nav-text">
-        LAGADELAS 2024
-    </div>
-    <div class="nav-text">
-        {{counter | formatTime}}
-    </div>
-</nav>
-<div class="flex">
-    <div class="sidebar">
-        <div *ngFor="let i of generateArray(50); let last = last" class="loop">
-            <a (click)="clickIndikator(i)" class="indikator text-center flex align-items-center justify-content-center"
-                [ngClass]="{'active': isIndikatorActive(i)}">
-                {{ i + 1 }}
-            </a>
+<p-toast></p-toast>
+
+<div *ngIf="!skor">
+    <nav class="nav-cat">
+        <div class="nav-text">
+            LAGADELAS 2024
         </div>
-
-
-    </div>
-
-
-    <div class="soal-cat w-full">
-        <div *ngFor="let item of soal">
-            <p class="text-5xl mt-3">{{ item.QUESTION_TEXT }}</p>
-            <div *ngFor="let item_option of item.OPTIONS; let innerIndex = index">
-                <div class="flex align-items-center mt-2 text-2xl">
-                    <p-radioButton [name]="item.QUEST_ID" [value]="innerIndex" [(ngModel)]="item.selectedOption"
-                        binary="true"
-                        (ngModelChange)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
-                    <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
-                </div>
+        <div class="nav-text">
+            {{counter | formatTime}}
+        </div>
+    </nav>
+    <div class="flex">
+        <div class="sidebar">
+            <div *ngFor="let i of generateArray(50); let last = last" class="loop">
+                <a (click)="clickIndikator(i)"
+                    class="indikator text-center flex align-items-center justify-content-center"
+                    [ngClass]="{'active': isIndikatorActive(i)}">
+                    {{ i + 1 }}
+                </a>
             </div>
         </div>
 
-        <div class="text-right">
-            <button *ngIf="soal.length != 0" pButton pRipple class="p-button-info" label="next"
-                (click)="nextQuestion()"></button>
+
+        <div class="soal-cat w-full">
+            <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
+                <p class="text-2xl font-bold" [ngClass]="{ 'mt-8': outerIndex === 1 }">{{ item.QUESTION_TEXT }}</p>
+                <div *ngFor="let item_option of item.OPTIONS; let innerIndex = index">
+                    <div class="flex align-items-center mt-2 text-2xl">
+                        <p-radioButton [name]="item.QUEST_ID"
+                            (ngModelChange)="responseSave(item.QUEST_ID, item_option.ID_OPTIONS, 3, counter)"
+                            [value]="innerIndex" [(ngModel)]="item.selectedOption" binary="true"
+                            (ngModelChange)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
+                        <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="text-right">
+                <button *ngIf="page < 25" pButton pRipple class="p-button-info mr-3 col-2" label="next"
+                    (click)="nextQuestion()"></button>
+                <button *ngIf="page == 25" pButton pRipple class="p-button-warning col-2" label="selesai"
+                    (click)="getSkor()"></button>
+            </div>
         </div>
     </div>
+</div>
+<div *ngIf=" skor" class="background">
+    <div
+        class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden background">
+        <div class="grid justify-content-center p-2 lg:p-0" style="min-width:70%">
+            <div class="col-12 xl:col-6"
+                style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+                <div class="h-full w-full m-0 py-7 px-4"
+                    style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
+                    <div class="text-center mb-5">
+                        <div class="font-bold" style="font-size: 1.6rem;color: #295BAC;">LAGADELAS<span>
+                                <div style="font-size: 1.25rem;color: #FF9800;">INISIATOR 2024</div>
+                            </span></div>
 
-
-
+                    </div>
+                    <div class="w-full md:w-10 mx-auto text-center ">
+                        <div class="mb-5">
+                            <div class=" align-items-center font-bold text-6xl">REGU</div>
+                            <div class="align-items-center font-bold text-3xl" style="color: red;">
+                                {{nilai_akhir.USERNAME}}</div>
+                        </div>
+                        <div class="">
+                            <div class=" align-items-center font-bold text-6xl">SKOR PUPUK</div>
+                            <div class="align-items-center font-bold text-6xl" style="color: red;">
+                                {{nilai_akhir.Nilai}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

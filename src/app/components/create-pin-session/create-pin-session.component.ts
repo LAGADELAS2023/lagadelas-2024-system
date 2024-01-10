@@ -11,9 +11,9 @@ import { ApiService } from 'src/app/service/api.service';
 export class CreatePinSessionComponent implements OnInit {
 
   sessionName = [
-    { id: 1, name: "PUPUK" },
-    { id: 2, name: "SANDI" },
-    { id: 3, name: "SEMAPHORE" },
+    "PUPUK",
+    "SANDI",
+    "SEMAPHORE",
   ];
   selectedSession: any;
   dateSession: any;
@@ -51,7 +51,7 @@ export class CreatePinSessionComponent implements OnInit {
 
   createPinSession(session_name, description, session_date, session_start, session_end) {
     const params = {
-      SESSION_NAME: session_name.name,
+      SESSION_NAME: session_name,
       DESCRIPTION: description,
       SESSION_DATE: session_date,
       SESSION_START: session_start,
@@ -65,6 +65,13 @@ export class CreatePinSessionComponent implements OnInit {
           summary: "SUCCESS",
           detail: "Berhasil membuat PIN sesi :)"
         })
+
+        this.selectedSession = null;
+        this.description = null;
+        this.start_session = null;
+        this.end_session = null;
+        this.dateSession = null;
+
         this.ngOnInit()
       }).catch(
         (error: any) => {
@@ -77,5 +84,27 @@ export class CreatePinSessionComponent implements OnInit {
     this.editDialog = true;
     console.log(this.selectedRowSession);
 
+
+  }
+
+  updateSession() {
+
+    this.api.updateSession(this.selectedRowSession).then(
+      (result: any) => {
+        this.message.add({
+          severity: "success",
+          summary: "SUCCESS",
+          detail: "Berhasil melakukan update PIN Sesi"
+        })
+        this.editDialog = false;
+        this.ngOnInit()
+      }).catch(
+        (error: any) => {
+          this.message.add({
+            severity: "danger",
+            summary: "FAILED",
+            detail: "Gagal melakukan update PIN Sesi"
+          })
+        })
   }
 }

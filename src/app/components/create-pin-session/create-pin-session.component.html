@@ -5,7 +5,7 @@
         <div class="field">
             <div class="flex flex-column gap-2">
                 <label class="font-bold" for="session_name">Pilih Sesi</label>
-                <p-dropdown [options]="sessionName" [(ngModel)]="selectedSession" optionLabel="name" [showClear]="true"
+                <p-dropdown [options]="sessionName" [(ngModel)]="selectedSession" [showClear]="true"
                     placeholder="Pilih sesi"></p-dropdown>
             </div>
         </div>
@@ -89,7 +89,8 @@
         <div class="field">
             <div class="flex flex-column gap-2">
                 <label class="font-bold" for="session_name">Sesi</label>
-                <input type="text" pInputText [(ngModel)]="selectedRowSession.SESSION_NAME" [readOnly]="true">
+                <p-dropdown [options]="sessionName" [(ngModel)]="selectedRowSession.SESSION_NAME" [showClear]="true"
+                    placeholder="Pilih sesi"></p-dropdown>
             </div>
         </div>
         <div class="field">
@@ -120,8 +121,8 @@
             </div>
         </div>
         <div class="field">
-            <button class="p-button p-button-info" pButton pRipple label="SIMPAN PERUBAHAN"
-                (click)="createPinSession(selectedSession, description, dateSession, start_session, end_session)"></button>
+            <button class="p-button p-button-warning" pButton pRipple label="SIMPAN PERUBAHAN"
+                (click)="updateSession()"></button>
         </div>
     </div>
 </p-dialog>
