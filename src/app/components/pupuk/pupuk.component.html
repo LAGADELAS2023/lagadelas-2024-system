@@ -23,6 +23,8 @@
 
         <div class="soal-cat w-full">
             <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
+                <img *ngIf="item.QUESTION_IMAGE != '' && item.QUESTION_IMAGE != null " [src]="item.QUESTION_IMAGE"
+                    alt="Uploaded Image" width="50%">
                 <p class="text-2xl font-bold" [ngClass]="{ 'mt-8': outerIndex === 1 }">{{ item.QUESTION_TEXT }}</p>
                 <div *ngFor="let item_option of item.OPTIONS; let innerIndex = index">
                     <div class="flex align-items-center mt-2 text-2xl">
@@ -31,6 +33,9 @@
                             [value]="innerIndex" [(ngModel)]="item.selectedOption" binary="true"
                             (ngModelChange)="onClickOption(item.QUEST_ID, item_option.ID_OPTIONS)"></p-radioButton>
                         <label for="{{ item_option.ID_OPTIONS }}" class="ml-2">{{ item_option.OPTIONS_TEXT }}</label>
+                        <img *ngIf="item_option.OPTIONS_IMAGE != '' && item_option.OPTIONS_IMAGE != null"
+                            [src]="item_option.OPTIONS_IMAGE" alt="Uploaded Image" width="50%">
+
                     </div>
                 </div>
             </div>
