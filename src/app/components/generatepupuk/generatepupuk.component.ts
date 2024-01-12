@@ -26,6 +26,10 @@ export class GeneratepupukComponent implements OnInit {
   gambarOption2: any = null;
   gambarOption3: any = null;
   gambarOption4: any = null;
+  masterSession = [];
+  selectedSession: any
+
+  value: number = 0;
 
   constructor(
     protected api: ApiService,
@@ -33,7 +37,10 @@ export class GeneratepupukComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.api.sessionGet().then(
+      (result: any) => {
+        this.masterSession = result.data;
+      })
   }
 
   onUpload(event: UploadEvent) {
@@ -138,7 +145,7 @@ export class GeneratepupukComponent implements OnInit {
       let params = {
         QUESTION_TEXT: this.QUESTIONTEXT,
         QUESTION_IMAGE: this.gambarPertanyaan,
-        SESSION_PIN: 1818,
+        SESSION_PIN: this.selectedSession.SESSION_PIN,
         OPTIONS: options,
       };
       console.log(params);

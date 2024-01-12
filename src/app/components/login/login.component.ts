@@ -34,7 +34,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   username: string;
 
-  pin: number;
+  pin1: number;
+  pin2: number;
+  pin3: number;
+  pin4: number;
 
   config: AppConfig;
 
@@ -63,11 +66,35 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  _login(a, b, c) {
+  onDigitInput(event) {
+    console.log(event);
+
+    let element;
+
+    if (event.code === 'Tab') {
+      return;
+    }
+
+    if (event.code !== 'Backspace') {
+      element = event.target.nextElementSibling;
+    } else {
+      element = event.target.previousElementSibling;
+    }
+
+    if (element) {
+      element.focus();
+    }
+  }
+
+
+
+
+  _login(a, b, c, d, e, f) {
+    let pin = `${c}${d}${e}${f}`
     const params = {
       USERNAME: a,
       PASSWORD: b,
-      PIN: c
+      PIN: pin
     }
 
     this.apiService.login(params).then(
@@ -76,10 +103,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.messages = [{ severity: 'success', summary: 'Success', detail: 'Berhasil Login' }];
           localStorage.setItem('account', JSON.stringify(result.login[0]))
           localStorage.setItem('isLoggedIn', "true");
+          localStorage.setItem('pin', `${pin}`);
           interval(1000)
             .pipe(take(1))
             .subscribe(() => {
-              this.router.navigate(['cat/pupuk/1']);
+              if (result.data.SESSION_NAME == 'PUPUK') {
+                this.router.navigate(['cat/pupuk/1']);
+              } else {
+                this.router.navigate(['cat/sandi/1']);
+              }
             });
         }
       }).catch(

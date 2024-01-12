@@ -22,7 +22,8 @@ export class PupukComponent implements OnInit, OnDestroy {
   directUrl = "pages/login";
   page: number;
   skor = false;
-  nilai_akhir: any
+  nilai_akhir: any;
+  value: number = 0;
 
   constructor(
     protected api: ApiService,
@@ -71,7 +72,11 @@ export class PupukComponent implements OnInit, OnDestroy {
   }
 
   initAPI(key) {
-    this.api.soalPupuk(key).then(
+    const pin = localStorage.getItem('pin');
+    const params = {
+      SESSION_PIN: pin
+    }
+    this.api.soalPupuk(key, params).then(
       (result: any) => {
         this.soal = result.data['data'];
         this.soal = this.soal.map((element, index) => {
@@ -174,7 +179,17 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.api.getTotalSkor(params).then(
       (ress: any) => {
         this.skor = true;
-        this.nilai_akhir = ress.data[0]
+        localStorage.removeItem('savedSoal');
+        localStorage.removeItem('setTime');
+        this.nilai_akhir = ress.data[0];
+        let interval = setInterval(() => {
+          this.value = this.value + Math.floor(Math.random() * 5) + 1;
+          if (this.value >= 100) {
+            this.value = 100;
+            this.router.navigate([this.directUrl]);
+            clearInterval(interval);
+          }
+        }, 500);
       }).catch(
         (err: any) => {
           this.message.add({
@@ -189,13 +204,13 @@ export class PupukComponent implements OnInit, OnDestroy {
     return Array.from({ length: count }, (_, index) => index);
   }
 
-  // @HostListener('document:visibilitychange', ['$event'])
-  // handleTabFocusChange(event: Event): void {
-  //   if (document.visibilityState === 'visible') {
-  //     this.router.navigate([this.directUrl]);
-  //     localStorage.setItem('setTime', String(this.counter))
-  //   }
-  // }
+  @HostListener('document:visibilitychange', ['$event'])
+  handleTabFocusChange(event: Event): void {
+    if (document.visibilityState === 'visible') {
+      this.router.navigate([this.directUrl]);
+      localStorage.setItem('setTime', String(this.counter))
+    }
+  }
 }
 
 @Pipe({

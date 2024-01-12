@@ -1,0 +1,27 @@
+.upload-file {
+    width: 100%;
+    align-items: center;
+
+    &-button {
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            display: inline-block;
+            padding: 13px 15px;
+            background-color: #3887BE;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            width: 100%;
+
+            &:hover {
+                background-color: #52D3D8;
+                /* Darker green background color */
+            }
+        }
+    }
+}

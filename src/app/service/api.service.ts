@@ -11,10 +11,28 @@ export class ApiService {
     protected http: HttpClient,
   ) { }
 
-  public soalPupuk(pages) {
+  public soalPupuk(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.get(`${environment.url_local}soal-opsi?page=${pages}`).subscribe({
+      return this.http.post(`${environment.url_local}soal-opsi?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public getSoalSandi(pages, pin) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}soal-sandi?page=${pages}`, pin).subscribe({
+        next: (res) => resolve(res),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public soalSandi(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}bikin-sandi`, params).subscribe({
+        next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
     })
@@ -28,6 +46,7 @@ export class ApiService {
       })
     })
   }
+
 
   public createPinSession(params) {
     return new Promise((resolve, reject) => {

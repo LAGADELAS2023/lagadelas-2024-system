@@ -13,6 +13,8 @@ import { PupukComponent } from './components/pupuk/pupuk.component';
 import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
 import { AuthGuard } from './guard/auth.guard';
 import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.component';
+import { GeneratesandiComponent } from './components/generatesandi/generatesandi.component';
+import { SandiComponent } from './components/sandi/sandi.component';
 
 @NgModule({
     imports: [
@@ -22,11 +24,13 @@ import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.compo
                 children: [
                     { path: '', component: DashboardComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
+                    { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'admin/pin-session', component: CreatePinSessionComponent },
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
             },
             { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
+            { path: 'cat/sandi/:pages', component: SandiComponent },
             { path: 'pendaftaran/peserta', component: PendaftaranComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },

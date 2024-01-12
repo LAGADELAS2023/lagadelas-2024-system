@@ -43,8 +43,8 @@
             align-items: center;
             color: var(--text-color);
             transition: color $transitionDuration;
-            border-radius: $borderRadius;
-            padding: .4rem .7rem;
+            border-radius: 8px;
+            padding: .7rem;
             transition: background-color .15s;
             font-weight: 400;
             font-size: 12px;
@@ -67,7 +67,8 @@
 
             &.router-link-exact-active {
                 font-weight: 700;
-                color: #FF9800;
+                color: white;
+                background-color: rgb(0, 118, 98);
             }
         }
 

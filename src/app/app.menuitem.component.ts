@@ -15,7 +15,7 @@ import { AppMainComponent } from './app.main.component';
 			<a [attr.href]="item.url" (click)="itemClick($event)" [ngClass]="item.class"
 			   *ngIf="(!item.routerLink || item.items) && item.visible !== false"
 			   [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
-				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+				<i [ngClass]="item.icon" class="layout-menuitem-icon mr-5"></i>
 				<span>{{item.label}}</span>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 				<i class="pi pi-fw {{active ? 'pi-angle-up' : 'pi-angle-down'}} ml-auto" *ngIf="item.items"></i>
@@ -23,7 +23,7 @@ import { AppMainComponent } from './app.main.component';
 			<a (click)="itemClick($event)" *ngIf="(item.routerLink && !item.items) && item.visible !== false" [ngClass]="item.class"
 			   [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink router-link-exact-active"
 			   [routerLinkActiveOptions]="{exact: !item.preventExact}" [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
-				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+				<i [ngClass]="item.icon" class="layout-menuitem-icon mr-3"></i>
 				<span>{{item.label}}</span>
 				<span class="p-tag p-badge ml-auto" *ngIf="item.badge">{{item.badge}}</span>
 				<i class="pi pi-fw {{active ? 'pi-angle-up' : 'pi-angle-down'}} ml-auto" *ngIf="item.items"></i>
@@ -121,7 +121,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
         // execute command
         if (this.item.command) {
-            this.item.command({originalEvent: event, item: this.item});
+            this.item.command({ originalEvent: event, item: this.item });
         }
 
         // toggle active state

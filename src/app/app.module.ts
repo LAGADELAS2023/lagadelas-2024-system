@@ -103,6 +103,7 @@ import { GeneratepupukComponent } from './components/generatepupuk/generatepupuk
 import { PupukComponent, FormatTimePipe } from './components/pupuk/pupuk.component';
 import { CreatePinSessionComponent } from './components/create-pin-session/create-pin-session.component';
 import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.component';
+import { GeneratesandiComponent } from './components/generatesandi/generatesandi.component';
 
 import { ApiService } from './service/api.service';
 import { MenuService } from './service/app.menu.service';
@@ -111,6 +112,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
+import { SandiComponent } from './components/sandi/sandi.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -220,11 +223,13 @@ import { AccessComponent } from './components/access/access.component';
         PupukComponent,
         CreatePinSessionComponent,
         PendaftaranComponent,
-        FormatTimePipe
+        GeneratesandiComponent,
+        SandiComponent,
+        FormatTimePipe,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        MenuService, ConfigService, ApiService
+        MenuService, ConfigService, ApiService, MessageService
     ],
     bootstrap: [AppComponent]
 })

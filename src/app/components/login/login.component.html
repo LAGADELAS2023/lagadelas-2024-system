@@ -24,12 +24,23 @@
                         <div class="text-pin">Masukan PIN</div>
                         <div class="strip-garis"></div>
                     </div>
-                    <p-password id="pin" [feedback]="false" placeholder="Masukan Pin" styleClass="w-full mb-3"
-                        [(ngModel)]="pin"></p-password>
+                    <div class="text-align-center justify-content-center flex">
+                        <div class="flex justify-content-center gap-2">
+                            <input pInputText #digitOne id="pin1" class="col-2 text-center"
+                                (keyup)="onDigitInput($event)" [(ngModel)]="pin1" />
+                            <input pInputText #digitTwo id="pin2" class="col-2 text-center"
+                                (keyup)="onDigitInput($event)" [(ngModel)]="pin2" />
+                            <input pInputText #digitThree id="pin3" class="col-2 text-center"
+                                (keyup)="onDigitInput($event)" [(ngModel)]="pin3" />
+                            <input pInputText #digitFour id="pin4" class="col-2 text-center"
+                                (keyup)="onDigitInput($event)" [(ngModel)]="pin4" />
+
+                        </div>
+                    </div>
                     <div class="flex align-items-center justify-content-between mb-5">
                     </div>
                     <button pButton pRipple label="Sign In" class="w-full p-3 text-xl"
-                        (click)="_login(username, password, pin)"></button>
+                        (click)="_login(username, password, pin1, pin2, pin3, pin4)"></button>
                 </div>
             </div>
         </div>

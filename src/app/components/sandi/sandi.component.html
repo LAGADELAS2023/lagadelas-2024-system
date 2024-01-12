@@ -1,0 +1,38 @@
+<p-toast></p-toast>
+
+<div>
+    <nav class="nav-cat">
+        <div class="nav-text">
+            LAGADELAS 2024
+        </div>
+        <div class="nav-text">
+            {{counter | formatTime}}
+        </div>
+    </nav>
+    <div class="flex">
+        <div class="sidebar">
+            <div *ngFor="let i of generateArray(5); let last = last" class="loop">
+                <a (click)="clickIndikator(i)"
+                    class="indikator text-center flex align-items-center justify-content-center"
+                    [ngClass]="{'active': isIndikatorActive(i)}">
+                    {{ i + 1 }}
+                </a>
+            </div>
+        </div>
+        <div class="soal-cat w-full">
+            <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
+                <!-- <img *ngIf="item.QUESTION_IMAGE != '' && item.QUESTION_IMAGE != null " [src]="item.QUESTION_IMAGE"
+                    alt="Uploaded Image" width="100%"> -->
+                <p-image *ngIf="item.QUESTION_IMAGE != '' && item.QUESTION_IMAGE != null " [src]="item.QUESTION_IMAGE"
+                    alt="Image" width="100%" height="120%" [preview]="true"></p-image>
+                <p class="text-2xl font-bold mt-3" [ngClass]="{ 'mt-8': outerIndex === 1 }"> <span
+                        class="pi pi-key mr-3 font-bold text-2xl"> =</span>{{ item.QUESTION_TEXT }}</p>
+                <div class="field p-fluid">
+                    <input type="text" pInputText placeholder="ISIKAN JAWABAN MU DISINI" [(ngModel)]="item.TextAnswer"
+                        (ngModelChange)="onInput()">
+                </div>
+                <button pButton class="p-button-info p-fluid" label="NEXT" (click)="next()"></button>
+            </div>
+        </div>
+    </div>
+</div>
