@@ -9,7 +9,7 @@
             {{counter | formatTime}}
         </div>
     </nav>
-    <div class="flex">
+    <div class="flex-column ">
         <div class="sidebar">
             <div *ngFor="let i of generateArray(50); let last = last" class="loop">
                 <a (click)="clickIndikator(i)"
@@ -24,7 +24,7 @@
         <div class="soal-cat w-full">
             <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
                 <img *ngIf="item.QUESTION_IMAGE != '' && item.QUESTION_IMAGE != null " [src]="item.QUESTION_IMAGE"
-                    alt="Uploaded Image" width="50%">
+                    alt="Uploaded Image" width="100%">
                 <p class="text-2xl font-bold" [ngClass]="{ 'mt-8': outerIndex === 1 }">{{ item.QUESTION_TEXT }}</p>
                 <div *ngFor="let item_option of item.OPTIONS; let innerIndex = index">
                     <div class="flex align-items-center mt-2 text-2xl">
@@ -41,8 +41,8 @@
             </div>
 
 
-            <div class="text-right">
-                <button *ngIf="page < 25" pButton pRipple class="p-button-info mr-3 col-2" label="next"
+            <div class="p-fluid mt-5">
+                <button *ngIf="page < 25" pButton pRipple class="p-button-info mr-3" label="next"
                     (click)="nextQuestion()"></button>
                 <button *ngIf="page == 25" pButton pRipple class="p-button-warning col-2" label="selesai"
                     (click)="getSkor()"></button>

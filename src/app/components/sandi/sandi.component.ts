@@ -17,6 +17,7 @@ export class SandiComponent implements OnInit {
   countDown: Subscription;
   page: any;
   soal = [];
+  responSave = [];
 
   constructor(
     protected api: ApiService,
@@ -103,12 +104,49 @@ export class SandiComponent implements OnInit {
     }
 
     localStorage.setItem('savedAnswer', JSON.stringify(savedAnswer));
-    console.log('jalan');
+    console.log(savedAnswer);
   }
 
+  selesai() {
+    let savedAnswer = JSON.parse(localStorage.getItem('savedAnswer')) || [];
+    const account = JSON.parse(localStorage.getItem('account'))
 
+    // Create an array to store promises from the API calls
+    let apiPromises = [];
 
+    for (let i = 0; i < savedAnswer.length; i++) {
+      const answer = savedAnswer[i].TextAnswer.split(' ')
+      let params = {
+        "ID_QUESTION": savedAnswer[i].QUEST_ID,
+        "ID_USER": account.ID,
+        "KATA1": answer[0],
+        "KATA2": answer[1],
+        "KATA3": answer[2],
+        "KATA4": answer[3],
+        "KATA5": answer[4]
+      }
+
+      apiPromises.push(this.api.getTotalSkorSandi(params));
+    }
+    Promise.all(apiPromises)
+      .then(() => {
+        const params = {
+          "USERNAME": account.USERNAME,
+          "SESSION_PIN": localStorage.getItem('pin')
+        }
+        this.api.skorSandi(params).then(
+          (result: any) => {
+            console.log(result);
+
+          })
+      })
+      .catch((error) => {
+        // Handle errors if needed
+        console.error('Error:', error);
+      });
+  }
 }
+
 
 @Pipe({
   name: 'formatTime',

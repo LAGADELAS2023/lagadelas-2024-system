@@ -12,6 +12,27 @@ export class DashboardComponent implements OnInit {
 
     items: MenuItem[];
 
+    data = [
+        {
+            PANGKALAN: "ELANG SMP NEGERI 18 SEMARANG",
+            SM: 89,
+            PPK: 99,
+            SND: 70,
+            PBB: 89,
+            MNY: 99,
+            BVK: 70
+        },
+        {
+            PANGKALAN: "SCORPIO SMP NEGERI 18 SEMARANG",
+            SM: 89,
+            PPK: 99,
+            SND: 70,
+            PBB: 89,
+            MNY: 99,
+            BVK: 70
+        }
+    ];
+
     products: Product[];
 
     chartData: any;

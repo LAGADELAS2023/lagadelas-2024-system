@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 0.3rem;
     background-color: #11235a44;
 }
 
@@ -37,17 +37,39 @@
     font-weight: bold;
 }
 
+.layout {
+    padding: 1rem;
+}
+
 .sidebar {
-    margin: 5rem 1rem 1rem 1rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    height: calc(100vh - 6rem);
-    position: fixed;
-    width: 300px;
+    margin-top: 5rem;
+    box-shadow: rgba(100, 100, 111, 0.112) 0px 7px 29px 0px;
+    height: 6rem;
+    width: 100%;
+    // position: fixed;
     border-radius: 12px;
     padding: 20px 10px;
-    display: grid; // Use CSS Grid
-    grid-template-columns: repeat(5, 1fr);
+    display: grid;
+    overflow-x: auto;
+    overflow-y: hidden;
+    grid-template-columns: repeat(50, 1fr);
     gap: 10px;
+}
+
+/* Style scrollbar agar tidak terlihat pada browser berbasis WebKit seperti Chrome dan Safari */
+.sidebar::-webkit-scrollbar {
+    width: 0.5em;
+    /* Ubah lebar scrollbar sesuai keinginan */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    /* Warna thumb scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Warna track scrollbar */
 }
 
 .sidebar a {
@@ -58,6 +80,7 @@
 .sidebar .indikator {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-width: 2px;
+    width: 50px;
     padding: 12px;
     font-weight: bold;
     cursor: pointer;
@@ -72,14 +95,14 @@
 }
 
 .loop {
-    flex: 1; // Use Flexbox to distribute the columns evenly
+    flex: 1;
 }
 
 
 .soal-cat {
-    margin: 5rem 1rem 2rem 25rem;
+    margin-top: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    min-height: calc(100vh - 7rem);
+    // min-height: calc(100vh - 7rem);
     padding: 20px 30px;
     border-radius: 12px;
 }

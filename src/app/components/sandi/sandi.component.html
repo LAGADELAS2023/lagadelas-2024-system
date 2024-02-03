@@ -9,7 +9,7 @@
             {{counter | formatTime}}
         </div>
     </nav>
-    <div class="flex">
+    <div class="flex-column layout">
         <div class="sidebar">
             <div *ngFor="let i of generateArray(5); let last = last" class="loop">
                 <a (click)="clickIndikator(i)"
@@ -32,6 +32,7 @@
                         (ngModelChange)="onInput()">
                 </div>
                 <button pButton class="p-button-info p-fluid" label="NEXT" (click)="next()"></button>
+                <button pButton class="p-button-info p-fluid" label="SELESAI" (click)="selesai()"></button>
             </div>
         </div>
     </div>

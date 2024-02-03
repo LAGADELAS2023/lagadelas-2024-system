@@ -101,4 +101,22 @@ export class ApiService {
       })
     })
   }
+
+  public getTotalSkorSandi(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}jawaban-sandi`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public skorSandi(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_local}nilai-sandi`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
 }

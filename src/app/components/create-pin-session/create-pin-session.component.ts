@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ApiService } from 'src/app/service/api.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-create-pin-session',
   templateUrl: './create-pin-session.component.html',
   styleUrl: './create-pin-session.component.scss',
-  providers: [MessageService]
+  providers: [MessageService, DatePipe]
 })
 export class CreatePinSessionComponent implements OnInit {
 
@@ -16,7 +18,7 @@ export class CreatePinSessionComponent implements OnInit {
     "SEMAPHORE",
   ];
   selectedSession: any;
-  dateSession: any;
+  dateSession: Date;
   start_session: any;
   end_session: any;
   description: string;
@@ -29,13 +31,13 @@ export class CreatePinSessionComponent implements OnInit {
     SESSION_DATE: null,
     SESSION_START: null,
     SESSION_END: null,
-
   }
   editDialog = false;
 
   constructor(
     protected api: ApiService,
-    private message: MessageService
+    private message: MessageService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -53,7 +55,7 @@ export class CreatePinSessionComponent implements OnInit {
     const params = {
       SESSION_NAME: session_name,
       DESCRIPTION: description,
-      SESSION_DATE: session_date,
+      SESSION_DATE: this.datePipe.transform(session_date, 'yyyy-MM-dd'),
       SESSION_START: session_start,
       SESSION_END: session_end,
     }
@@ -81,6 +83,10 @@ export class CreatePinSessionComponent implements OnInit {
 
   editSession(a) {
     this.selectedRowSession = { ...a };
+    this.selectedRowSession.SESSION_DATE = this.datePipe.transform(
+      this.selectedRowSession.SESSION_DATE,
+      'yyyy-MM-dd'
+    );
     this.editDialog = true;
     console.log(this.selectedRowSession);
 
@@ -88,7 +94,10 @@ export class CreatePinSessionComponent implements OnInit {
   }
 
   updateSession() {
-
+    this.selectedRowSession.SESSION_DATE = this.datePipe.transform(
+      this.selectedRowSession.SESSION_DATE,
+      'yyyy-MM-dd'
+    );
     this.api.updateSession(this.selectedRowSession).then(
       (result: any) => {
         this.message.add({
@@ -101,7 +110,7 @@ export class CreatePinSessionComponent implements OnInit {
       }).catch(
         (error: any) => {
           this.message.add({
-            severity: "danger",
+            severity: "error",
             summary: "FAILED",
             detail: "Gagal melakukan update PIN Sesi"
           })
