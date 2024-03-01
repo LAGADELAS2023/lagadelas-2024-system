@@ -27,17 +27,23 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'ADMIN & REKAP',
                 items: [
-                    { label: 'REKAP NILAI', routerLink: ['/'], icon: 'pi pi-star-fill' },
-                    { label: 'VERIFIKASI REGU', routerLink: ['/verifikasi'], icon: 'pi pi-verified' },
-                    { label: 'BUAT PIN SESI', routerLink: ['/admin/pin-session'], icon: 'pi pi-key' },
+                    { label: 'REKAP NILAI', routerLink: ['/'] },
+                    { label: 'VERIFIKASI REGU', routerLink: ['admin/verifikasi'] },
+                    { label: 'BUAT PIN SESI', routerLink: ['/admin/pin-session'] },
                 ]
             },
             {
                 label: 'MATERI',
                 items: [
-                    { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'], icon: 'pi pi-circle-fill' },
-                    { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'], icon: 'pi pi-circle-fill' },
-                    { label: 'BUAT SOAL SEMBOYAN', routerLink: ['/crate_question'], icon: 'pi pi-circle-fill' },
+                    { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'] },
+                    { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'] },
+                    { label: 'BUAT SOAL SEMBOYAN', routerLink: ['pages/empty'] },
+                ]
+            },
+            {
+                label: 'TOOLS',
+                items: [
+                    { label: 'BLOG', routerLink: ['tools/blog'] },
                 ]
             },
         ];

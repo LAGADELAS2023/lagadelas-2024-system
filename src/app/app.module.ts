@@ -41,6 +41,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KnobModule } from 'primeng/knob';
+import { EditorModule } from 'primeng/editor';
 import { ListboxModule } from 'primeng/listbox';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenuModule } from 'primeng/menu';
@@ -114,6 +115,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { SandiComponent } from './components/sandi/sandi.component';
 import { MessageService } from 'primeng/api';
+import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
     imports: [
@@ -188,6 +191,7 @@ import { MessageService } from 'primeng/api';
         SplitterModule,
         StepsModule,
         TagModule,
+        EditorModule,
         TableModule,
         TabMenuModule,
         TabViewModule,
@@ -226,6 +230,8 @@ import { MessageService } from 'primeng/api';
         GeneratesandiComponent,
         SandiComponent,
         FormatTimePipe,
+        VerifikasiReguComponent,
+        BlogComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

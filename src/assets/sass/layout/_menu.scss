@@ -1,11 +1,11 @@
 .layout-sidebar {
     position: fixed;
     width: 250px;
-    height: calc(100vh);
+    height: calc(90vh - 4rem);
     z-index: 999;
     overflow-y: auto;
     user-select: none;
-    top: 5rem;
+    top: 6rem;
     left: 0;
     transition: transform $transitionDuration, left $transitionDuration;
     background-color: var(--surface-overlay);
@@ -50,7 +50,7 @@
             font-size: 12px;
 
             span {
-                margin-left: 0.1rem;
+                margin-left: 1px;
             }
 
             .menuitem-toggle-icon {
@@ -68,7 +68,7 @@
             &.router-link-exact-active {
                 font-weight: 700;
                 color: white;
-                background-color: rgb(0, 118, 98);
+                background-color: #2D9596;
             }
         }
 

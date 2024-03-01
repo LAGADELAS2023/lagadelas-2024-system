@@ -15,6 +15,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { PendaftaranComponent } from './components/pendaftaran/pendaftaran.component';
 import { GeneratesandiComponent } from './components/generatesandi/generatesandi.component';
 import { SandiComponent } from './components/sandi/sandi.component';
+import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
     imports: [
@@ -26,6 +28,8 @@ import { SandiComponent } from './components/sandi/sandi.component';
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'admin/pin-session', component: CreatePinSessionComponent },
+                    { path: 'admin/verifikasi', component: VerifikasiReguComponent },
+                    { path: 'tools/blog', component: BlogComponent },
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
             },

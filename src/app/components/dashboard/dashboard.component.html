@@ -1,4 +1,12 @@
 <div class="card">
+    <div class="flex justify-content-between mb-3 align-items-center ">
+        <div style="color: #2D9596;font-weight: bold;font-size: 16px;">
+            REKAP PERLOMBAAN
+        </div>
+        <div>
+            <button class="p-button-success" label="EXPORT" pButton pRipple icon="pi pi-file-excel"></button>
+        </div>
+    </div>
     <p-table [value]="data" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
