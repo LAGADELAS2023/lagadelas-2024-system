@@ -17,6 +17,7 @@ import { GeneratesandiComponent } from './components/generatesandi/generatesandi
 import { SandiComponent } from './components/sandi/sandi.component';
 import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { SemboyanComponent } from './components/semboyan/semboyan.component';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { BlogComponent } from './components/blog/blog.component';
             },
             { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
             { path: 'cat/sandi/:pages', component: SandiComponent },
+            { path: 'cat/semboyan/:pages', component: SemboyanComponent },
             { path: 'pendaftaran/peserta', component: PendaftaranComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },

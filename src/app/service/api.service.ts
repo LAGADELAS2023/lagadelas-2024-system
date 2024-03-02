@@ -13,7 +13,7 @@ export class ApiService {
 
   public soalPupuk(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}soal-opsi?page=${pages}`, pin).subscribe({
+      return this.http.post(`${environment.url_local}question?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err)
       })
@@ -40,7 +40,7 @@ export class ApiService {
 
   public login(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}auth-pupuk`, params).subscribe({
+      return this.http.post(`${environment.url_local}auth`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })

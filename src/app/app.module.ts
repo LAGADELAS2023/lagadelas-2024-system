@@ -117,6 +117,10 @@ import { SandiComponent } from './components/sandi/sandi.component';
 import { MessageService } from 'primeng/api';
 import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menaksir-tinggi.component';
+import { SemboyanComponent } from './components/semboyan/semboyan.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NetworkDetectorDirective } from './network-detector.directive';
 
 @NgModule({
     imports: [
@@ -232,6 +236,10 @@ import { BlogComponent } from './components/blog/blog.component';
         FormatTimePipe,
         VerifikasiReguComponent,
         BlogComponent,
+        MenaksirTinggiComponent,
+        SemboyanComponent,
+        HeaderComponent,
+        NetworkDetectorDirective
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

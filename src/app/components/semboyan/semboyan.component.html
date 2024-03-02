@@ -1,0 +1,122 @@
+<p-toast></p-toast>
+<app-header></app-header>
+<div>
+    <div class="layout">
+        <div class="grid">
+            <div class="col-6">
+                <div class="card">
+                    <h4>Informasi Pengerjaan</h4>
+                    <hr>
+                    <div class="grid">
+                        <div class="col-3">
+                            Sesi Lomba
+                        </div>
+                        <div class="col-1">
+                            :
+                        </div>
+                        <div class="col-8">
+                            SEMBOYAN
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-3">
+                            Regu
+                        </div>
+                        <div class="col-1">
+                            :
+                        </div>
+                        <div class="col-8">
+                            Elang
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-3">
+                            Pangkalan
+                        </div>
+                        <div class="col-1">
+                            :
+                        </div>
+                        <div class="col-8">
+                            SMP Negeri 18 SEMARANG
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <h4>Sisa Waktu</h4>
+                    <hr>
+                    <div class="flex justify-content-center p-fluid" style="font-size: 4.2rem;font-weight: bold;">
+                        {{counter | formatTime}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card" >
+                    <h4>Soal Semaphore</h4>
+                    <hr>
+                    <div class="p-fluid">
+                       <button pButton pRipple class="p-button-info" label="PUTAR VIDEO" icon="pi pi-play" (click)="showVideo()" [disabled]="videoCounter == 2"></button>
+                       <p *ngIf="videoCounter == 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
+                       <p *ngIf="videoCounter != 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Video hanya dapat diputar 2 kali</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card p-fluid">
+                    <h4>Jawaban</h4>
+                    <hr>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-key"></i>
+                        <input type="text" pInputText placeholder="Masukan jawaban Semaphore" />
+                    </span>
+                    <p style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Dimohon untuk tidak melakukan refersh atau keluar halaman</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card" >
+                    <h4>Soal Morse</h4>
+                    <hr>
+                    <div class="p-fluid">
+                       <button pButton pRipple class="p-button-info" label="PUTAR AUDIO" icon="pi pi-play" (click)="showAudio()" [disabled]="audioCounter == 2"></button>
+                       <p *ngIf="audioCounter == 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
+                       <p *ngIf="audioCounter != 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Audio hanya dapat diputar 2 kali</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card p-fluid">
+                    <h4>Jawaban</h4>
+                    <hr>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-key"></i>
+                        <input type="text" pInputText placeholder="Masukan jawaban Sandi"/>
+                    </span>
+                    <p style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Dimohon untuk tidak melakukan refersh atau keluar halaman</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-fluid">
+            <button pButton pRipple class="p-button-success" label="SIMPAN JAWABAN"></button>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="video" [modal]="true" [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false" [closable]="false">
+    <div class="text-center">
+        <video  controls="false" #videoPlayer width="90%">
+            <source src="{{videoSource}}" type="video/mp4">
+             Your browser does not support the video tag.
+        </video>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="audio" [modal]="true" [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false" [closable]="false">
+    <div class="text-center">
+        <audio controls="false" #audioPlayer>
+            <source src="{{audioSource}}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+    </div>
+</p-dialog>

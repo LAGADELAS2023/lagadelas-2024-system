@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (result: any) => {
         if (result.status == 200) {
           this.messages = [{ severity: 'success', summary: 'Success', detail: 'Berhasil Login' }];
-          localStorage.setItem('account', JSON.stringify(result.login[0]))
+          localStorage.setItem('account', JSON.stringify(result.login))
           localStorage.setItem('isLoggedIn', "true");
           localStorage.setItem('pin', `${pin}`);
           interval(1000)

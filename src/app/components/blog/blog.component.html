@@ -7,4 +7,11 @@
     <div>
         <p-editor [(ngModel)]="text" [style]="{ height: '320px' }"></p-editor>
     </div>
+
+    <div class="mb-5">
+        <button class="p-button-success" pButton pRipple label="CEK CEK" (click)="cek()"></button>
+    </div>
+
+
+    <div [innerHTML]="convertToHtml(text)" class="mt-5"></div>
 </div>

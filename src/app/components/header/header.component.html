@@ -1,0 +1,11 @@
+<nav class="nav-cat">
+    <div class="nav-text">
+        LAGADELAS 2024
+    </div>
+    <div class="nav-signal-on" *ngIf="onlineMessage == 'ONLINE'">
+        {{onlineMessage}} <span class="ml-3"><i class="pi pi-circle-fill"></i></span>
+    </div>
+    <div class="nav-signal-off" *ngIf="onlineMessage == 'OFFLINE'">
+        {{onlineMessage}} <span class="ml-3"><i class="pi pi-circle-fill"></i></span>
+    </div>
+</nav>

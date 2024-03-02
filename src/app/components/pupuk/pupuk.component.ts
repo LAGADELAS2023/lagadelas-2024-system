@@ -148,7 +148,7 @@ export class PupukComponent implements OnInit, OnDestroy {
     const params = {
       ID_QUESTION: q,
       ID_OPTIONS: a,
-      ID_USER: account.ID,
+      ID_USER: account.id_user,
       TIMECOUNTDOWN: t,
     }
 
