@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="p-fluid">
+        <div class="field">
+            <div class="flex flex-column gap-2 mb-2">
+                <label for="pin_session" class="font-bold">PIN SESI</label>
+                <p-dropdown [options]="masterSession" [(ngModel)]="selectedSession" optionLabel="SESSION_PIN"
+                    [filter]="true" filterBy="SESSION_PIN" [showClear]="true" placeholder="Select a Pin">
+                    <ng-template let-sesi pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ sesi.SESSION_PIN }} - {{ sesi.SESSION_NAME }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="field">
+            <label class="font-bold">SOAL SEMAPHORE</label>
+        </div>
+        <div class="text-center mb-3 align-items-center ">
+            <p-image *ngIf="gambarPertanyaan !== null" [src]="gambarPertanyaan" alt="Image" width="100%"
+                [preview]="true"></p-image>
+            <p *ngIf="gambarPertanyaan == null">=== PILIH SOAL DALAM BENTUK VIDEO ===</p>
+        </div>
+        <div class="field">
+            <div class="upload-file upload-file-button">
+                <input type="file" (change)="onFileChange($event, 0)" id="fileInput" accept="mp4/*" />
+                <label for="fileInput" class="text-center"><i class="pi pi-video"></i></label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="flex flex-column gap-2 mb-2">
+                <label class="font-bold">KUNCI JAWABAN <i class="pi pi-lock ml-2"></i> </label>
+                <input type="text" pInputText [(ngModel)]="answerKey">
+            </div>
+        </div>
+        <div class="field">
+            <button pButton class="p-button-green" label="SIMPAN SOAL" (click)="postSoalSandi()"></button>
+        </div>
+    </div>
+</div>

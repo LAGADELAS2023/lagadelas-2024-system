@@ -18,6 +18,7 @@ import { SandiComponent } from './components/sandi/sandi.component';
 import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { SemboyanComponent } from './components/semboyan/semboyan.component';
+import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { SemboyanComponent } from './components/semboyan/semboyan.component';
                     { path: '', component: DashboardComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
+                    { path: 'materi/semboyan', component: GeneratesemboyanComponent },
                     { path: 'admin/pin-session', component: CreatePinSessionComponent },
                     { path: 'admin/verifikasi', component: VerifikasiReguComponent },
                     { path: 'tools/blog', component: BlogComponent },

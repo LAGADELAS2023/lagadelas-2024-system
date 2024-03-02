@@ -37,7 +37,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'] },
                     { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'] },
-                    { label: 'BUAT SOAL SEMBOYAN', routerLink: ['pages/empty'] },
+                    { label: 'BUAT SOAL SEMBOYAN', routerLink: ['materi/semboyan'] },
                 ]
             },
             {

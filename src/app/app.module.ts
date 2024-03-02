@@ -121,6 +121,7 @@ import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menak
 import { SemboyanComponent } from './components/semboyan/semboyan.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NetworkDetectorDirective } from './network-detector.directive';
+import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 
 @NgModule({
     imports: [
@@ -239,7 +240,8 @@ import { NetworkDetectorDirective } from './network-detector.directive';
         MenaksirTinggiComponent,
         SemboyanComponent,
         HeaderComponent,
-        NetworkDetectorDirective
+        NetworkDetectorDirective,
+        GeneratesemboyanComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
