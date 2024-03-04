@@ -19,6 +19,7 @@ export class RegisterAccountComponent implements OnInit {
   selectedAccount : any;
 
   mstDivisi = [
+    {id : 0, name: "REGULER"},
     {id : 1, name: "SEKRETARIS"},
     {id : 2, name: "BENDAHARA"},
     {id : 4, name: "DDD"},
@@ -27,6 +28,7 @@ export class RegisterAccountComponent implements OnInit {
     {id : 7, name: "HUMAS"},
     {id : 8, name: "PERLENGKAPAN"},
     {id : 9, name: "DANUS"},
+    {id : 10, name: "ADMIN"},
   ];
   mstRole = [];
 

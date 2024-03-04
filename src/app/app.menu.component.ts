@@ -7,8 +7,8 @@ import { AppMainComponent } from './app.main.component';
         <div class="layout-menu-container">
             <ul class="layout-menu" role="menu" (keydown)="onKeydown($event)">
                 <li app-menu class="layout-menuitem-category" *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true" role="none">
-                    <div class="layout-menuitem-root-text" [attr.aria-label]="item.label">{{item.label}}</div>
-                    <ul role="menu">
+                    <div class="layout-menuitem-root-text" [attr.aria-label]="item.label" *ngIf="item.akses">{{item.label}}</div>
+                    <ul role="menu"  *ngIf="item.akses">
                         <li app-menuitem *ngFor="let child of item.items" [item]="child" [index]="i" role="none"></li>
                     </ul>
                 </li>
@@ -19,22 +19,27 @@ import { AppMainComponent } from './app.main.component';
 export class AppMenuComponent implements OnInit {
 
     model: any[];
+    account: any;
 
-    constructor(public appMain: AppMainComponent) { }
+    constructor(public appMain: AppMainComponent) {
+    }
 
     ngOnInit() {
+        this.account = JSON.parse(localStorage.getItem('account'));
         this.model = [
             {
                 label: 'REKAP',
                 items: [
                     { label: 'REKAP NILAI', routerLink: ['/admin'] },
-                ]
+                ],
+                role: ["MATERI", "REGULER", "ADMIN"],
             },
             {
                 label: 'ADMINISTRASI',
                 items: [
                     { label: 'VERIFIKASI REGU', routerLink: ['verifikasi'] },
-                ]
+                ],
+                role: ["MATERI", "REGULER", "ADMIN"],
             },
             {
                 label: 'MATERI',
@@ -43,21 +48,32 @@ export class AppMenuComponent implements OnInit {
                     { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'] },
                     { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'] },
                     { label: 'BUAT SOAL SEMBOYAN', routerLink: ['materi/semboyan'] },
-                ]
+                ],
+                role: ["MATERI", "ADMIN", "REGULER"],
             },
             {
                 label: 'TOOLS',
                 items: [
                     { label: 'BLOG', routerLink: ['tools/blog'] },
-                ]
+                ],
+                role: [],
             },
             {
                 label: 'ADMIN ZONE',
                 items: [
                     { label: 'BUAT AKUN', routerLink: ['register/account'] },
-                ]
+                ],
+                role: ["ADMIN"],
             },
         ];
+        for (let i = 0; i < this.model.length; i++) {
+            if (this.model[i].role.length == 0 || this.model[i].role.includes(this.account.DIVISI)) {
+                this.model[i]['akses'] = true;
+            } else {
+                this.model[i]['akses'] = false;
+            }
+        }
+
     }
 
     onKeydown(event: KeyboardEvent) {

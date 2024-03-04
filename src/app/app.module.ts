@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -115,7 +115,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { SandiComponent } from './components/sandi/sandi.component';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi-regu.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menaksir-tinggi.component';
@@ -187,6 +187,7 @@ import { RegisterAccountComponent } from './components/auth/register-account/reg
         PickListModule,
         ProgressBarModule,
         RadioButtonModule,
+        ReactiveFormsModule,
         RatingModule,
         RippleModule,
         ScrollPanelModule,
@@ -251,7 +252,7 @@ import { RegisterAccountComponent } from './components/auth/register-account/reg
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        MenuService, ConfigService, ApiService, MessageService
+        MenuService, ConfigService, ApiService, MessageService, ConfirmationService
     ],
     bootstrap: [AppComponent]
 })

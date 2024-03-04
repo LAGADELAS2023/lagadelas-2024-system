@@ -18,18 +18,36 @@
 		<img src="./assets/image/login/bg.jpg" class="bg">
 		<img src="./assets/image/login/girl.png" class="girl">
 		<img src="./assets/image/login/trees.png" class="trees">
-		<div class="login mx-3">
+		<form [formGroup]="formGroup" (submit)="_login()" class="login mx-3">
             <img src="./assets/image/maskot/figure2_transparant.webp" alt="maskot">
 			<h3>LAGADELAS INISIATOR 2024</h3>
 			<div class="inputBox p-fluid">
-				<input type="text" placeholder="Username" [(ngModel)]="username"/>
+				<input pInputText 
+				type="text" 
+				placeholder="Username" 
+				name="username" 
+				formControlName="username" 
+				[ngClass]="{ 'ng-invalid': formGroup.get('username').invalid && (formGroup.get('username').dirty || formGroup.get('username').touched) }" 
+				(input)="conditionCheckUsername()"
+				/>
+						 <small class="mt-2" style="color: red;text-align: left;" *ngIf="username">Username tidak boleh kosong</small>
 			</div>
 			<div class="inputBox p-fluid">
-				<input type="password" placeholder="Password" [(ngModel)]="password"/>
+				<p-password 
+				type="password" 
+				placeholder="Password" 
+				name="password" 
+				formControlName="password" 
+				[toggleMask]="true" 
+				[ngClass]="{ 'ng-invalid': formGroup.get('password').invalid && (formGroup.get('password').dirty || formGroup.get('password').touched) }" 
+				[feedback]="false" 
+				(input)="conditionCheckPassword()">
+			</p-password>
+			<small class="mt-2" style="color: red;text-align: left;" *ngIf="password">Password tidak boleh kosong</small>
 			</div>
             <div class="inputBox p-fluid">
-				<button class="p-button-warning" pButton pRipple label="LOGIN" (click)="_login(username,password)"></button>
+				<button class="p-button-warning" pButton pRipple label="LOGIN" type="submit" ></button>
             </div>
-		</div>
+		</form>
 		
 	</section>
