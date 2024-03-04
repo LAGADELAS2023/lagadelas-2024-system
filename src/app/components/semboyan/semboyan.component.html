@@ -56,9 +56,9 @@
                     <h4>Soal Semaphore</h4>
                     <hr>
                     <div class="p-fluid">
-                       <button pButton pRipple class="p-button-info" label="PUTAR VIDEO" icon="pi pi-play" (click)="showVideo()" [disabled]="videoCounter == 2"></button>
-                       <p *ngIf="videoCounter == 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
-                       <p *ngIf="videoCounter != 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Video hanya dapat diputar 2 kali</p>
+                       <button pButton pRipple class="p-button-info" label="PUTAR VIDEO" icon="pi pi-play" (click)="showVideo()" [disabled]="videoCounter == 1"></button>
+                       <p *ngIf="videoCounter == 1" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
+                       <p *ngIf="videoCounter != 1" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Video hanya dapat diputar 2 kali</p>
                     </div>
                 </div>
             </div>
@@ -78,9 +78,9 @@
                     <h4>Soal Morse</h4>
                     <hr>
                     <div class="p-fluid">
-                       <button pButton pRipple class="p-button-info" label="PUTAR AUDIO" icon="pi pi-play" (click)="showAudio()" [disabled]="audioCounter == 2"></button>
-                       <p *ngIf="audioCounter == 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
-                       <p *ngIf="audioCounter != 2" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Audio hanya dapat diputar 2 kali</p>
+                       <button pButton pRipple class="p-button-info" label="PUTAR AUDIO" icon="pi pi-play" (click)="showAudio()" [disabled]="audioCounter == 1"></button>
+                       <p *ngIf="audioCounter == 1" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Kesempatan memutar sudah habis</p>
+                       <p *ngIf="audioCounter != 1" style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Audio hanya dapat diputar 2 kali</p>
                     </div>
                 </div>
             </div>
