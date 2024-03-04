@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  url_local: 'http://192.168.1.205/api-lagadelas/api/master/',
+  url_local: 'http://10.224.0.54/api-lagadelas/api/master/',
   production: false
 };
 
