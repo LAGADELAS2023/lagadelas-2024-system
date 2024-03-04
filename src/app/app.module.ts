@@ -122,6 +122,7 @@ import { SemboyanComponent } from './components/semboyan/semboyan.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NetworkDetectorDirective } from './network-detector.directive';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
+import { LoginUserComponent } from './components/auth/login-user/login-user.component';
 
 @NgModule({
     imports: [
@@ -241,7 +242,8 @@ import { GeneratesemboyanComponent } from './components/generatesemboyan/generat
         SemboyanComponent,
         HeaderComponent,
         NetworkDetectorDirective,
-        GeneratesemboyanComponent
+        GeneratesemboyanComponent,
+        LoginUserComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

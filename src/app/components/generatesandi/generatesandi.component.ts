@@ -48,11 +48,16 @@ export class GeneratesandiComponent implements OnInit {
   }
 
   protected postSoalSandi() {
+    let answerkeyArray =this.answerKey.split(' ');
     const params = {
       "QUESTION_TEXT": this.key,
       "SESSION_PIN": this.selectedSession.SESSION_PIN,
       "QUESTION_IMAGE": this.gambarPertanyaan,
-      "ANSWER_TEXT": this.answerKey
+      "K1": answerkeyArray[0],
+      "K2": answerkeyArray[1],
+      "K3": answerkeyArray[2],
+      "K4": answerkeyArray[3],
+      "K5": answerkeyArray[4],
     }
     this.api.soalSandi(params).then(
       (result: any) => {

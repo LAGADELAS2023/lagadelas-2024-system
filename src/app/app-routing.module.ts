@@ -19,19 +19,20 @@ import { VerifikasiReguComponent } from './components/verifikasi-regu/verifikasi
 import { BlogComponent } from './components/blog/blog.component';
 import { SemboyanComponent } from './components/semboyan/semboyan.component';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
+import { LoginUserComponent } from './components/auth/login-user/login-user.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppMainComponent,
+                path: 'admin', component: AppMainComponent,
                 children: [
                     { path: '', component: DashboardComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'materi/semboyan', component: GeneratesemboyanComponent },
-                    { path: 'admin/pin-session', component: CreatePinSessionComponent },
-                    { path: 'admin/verifikasi', component: VerifikasiReguComponent },
+                    { path: 'pin-session', component: CreatePinSessionComponent },
+                    { path: 'verifikasi', component: VerifikasiReguComponent },
                     { path: 'tools/blog', component: BlogComponent },
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
@@ -42,10 +43,12 @@ import { GeneratesemboyanComponent } from './components/generatesemboyan/generat
             { path: 'pendaftaran/peserta', component: PendaftaranComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },
+            { path: 'auth/user/login', component: LoginUserComponent },
             { path: 'pages/error', component: ErrorComponent },
             { path: 'pages/notfound', component: NotfoundComponent },
             { path: 'pages/access', component: AccessComponent },
-            { path: '**', redirectTo: 'pages/login' },
+            { path: '**', redirectTo: 'auth/user/login' },
+            {path : '', redirectTo: 'auth/user/login', pathMatch: 'full'}
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
     ],
     exports: [RouterModule]
