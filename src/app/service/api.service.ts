@@ -31,7 +31,7 @@ export class ApiService {
 
   public soalSandi(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}bikin-sandi`, params).subscribe({
+      return this.http.post(`${environment.url_local}create-sandi`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
