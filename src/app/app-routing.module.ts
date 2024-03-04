@@ -20,6 +20,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { SemboyanComponent } from './components/semboyan/semboyan.component';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 import { LoginUserComponent } from './components/auth/login-user/login-user.component';
+import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
 
 @NgModule({
     imports: [
@@ -34,8 +35,10 @@ import { LoginUserComponent } from './components/auth/login-user/login-user.comp
                     { path: 'pin-session', component: CreatePinSessionComponent },
                     { path: 'verifikasi', component: VerifikasiReguComponent },
                     { path: 'tools/blog', component: BlogComponent },
+                    { path: 'register/account', component: RegisterAccountComponent },
                     { path: 'pages/empty', component: EmptyComponent },
                 ],
+                canActivate: [AuthGuard]
             },
             { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
             { path: 'cat/sandi/:pages', component: SandiComponent },

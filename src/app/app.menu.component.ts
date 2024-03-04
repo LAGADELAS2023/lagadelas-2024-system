@@ -25,16 +25,21 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'ADMIN & REKAP',
+                label: 'REKAP',
                 items: [
                     { label: 'REKAP NILAI', routerLink: ['/admin'] },
+                ]
+            },
+            {
+                label: 'ADMINISTRASI',
+                items: [
                     { label: 'VERIFIKASI REGU', routerLink: ['verifikasi'] },
-                    { label: 'BUAT PIN SESI', routerLink: ['pin-session'] },
                 ]
             },
             {
                 label: 'MATERI',
                 items: [
+                    { label: 'BUAT PIN SESI', routerLink: ['pin-session'] },
                     { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'] },
                     { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'] },
                     { label: 'BUAT SOAL SEMBOYAN', routerLink: ['materi/semboyan'] },
@@ -44,6 +49,12 @@ export class AppMenuComponent implements OnInit {
                 label: 'TOOLS',
                 items: [
                     { label: 'BLOG', routerLink: ['tools/blog'] },
+                ]
+            },
+            {
+                label: 'ADMIN ZONE',
+                items: [
+                    { label: 'BUAT AKUN', routerLink: ['register/account'] },
                 ]
             },
         ];

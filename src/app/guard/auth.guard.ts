@@ -12,11 +12,12 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree {
     const isLogged = localStorage.getItem('isLoggedIn') == "true";
+    const token = localStorage.getItem('token') != "";
 
-    if (isLogged) {
+    if (isLogged && token) {
       return true;
     } else {
-      return this.router.createUrlTree(['/pages/login']);
+      return this.router.createUrlTree(['auth/user/login']);
     }
   }
 }

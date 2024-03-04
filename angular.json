@@ -28,7 +28,10 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/primeicons/primeicons.css",
+                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css"
                         ],
                         "scripts": [
                             "node_modules/prismjs/prism.js",
@@ -102,7 +105,10 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/primeicons/primeicons.css",
+                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css"
                         ],
                         "scripts": []
                     }
@@ -110,8 +116,7 @@
             }
         }
     },
-    "defaultProject": "sakai",
     "cli": {
-      "analytics": "aa068ff2-bc13-46d6-b3ac-0c586b5b06de"
+      "analytics": "20efe18c-2718-4150-80e5-d8ed923a9747"
     }
 }

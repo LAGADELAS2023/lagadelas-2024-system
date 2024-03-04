@@ -1,0 +1,108 @@
+
+<div class="">
+    <div class="card">
+        <div class="grid p-fluid">
+            <div class="lg:col-6 col-12">
+                <div class="field">
+                    <label for="full_name" class="font-bold">NAMA LENGKAP</label>
+                    <input type="text" pInputText id="full_name" [(ngModel)]="full_name">
+                </div>
+                <div class="field">
+                    <label for="email" class="font-bold">EMAIL</label>
+                    <input type="email" pInputText id="email" [(ngModel)]="email">
+                </div>
+                <div class="field">
+                    <label for="divisi" class="font-bold">DIVISI</label>
+                    <p-dropdown [options]="mstDivisi" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" [(ngModel)]="selectedDivisi"></p-dropdown>
+                </div>
+            </div>
+            <div class="lg:col-6 col-12">
+                <div class="field">
+                    <label for="username" class="font-bold">USERNAME</label>
+                    <input type="text" pInputText id="username" [(ngModel)]="username">
+                </div>
+                <div class="field">
+                    <label for="password" class="font-bold">PASSWORD</label>
+                    <p-password [feedback]="false" [toggleMask]="true" [(ngModel)]="password"></p-password>
+                </div>
+                <div class="field">
+                    <label for="divisi" class="font-bold">HAK AKSES</label>
+                    <p-dropdown [options]="mstRole" optionLabel="ROLE_NAME" [filter]="true" filterBy="ROLE_NAME" [showClear]="true" [(ngModel)]="selectedRole"></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 p-fluid">
+                <button class="p-button-info" pButton pRipple label="SIMPAN ACCOUNT" (click)="_register()"></button>
+            </div>
+        </div>
+        <div class="card">
+            <p-table
+                #dt
+                [value]="accountList"
+                [(selection)]="selectedAccount"
+                dataKey="ID"
+                [rowHover]="true"
+                [rows]="10"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [filterDelay]="0"
+                [globalFilterFields]="['FULL_NAME', 'USERNAME', 'DIVISI']"
+            >
+                <ng-template pTemplate="caption">
+                    <div class="table-header flex justify-content-between align-items-center ">
+                        <div>List of Account</div>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 4rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th>NAMA</th>
+                        <th>EMAIL</th>
+                        <th>DIVISI</th>
+                        <th>JABATAN</th>
+                        <th>USERNAME</th>
+                        <th style="width: 5rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-account>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="account"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            {{ account.FULL_NAME }}
+                        </td>
+                        <td>
+                            {{ account.EMAIL }}
+                        </td>
+                        <td>
+                            {{ account.DIVISI }}
+                        </td>
+                        <td>
+                            {{ account.ACCESS_ROLE  }}
+                        </td>
+                        <td>
+                            {{ account.USERNAME  }}
+                        </td>
+                        <td style="text-align: center;display: flex;gap: 10px;justify-content: center;">
+                            <button pButton type="button" class="p-button-warning" icon="pi pi-pencil"></button>
+                            <button pButton type="button" class="p-button-danger" icon="pi pi-trash"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No customers found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

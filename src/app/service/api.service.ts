@@ -11,9 +11,18 @@ export class ApiService {
     protected http: HttpClient,
   ) { }
 
+  public authLogin(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}auth-panitia`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
   public soalPupuk(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}question?page=${pages}`, pin).subscribe({
+      return this.http.post(`${environment.url_public}question?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err)
       })
@@ -22,7 +31,7 @@ export class ApiService {
 
   public getSoalSandi(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}soal-sandi?page=${pages}`, pin).subscribe({
+      return this.http.post(`${environment.url_public}soal-sandi?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err)
       })
@@ -31,7 +40,7 @@ export class ApiService {
 
   public soalSandi(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}create-sandi`, params).subscribe({
+      return this.http.post(`${environment.url_public}create-sandi`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -40,7 +49,7 @@ export class ApiService {
 
   public login(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}auth`, params).subscribe({
+      return this.http.post(`${environment.url_public}auth`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -50,7 +59,7 @@ export class ApiService {
 
   public createPinSession(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}ins-session`, params).subscribe({
+      return this.http.post(`${environment.url_public}ins-session`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -59,7 +68,7 @@ export class ApiService {
 
   public sessionGet() {
     return new Promise((resolve, reject) => {
-      return this.http.get(`${environment.url_local}session`).subscribe({
+      return this.http.get(`${environment.url_public}session`).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -68,7 +77,7 @@ export class ApiService {
 
   public createSoalPupuk(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}ins-puk`, params).subscribe({
+      return this.http.post(`${environment.url_public}ins-puk`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -77,7 +86,7 @@ export class ApiService {
 
   public updateSession(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}update-session`, params).subscribe({
+      return this.http.post(`${environment.url_public}update-session`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -86,7 +95,7 @@ export class ApiService {
 
   public saveResponse(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}submit`, params).subscribe({
+      return this.http.post(`${environment.url_public}submit`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -95,7 +104,7 @@ export class ApiService {
 
   public getTotalSkor(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}summary`, params).subscribe({
+      return this.http.post(`${environment.url_public}summary`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -104,7 +113,7 @@ export class ApiService {
 
   public getTotalSkorSandi(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}jawaban-sandi`, params).subscribe({
+      return this.http.post(`${environment.url_public}jawaban-sandi`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -113,10 +122,38 @@ export class ApiService {
 
   public skorSandi(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}nilai-sandi`, params).subscribe({
+      return this.http.post(`${environment.url_public}nilai-sandi`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
     })
   }
+
+  public listRole() {
+    return new Promise((resolve, reject) => {
+      return this.http.get(`${environment.url_public}role-list`).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public adminList() {
+    return new Promise((resolve, reject) => {
+      return this.http.get(`${environment.url_public}admin-list`).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public registerAccount(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}insert-account`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+  
 }

@@ -88,6 +88,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { BlockUIModule } from 'primeng/blockui';
 
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -123,6 +124,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NetworkDetectorDirective } from './network-detector.directive';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 import { LoginUserComponent } from './components/auth/login-user/login-user.component';
+import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
 
 @NgModule({
     imports: [
@@ -133,6 +135,7 @@ import { LoginUserComponent } from './components/auth/login-user/login-user.comp
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        BlockUIModule,
         AccordionModule,
         AutoCompleteModule,
         AvatarModule,
@@ -243,7 +246,8 @@ import { LoginUserComponent } from './components/auth/login-user/login-user.comp
         HeaderComponent,
         NetworkDetectorDirective,
         GeneratesemboyanComponent,
-        LoginUserComponent
+        LoginUserComponent,
+        RegisterAccountComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

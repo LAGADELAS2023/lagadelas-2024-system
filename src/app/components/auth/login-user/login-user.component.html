@@ -1,3 +1,7 @@
+	<p-toast [breakpoints]="{'920px': {width: '90%', right: '0'}}"></p-toast>
+	<p-blockUI [blocked]="blockedDocument">
+		<div *ngIf="blockedDocument" class="loader"></div>
+	</p-blockUI>
 	<section>
 		<div class="leaves">
 			<div class="set">
@@ -15,16 +19,16 @@
 		<img src="./assets/image/login/girl.png" class="girl">
 		<img src="./assets/image/login/trees.png" class="trees">
 		<div class="login mx-3">
-            <img src="./assets/image/maskot/figure2_transparant.png" alt="maskot">
+            <img src="./assets/image/maskot/figure2_transparant.webp" alt="maskot">
 			<h3>LAGADELAS INISIATOR 2024</h3>
 			<div class="inputBox p-fluid">
-				<input type="text" placeholder="Username"/>
+				<input type="text" placeholder="Username" [(ngModel)]="username"/>
 			</div>
 			<div class="inputBox p-fluid">
-				<input type="password" placeholder="Password"/>
+				<input type="password" placeholder="Password" [(ngModel)]="password"/>
 			</div>
             <div class="inputBox p-fluid">
-				<button class="p-button-warning" pButton pRipple label="LOGIN"></button>
+				<button class="p-button-warning" pButton pRipple label="LOGIN" (click)="_login(username,password)"></button>
             </div>
 		</div>
 		

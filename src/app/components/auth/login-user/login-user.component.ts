@@ -1,45 +1,41 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ConfigService } from 'src/app/service/app.config.service'; 
-import { AppConfig } from 'src/app/api/appconfig';
-import { Subscription, interval } from 'rxjs';
-import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-
-
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { ConfigService } from 'src/app/service/app.config.service';
+import { ApiService } from 'src/app/service/api.service';
+import { AppConfig } from 'src/app/api/appconfig';
 
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
-  styleUrl: './login-user.component.scss'
+  styleUrls: ['./login-user.component.scss']
 })
 export class LoginUserComponent implements OnInit, OnDestroy {
 
-  password: string;
-
-  username: string;
-
+  password: string = "";
+  username: string = "";
   config: AppConfig;
-
   subscription: Subscription;
-
-  messages: any[] | undefined;
+  blockedDocument = false;
 
   constructor(
     public configService: ConfigService,
     protected apiService: ApiService,
     private router: Router,
+    private message: MessageService,
+    protected api:ApiService,
   ) { }
 
   ngOnInit(): void {
-    localStorage.setItem('isLoggedIn', "false")
+    localStorage.setItem('isLoggedIn', "false");
+    localStorage.setItem('token', "");
     this.config = this.configService.config;
     this.subscription = this.configService.configUpdate$.subscribe(config => {
       this.config = config;
     });
-    localStorage.removeItem('account')
+    localStorage.removeItem('account');
   }
-
 
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -47,37 +43,41 @@ export class LoginUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  _login(a, b) {
-    const params = {
-      USERNAME: a,
-      PASSWORD: b,
+  _login(a: string, b: string): void {
+    if (a == "" || b == "") {
+      this.message.clear();
+      this.message.add({
+        severity: 'error',
+        summary: 'GAGAL',
+        detail: 'Data wajib diisi'
+      });
+    } else {
+      this.blockedDocument = true;
+      const params = {
+        USERNAME: a,
+        PASSWORD: b,
+      };
+      setTimeout(()=>{
+        this.api.authLogin(params).then((result: any) => {
+          this.message.clear();
+          this.message.add({
+            severity: 'success',
+            summary: 'BERHASIL',
+            detail: 'berhasil login'
+          });
+          localStorage.setItem('isLoggedIn', "true");
+          localStorage.setItem('token', result.token);
+            this.router.navigate(['admin']);
+        }).catch((error : any)=> {
+          this.message.add({
+            severity: 'error',
+            summary: 'GAGAL',
+            detail: 'username atau password salah'
+          });
+          this.blockedDocument = true;
+        })
+      }, 2000);
+      
     }
-
-    this.router.navigate(['admin']);
-    // this.apiService.login(params).then(
-    //   (result: any) => {
-    //     if (result.status == 200) {
-    //       this.messages = [{ severity: 'success', summary: 'Success', detail: 'Berhasil Login' }];
-    //       localStorage.setItem('account', JSON.stringify(result.login))
-    //       localStorage.setItem('isLoggedIn', "true");
-    //       interval(1000)
-    //         .pipe(take(1))
-    //         .subscribe(() => {
-    //           if (result.data.SESSION_NAME == 'PUPUK') {
-    //             this.router.navigate(['cat/pupuk/1']);
-    //           } else {
-    //             this.router.navigate(['cat/sandi/1']);
-    //           }
-    //         });
-    //     }
-    //   }).catch(
-    //     (error: any) => {
-    //       if (error.status == 404) {
-    //         this.messages = [{ severity: 'error', summary: 'Failed', detail: 'Pin tidak ditemukan' }];
-    //       } else {
-    //         this.messages = [{ severity: 'error', summary: 'Failed', detail: 'Username atau password salah' }];
-    //       }
-    //     })
   }
-
 }
