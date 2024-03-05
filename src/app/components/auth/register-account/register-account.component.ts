@@ -69,7 +69,8 @@ export class RegisterAccountComponent implements OnInit {
           severity:'success',
           summary : 'BERHASIL',
           detail : 'membuat account'
-        })
+        });
+        this.ngOnInit();
       }).catch((error : any)=>{
         this.message.add({
           severity:'error',
