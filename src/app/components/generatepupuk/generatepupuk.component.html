@@ -95,28 +95,6 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:col-6 col-12  mb-3">
-                <div class="flex flex-column gap-2 mb-2">
-                    <label for="jawaban_4" class="font-bold">PILIHAN 4</label>
-                    <img *ngIf="gambarOption4 !== null" [src]="gambarOption4" alt="Uploaded Image" width="100%">
-                    <div class="grid">
-                        <div class="lg:col-10 col-12">
-                            <p-inputGroup>
-                                <p-inputGroupAddon><p-radioButton name="category" inputId="4" [(ngModel)]="answerKey"
-                                        value="4"></p-radioButton></p-inputGroupAddon>
-                                <input type="text" pInputText placeholder="Pilihan 4" [(ngModel)]="OPTIONTEXT4" />
-                            </p-inputGroup>
-                        </div>
-                        <div class="lg:col-2 col-12">
-                            <div class="upload-file upload-file-button">
-                                <input type="file" (change)="onFileChange($event, 4)" id="fileInput4"
-                                    accept="image/*" />
-                                <label for="fileInput4" class="text-center"><i class="pi pi-image"></i></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <hr>
         <button class="p-button p-button-green mt-5" pButton pRipple label="SIMPAN SOAL"

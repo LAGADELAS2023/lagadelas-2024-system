@@ -13,9 +13,8 @@ import { DatePipe } from '@angular/common';
 export class CreatePinSessionComponent implements OnInit {
 
   sessionName = [
-    "PUPUK",
-    "SANDI",
-    "SEMAPHORE",
+    "PUPUK-SANDI",
+    "SEMBOYAN",
   ];
   selectedSession: any;
   dateSession: Date;

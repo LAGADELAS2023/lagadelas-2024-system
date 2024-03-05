@@ -45,6 +45,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'MATERI',
                 items: [
                     { label: 'BUAT PIN SESI', routerLink: ['pin-session'] },
+                    { label: 'APROVAL SOAL', routerLink: ['materi/aproval'] },
                     { label: 'BUAT SOAL PUPUK', routerLink: ['materi/pupuk'] },
                     { label: 'BUAT SOAL SANDI', routerLink: ['materi/sandi'] },
                     { label: 'BUAT SOAL SEMBOYAN', routerLink: ['materi/semboyan'] },

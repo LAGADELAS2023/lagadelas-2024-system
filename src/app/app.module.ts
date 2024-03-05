@@ -125,6 +125,7 @@ import { NetworkDetectorDirective } from './network-detector.directive';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 import { LoginUserComponent } from './components/auth/login-user/login-user.component';
 import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
+import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
 
 @NgModule({
     imports: [
@@ -248,7 +249,8 @@ import { RegisterAccountComponent } from './components/auth/register-account/reg
         NetworkDetectorDirective,
         GeneratesemboyanComponent,
         LoginUserComponent,
-        RegisterAccountComponent
+        RegisterAccountComponent,
+        AprovalSoalComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

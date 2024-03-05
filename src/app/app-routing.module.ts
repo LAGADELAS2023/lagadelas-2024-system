@@ -21,6 +21,7 @@ import { SemboyanComponent } from './components/semboyan/semboyan.component';
 import { GeneratesemboyanComponent } from './components/generatesemboyan/generatesemboyan.component';
 import { LoginUserComponent } from './components/auth/login-user/login-user.component';
 import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
+import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { RegisterAccountComponent } from './components/auth/register-account/reg
                 path: 'admin', component: AppMainComponent,
                 children: [
                     { path: '', component: DashboardComponent },
+                    { path: 'materi/aproval', component: AprovalSoalComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'materi/semboyan', component: GeneratesemboyanComponent },

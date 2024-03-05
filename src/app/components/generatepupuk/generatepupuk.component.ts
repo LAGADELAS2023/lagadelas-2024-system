@@ -123,6 +123,8 @@ export class GeneratepupukComponent implements OnInit {
 
   createSoalPupuk(event: UploadEvent) {
     // if (this.answerKey == undefined || this.QUESTIONTEXT == undefined || this.OPTIONTEXT1 == undefined || this.OPTIONTEXT2 == undefined || this.OPTIONTEXT3 == undefined || this.OPTIONTEXT4 == undefined) {
+    let counter = 0;
+    
     if (this.answerKey == undefined || this.QUESTIONTEXT == undefined) {
       this.message.add({
         severity: "error",
@@ -135,40 +137,47 @@ export class GeneratepupukComponent implements OnInit {
         { OPTIONS_TEXT: this.OPTIONTEXT1 || null, VALUE: 0, OPTIONS_IMAGE: this.gambarOption1 },
         { OPTIONS_TEXT: this.OPTIONTEXT2 || null, VALUE: 0, OPTIONS_IMAGE: this.gambarOption2 },
         { OPTIONS_TEXT: this.OPTIONTEXT3 || null, VALUE: 0, OPTIONS_IMAGE: this.gambarOption3 },
-        { OPTIONS_TEXT: this.OPTIONTEXT4 || null, VALUE: 0, OPTIONS_IMAGE: this.gambarOption4 },
+        // { OPTIONS_TEXT: this.OPTIONTEXT4 || null, VALUE: 0, OPTIONS_IMAGE: this.gambarOption4 },
       ];
 
       if (correctAnswerIndex >= 1 && correctAnswerIndex <= 4) {
         options[correctAnswerIndex - 1].VALUE = 1;
       }
 
-      let params = {
-        QUESTION_TEXT: this.QUESTIONTEXT,
-        QUESTION_IMAGE: this.gambarPertanyaan,
-        SESSION_PIN: this.selectedSession.SESSION_PIN,
-        OPTIONS: options,
-      };
-      console.log(params);
-      this.api.createSoalPupuk(params).then(
-        (result: any) => {
-          this.message.add({
-            severity: "success",
-            summary: 'SUCCESS',
-            detail: 'Masuk nichh, Pargoy dulu'
-          })
-          this.QUESTIONTEXT = "";
-          this.OPTIONTEXT1 = "";
-          this.OPTIONTEXT2 = "";
-          this.OPTIONTEXT3 = "";
-          this.OPTIONTEXT4 = "";
-        }).catch(
-          (error: any) => {
-            this.message.add({
-              severity: "error",
-              summary: 'FAILED',
-              detail: 'Gagal nichh, Pasti belum pargoy'
+      for (let i = 0; i < options.length; i++) {
+        let params = {
+          QUESTION_TEXT: this.QUESTIONTEXT,
+          QUESTION_IMAGE: this.gambarPertanyaan,
+          SESSION_PIN: this.selectedSession.SESSION_PIN,
+          OPTIONS: options[i],
+        };        
+        this.api.createSoalPupuk(params).then(
+          (result: any) => {
+            counter++
+            if (counter == options.length) {
+              this.message.add({
+                severity: "success",
+                summary: 'SUCCESS',
+                detail: 'Soal berhasil dibuat'
+              })
+              this.QUESTIONTEXT = "";
+              this.OPTIONTEXT1 = "";
+              this.OPTIONTEXT2 = "";
+              this.OPTIONTEXT3 = "";
+            }
+            // this.OPTIONTEXT4 = "";
+          }).catch(
+            (error: any) => {
+              counter++
+              if (counter == options.length) {                
+                this.message.add({
+                  severity: "error",
+                  summary: 'FAILED',
+                  detail: 'Gagal nichh, Pasti belum pargoy'
+                })
+              }
             })
-          })
+      }
     }
   }
 
