@@ -19,7 +19,6 @@ export class LoginUserComponent implements OnInit, OnDestroy {
   config: AppConfig;
   subscription: Subscription;
   blockedDocument = false;
-
   formGroup: FormGroup;
 
 

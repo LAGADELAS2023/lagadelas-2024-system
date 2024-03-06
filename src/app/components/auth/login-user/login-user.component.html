@@ -1,6 +1,7 @@
 	<p-toast [breakpoints]="{'920px': {width: '90%', right: '0'}}"></p-toast>
 	<p-blockUI [blocked]="blockedDocument">
-		<div *ngIf="blockedDocument" class="loader"></div>
+		<div class="loader"></div>
+		<p style="color: white;font-weight: bold;font-style: italic;font-size: 2rem;margin-left: 20px;">Loading...</p>
 	</p-blockUI>
 	<section>
 		<div class="leaves">
@@ -19,7 +20,7 @@
 		<img src="./assets/image/login/girl.png" class="girl">
 		<img src="./assets/image/login/trees.png" class="trees">
 		<form [formGroup]="formGroup" (submit)="_login()" class="login mx-3">
-            <img src="./assets/image/maskot/figure2_transparant.webp" alt="maskot">
+            <img src="./assets/image/maskot/figure2_transparant.png" alt="maskot">
 			<h3>LAGADELAS INISIATOR 2024</h3>
 			<div class="inputBox p-fluid">
 				<input pInputText 

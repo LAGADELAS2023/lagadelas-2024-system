@@ -1,0 +1,28 @@
+<!-- <div class="card bg-primary text-center font-bold text-lg">
+    PENGATURAN AKUN
+</div> -->
+<p-toast></p-toast>
+<div class="card text-center">
+    <img src="./assets/image/pluggin/user.png" alt="profile" width="20%">
+    <h5 class="font-bold">{{account.FULL_NAME}}</h5>
+    <p class="font-500">{{account.EMAIL.toLowerCase()}}</p>
+    <p-badge [value]="account.DIVISI"></p-badge>
+</div>
+<div class="card p-fluid">
+    <h4 class="text-primary  font-bold">PERBARUI KATA SANDI</h4>
+    <div class="field">
+        <label for="password" class="font-bold">PASSWORD LAMA</label>
+        <p-password [feedback]="false" [toggleMask]="true" [(ngModel)]="password_old"></p-password>
+    </div>
+    <div class="field">
+        <label for="password" class="font-bold">PASSWORD BARU</label>
+        <p-password [feedback]="false" [toggleMask]="true" [(ngModel)]="password"></p-password>
+    </div>
+    <div class="field">
+        <label for="password" class="font-bold">ULANG PASSWORD</label>
+        <p-password [feedback]="false" [toggleMask]="true" [(ngModel)]="password_return"></p-password>
+    </div>
+    <div class="field sm:p-fluid">
+        <button class="p-button-warning" pButton pRipple label="Simpan Perubahan" (click)="simpanPassword()"></button>
+    </div>
+</div>

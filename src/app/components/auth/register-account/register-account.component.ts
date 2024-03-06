@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
+import { Account } from 'src/app/api/account';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-account',
@@ -16,7 +18,21 @@ export class RegisterAccountComponent implements OnInit {
   email : string;
   selectedRole: any;
   accountList : any;
-  selectedAccount : any;
+  selectedAccount : Account = {
+    ID: 0,
+    USERNAME: "",
+    PASSWORD: "",
+    FULL_NAME: "",
+    DIVISI: "",
+    EMAIL: "",
+    ACCESS_ROLE: "",
+    STATUS: "",
+    CREATED_AT: "",
+    MODIFIED_AT: "",
+    ID_ROLE: "",
+    ROLE_NAME: "",
+  };
+  visible = false;
 
   mstDivisi = [
     {id : 0, name: "REGULER"},
@@ -35,6 +51,7 @@ export class RegisterAccountComponent implements OnInit {
   constructor(
     protected api:ApiService,
     private message: MessageService,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -78,6 +95,46 @@ export class RegisterAccountComponent implements OnInit {
           detail  : 'membuat account'
         })
       })
+  }
+
+  openDialogUpdate(account){
+    this.visible = true;
+    this.selectedAccount = {...account}
+    this.selectedAccount.PASSWORD = ''
+    console.log(this.selectedAccount);
+  }
+
+  updateAccount(){ 
+    const params = {
+      'ID' : this.selectedAccount.ID,
+      'USERNAME' : this.selectedAccount.USERNAME,
+      'PASSWORD' : this.selectedAccount.PASSWORD ,
+      'FULL_NAME' : this.selectedAccount.FULL_NAME ,
+      'DIVISI' : this.selectedAccount.DIVISI.name,
+      'EMAIL' : this.selectedAccount.EMAIL ,
+      'ACCESS_ROLE' : this.selectedAccount.ROLE_NAME.ID_ROLE ,
+      'STATUS' : this.selectedAccount.STATUS ,
+      'MODIFIED_AT' : new Date()
+    }
+    
+    this.api.updateAccount(params).then((result : any) => {
+      this.visible = false;
+      this.message.add({
+        severity:'success',
+        summary : 'BERHASIL',
+        detail : 'Memperbarui account, diarahkan ke halaman login'
+      });
+      setInterval(()=>{
+        this.router.navigate(['auth/user/login']);
+      }, 2000)
+    }).catch((error : any)=>{
+      this.message.add({
+        severity:'error',
+        summary : 'GAGAL',
+        detail : 'memperbarui account atau tidak ada perubahan'
+      });
+    })
+    
   }
   
 }

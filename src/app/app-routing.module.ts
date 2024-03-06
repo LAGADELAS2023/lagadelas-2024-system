@@ -22,6 +22,7 @@ import { GeneratesemboyanComponent } from './components/generatesemboyan/generat
 import { LoginUserComponent } from './components/auth/login-user/login-user.component';
 import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
 import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.com
                     { path: 'tools/blog', component: BlogComponent },
                     { path: 'register/account', component: RegisterAccountComponent },
                     { path: 'pages/empty', component: EmptyComponent },
+                    { path: 'user/profile', component: ProfileComponent },
                 ],
                 canActivate: [AuthGuard]
             },

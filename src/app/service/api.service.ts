@@ -56,6 +56,15 @@ export class ApiService {
     })
   }
 
+  public updateAccount(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}update-account`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
 
   public createPinSession(params) {
     return new Promise((resolve, reject) => {
