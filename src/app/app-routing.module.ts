@@ -44,7 +44,7 @@ import { ProfileComponent } from './components/profile/profile.component';
                 ],
                 canActivate: [AuthGuard]
             },
-            { path: 'cat/pupuk/:pages', component: PupukComponent, canActivate: [AuthGuard], },
+            { path: 'cat/pupuk/:pages', component: PupukComponent },
             { path: 'cat/sandi/:pages', component: SandiComponent },
             { path: 'cat/semboyan/:pages', component: SemboyanComponent },
             { path: 'pendaftaran/peserta', component: PendaftaranComponent },
