@@ -144,40 +144,39 @@ export class GeneratepupukComponent implements OnInit {
         options[correctAnswerIndex - 1].VALUE = 1;
       }
 
-      for (let i = 0; i < options.length; i++) {
-        let params = {
-          QUESTION_TEXT: this.QUESTIONTEXT,
-          QUESTION_IMAGE: this.gambarPertanyaan,
-          SESSION_PIN: this.selectedSession.SESSION_PIN,
-          OPTIONS: options[i],
-        };        
-        this.api.createSoalPupuk(params).then(
-          (result: any) => {
-            counter++
-            if (counter == options.length) {
-              this.message.add({
-                severity: "success",
-                summary: 'SUCCESS',
-                detail: 'Soal berhasil dibuat'
-              })
-              this.QUESTIONTEXT = "";
-              this.OPTIONTEXT1 = "";
-              this.OPTIONTEXT2 = "";
-              this.OPTIONTEXT3 = "";
-            }
-            // this.OPTIONTEXT4 = "";
-          }).catch(
-            (error: any) => {
-              counter++
-              if (counter == options.length) {                
-                this.message.add({
-                  severity: "error",
-                  summary: 'FAILED',
-                  detail: 'Gagal nichh, Pasti belum pargoy'
-                })
-              }
+      let params = {
+        QUESTION_TEXT: this.QUESTIONTEXT,
+        QUESTION_IMAGE: this.gambarPertanyaan,
+        SESSION_PIN: this.selectedSession.SESSION_PIN,
+        OPTIONS: options,
+      };      
+
+      this.api.createSoalPupuk(params).then(
+        (result: any) => {
+          counter++
+          if (counter == options.length) {
+            this.message.add({
+              severity: "success",
+              summary: 'SUCCESS',
+              detail: 'Soal berhasil dibuat'
             })
-      }
+            this.QUESTIONTEXT = "";
+            this.OPTIONTEXT1 = "";
+            this.OPTIONTEXT2 = "";
+            this.OPTIONTEXT3 = "";
+          }
+          // this.OPTIONTEXT4 = "";
+        }).catch(
+          (error: any) => {
+            counter++
+            if (counter == options.length) {                
+              this.message.add({
+                severity: "error",
+                summary: 'FAILED',
+                detail: 'Gagal nichh, Pasti belum pargoy'
+              })
+            }
+          })
     }
   }
 
