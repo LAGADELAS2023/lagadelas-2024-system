@@ -1,34 +1,76 @@
-<div class="card">
-    <div class="flex justify-content-between mb-3 align-items-center ">
-        <div style="color: #2D9596;font-weight: bold;font-size: 16px;">
-            REKAP PERLOMBAAN
-        </div>
-        <div>
-            <button class="p-button-success" label="EXPORT" pButton pRipple icon="pi pi-file-excel"></button>
+<div class="grid">
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Pangkalan</span>
+                    <div class="text-900 font-medium text-xl">--</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-home text-blue-500 text-xl"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <p-table [value]="data" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>PANGKALAN</th>
-                <th>SM</th>
-                <th>PPK</th>
-                <th>SND</th>
-                <th>PBB</th>
-                <th>MNY</th>
-                <th>BVK</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-            <tr>
-                <td>{{ row.PANGKALAN }}</td>
-                <td>{{ row.SM }}</td>
-                <td>{{ row.PPK }}</td>
-                <td>{{ row.SND }}</td>
-                <td>{{ row.PBB }}</td>
-                <td>{{ row.MNY }}</td>
-                <td>{{ row.BVK }}</td>
-            </tr>
-        </ng-template>
-    </p-table>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Regu</span>
+                    <div class="text-900 font-medium text-xl">--</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-users text-orange-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Pelaksanaan</span>
+                    <div class="text-900 font-medium text-xl">{{totalHariKurang}} hari lagi</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-calendar text-cyan-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">User Access</span>
+                    <div class="text-900 font-medium text-xl">15 Akun</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-user-plus text-purple-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="flex align-items-center justify-content-between mb-4">
+                <h5>Notifications</h5>
+                <div>
+                    <button pButton type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain" (click)="menu.toggle($event)"></button>
+                    <p-menu #menu [popup]="true" [model]="items"></p-menu>
+                </div>
+            </div>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
+                        <i class="pi pi-info-circle text-xl text-blue-500"></i>
+                    </div>
+                    <span class="text-900"> SIMULASI LAGADELAS,
+                <span class="text-700 font-"> Diharap semua panitia dapat mengikuti simulasi pada <span class="text-blue-500">09/03/2024 Pukul : 08:00 WIB</span></span>
+            </span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

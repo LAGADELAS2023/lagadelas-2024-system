@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ApiService } from 'src/app/service/api.service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,15 +33,21 @@ export class CreatePinSessionComponent implements OnInit {
     SESSION_END: null,
   }
   editDialog = false;
+  account : any;
 
   constructor(
     protected api: ApiService,
     private message: MessageService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router:Router
   ) { }
 
   ngOnInit() {
-    this.initApi()
+    this.initApi();
+    this.account = JSON.parse(localStorage.getItem('account'));
+    if (this.account.ACCESS_ROLE != 3 && this.account.ACCESS_ROLE != 4) {
+      this.router.navigate(['admin/pages/access'])
+    }
   }
 
   async initApi() {

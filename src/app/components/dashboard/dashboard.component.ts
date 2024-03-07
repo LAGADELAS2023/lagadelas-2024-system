@@ -12,27 +12,6 @@ export class DashboardComponent implements OnInit {
 
     items: MenuItem[];
 
-    data = [
-        {
-            PANGKALAN: "ELANG SMP NEGERI 18 SEMARANG",
-            SM: 89,
-            PPK: 99,
-            SND: 70,
-            PBB: 89,
-            MNY: 99,
-            BVK: 70
-        },
-        {
-            PANGKALAN: "SCORPIO SMP NEGERI 18 SEMARANG",
-            SM: 89,
-            PPK: 99,
-            SND: 70,
-            PBB: 89,
-            MNY: 99,
-            BVK: 70
-        }
-    ];
-
     products: Product[];
 
     chartData: any;
@@ -42,6 +21,8 @@ export class DashboardComponent implements OnInit {
     subscription: Subscription;
 
     config: AppConfig;
+
+    totalHariKurang: number;
 
     constructor(public configService: ConfigService) { }
 
@@ -78,6 +59,9 @@ export class DashboardComponent implements OnInit {
                 }
             ]
         };
+
+        // Panggil metode hitungHariKurang
+        this.hitungHariKurang();
     }
 
     updateChartOptions() {
@@ -85,7 +69,6 @@ export class DashboardComponent implements OnInit {
             this.applyDarkTheme();
         else
             this.applyLightTheme();
-
     }
 
     applyDarkTheme() {
@@ -146,5 +129,13 @@ export class DashboardComponent implements OnInit {
                 },
             }
         };
+    }
+
+    hitungHariKurang() {
+        const targetDate = new Date('2024-09-28');
+        const today = new Date();
+        const differenceInTime = targetDate.getTime() - today.getTime();
+        const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+        this.totalHariKurang = differenceInDays;
     }
 }

@@ -40,8 +40,9 @@ import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menak
                     { path: 'verifikasi', component: VerifikasiReguComponent },
                     { path: 'tools/blog', component: BlogComponent },
                     { path: 'register/account', component: RegisterAccountComponent },
-                    { path: 'pages/empty', component: EmptyComponent },
                     { path: 'user/profile', component: ProfileComponent },
+                    { path: 'pages/empty', component: EmptyComponent },
+                    { path: 'pages/access', component: AccessComponent },
                 ],
                 canActivate: [AuthGuard]
             },
@@ -55,7 +56,6 @@ import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menak
             { path: 'auth/user/login', component: LoginUserComponent },
             { path: 'pages/error', component: ErrorComponent },
             { path: 'pages/notfound', component: NotfoundComponent },
-            { path: 'pages/access', component: AccessComponent },
             { path: '**', redirectTo: 'auth/user/login' },
             {path : '', redirectTo: 'auth/user/login', pathMatch: 'full'}
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })

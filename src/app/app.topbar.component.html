@@ -14,13 +14,17 @@
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
         <!-- <Button class="p-button-danger p-button-outlined" (click)="confirm()" label="Logout" pButton pRipple icon="pi pi-sign-out"></Button> -->
-        <a (click)="confirm()" class="p-link layout-topbar-button">
-            <i class="pi pi-sign-out"></i>
-            <span>Logout</span>
+        <a [routerLink]="'/admin'" class="p-link layout-topbar-button">
+            <i class="pi pi-home"></i>
+            <span>Home</span>
         </a>
         <a [routerLink]="'user/profile'" class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
             <span>Profil</span>
+        </a>
+        <a (click)="confirm()" class="p-link layout-topbar-button">
+            <i class="pi pi-sign-out"></i>
+            <span>Logout</span>
         </a>
     </div>
 </div>

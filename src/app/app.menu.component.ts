@@ -28,11 +28,11 @@ export class AppMenuComponent implements OnInit {
         this.account = JSON.parse(localStorage.getItem('account'));
         this.model = [
             {
-                label: 'REKAP',
+                label: 'HOME',
                 items: [
-                    { label: 'REKAP NILAI', routerLink: ['/admin'] },
+                    { label: 'DASHBOARD', routerLink: ['/admin'] },
                 ],
-                role: ["REGULER", "ADMIN"],
+                role: [],
             },
             {
                 label: 'ADMINISTRASI',
