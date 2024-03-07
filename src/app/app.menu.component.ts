@@ -32,14 +32,14 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'REKAP NILAI', routerLink: ['/admin'] },
                 ],
-                role: ["MATERI", "REGULER", "ADMIN"],
+                role: ["REGULER", "ADMIN"],
             },
             {
                 label: 'ADMINISTRASI',
                 items: [
                     { label: 'VERIFIKASI REGU', routerLink: ['verifikasi'] },
                 ],
-                role: ["MATERI", "REGULER", "ADMIN"],
+                role: ["REGULER", "ADMIN"],
             },
             {
                 label: 'MATERI',
@@ -52,13 +52,13 @@ export class AppMenuComponent implements OnInit {
                 ],
                 role: ["MATERI", "ADMIN", "REGULER"],
             },
-            {
-                label: 'TOOLS',
-                items: [
-                    { label: 'BLOG', routerLink: ['tools/blog'] },
-                ],
-                role: [],
-            },
+            // {
+            //     label: 'TOOLS',
+            //     items: [
+            //         { label: 'BLOG', routerLink: ['tools/blog'] },
+            //     ],
+            //     role: [],
+            // },
             {
                 label: 'ADMIN ZONE',
                 items: [

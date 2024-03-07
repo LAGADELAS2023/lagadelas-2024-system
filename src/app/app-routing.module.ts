@@ -23,6 +23,7 @@ import { LoginUserComponent } from './components/auth/login-user/login-user.comp
 import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
 import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menaksir-tinggi.component';
 
 @NgModule({
     imports: [
@@ -44,6 +45,7 @@ import { ProfileComponent } from './components/profile/profile.component';
                 ],
                 canActivate: [AuthGuard]
             },
+            { path: 'juri/menaksir-tinggi', component: MenaksirTinggiComponent },
             { path: 'cat/pupuk/:pages', component: PupukComponent },
             { path: 'cat/sandi/:pages', component: SandiComponent },
             { path: 'cat/semboyan/:pages', component: SemboyanComponent },

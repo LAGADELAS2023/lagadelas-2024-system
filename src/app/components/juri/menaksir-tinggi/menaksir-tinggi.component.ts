@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MenaksirTinggiComponent {
 
+  ketepatan : number = 15;
+  metode : number = 10;
+  estetika : number = 10;
+
 }
