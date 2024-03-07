@@ -22,7 +22,7 @@ export class ApiService {
 
   public soalPupuk(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_local}question?page=${pages}`, pin).subscribe({
+      return this.http.post(`${environment.url_public}question?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err)
       })
