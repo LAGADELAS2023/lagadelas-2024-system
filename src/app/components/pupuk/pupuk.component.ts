@@ -77,7 +77,7 @@ export class PupukComponent implements OnInit, OnDestroy {
       (result: any) => {
         this.soal = result.data['data'];
         this.soal = this.soal.map((element, index) => {
-          const nomor_soal = (key * 2 - 1 + index + 1) - 1; // Adjust the formula for numbering
+          const nomor_soal = key; // Adjust the formula for numbering
           return { ...element, selectedOption: null, nomor_soal };
         });
 
@@ -111,11 +111,10 @@ export class PupukComponent implements OnInit, OnDestroy {
   }
 
   clickIndikator(keypage) {
-    this.router.navigate(['../' + Math.ceil((keypage + 1) / 2)], { relativeTo: this.activedRouter });
+    this.router.navigate(['../' + Math.ceil((keypage + 1))], { relativeTo: this.activedRouter });
   }
 
   onClickOption(): void {
-    // Mengambil data yang sudah ada dari localStorage
     const savedSoalString = localStorage.getItem('savedSoal');
 
     // Jika data sudah ada
@@ -133,6 +132,7 @@ export class PupukComponent implements OnInit, OnDestroy {
       localStorage.setItem('savedSoal', JSON.stringify(savedSoal));
       localStorage.setItem('setTime', JSON.stringify(this.counter));
     } else {
+      localStorage.setItem('setTime', JSON.stringify(this.counter));
       localStorage.setItem('savedSoal', JSON.stringify(this.soal));
     }
     this.soal.forEach((val) => {

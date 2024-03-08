@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <div class="card">
             <div class="sidebar">
                 <div *ngFor="let i of generateArray(30); let last = last" class="loop">
@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-8">
         <div class="card">
             <div class="w-full">
                 <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
@@ -135,10 +135,14 @@
                 </div>
     
     
-                <div class="p-fluid mt-5">
-                    <button *ngIf="page < 25" pButton pRipple class="p-button-info mr-3" label="next"
+                <div class="grid mt-5">
+                    <button *ngIf="page != 1" pButton pRipple class="col p-button-danger mr-3" label="KEMBALI"
                         (click)="nextQuestion()"></button>
-                    <button *ngIf="page == 25" pButton pRipple class="p-button-warning col-2" label="selesai"
+                    <button *ngIf="page < 25" pButton pRipple class="col p-button-warning mr-3" label="RAGU"
+                        (click)="nextQuestion()"></button>
+                    <button *ngIf="page < 30" pButton pRipple class="col p-button-info mr-3" label="NEXT"
+                        (click)="nextQuestion()"></button>
+                    <button *ngIf="page == 25" pButton pRipple class="col p-button-warning col-2" label="selesai"
                         (click)="getSkor()"></button>
                 </div>
             </div>
@@ -146,7 +150,7 @@
     </div>
 </div>
 
-<div *ngIf=" skor" class="background">
+<!-- <div *ngIf=" skor" class="background">
     <div
         class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden background">
         <div class="grid justify-content-center p-2 lg:p-0" style="min-width:70%">
@@ -177,4 +181,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
