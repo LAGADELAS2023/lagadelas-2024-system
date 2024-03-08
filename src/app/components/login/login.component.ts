@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           interval(1000)
             .pipe(take(1))
             .subscribe(() => {
-              if (result.data.SESSION_NAME == 'PUPUK') {
+              if (result.data.SESSION_NAME == 'PUPUK-SANDI') {
                 this.router.navigate(['cat/pupuk/1']);
               } else {
                 this.router.navigate(['cat/sandi/1']);

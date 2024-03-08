@@ -70,7 +70,8 @@ export class PupukComponent implements OnInit, OnDestroy {
   initAPI(key) {
     const pin = localStorage.getItem('pin');
     const params = {
-      SESSION_PIN: pin
+      SESSION_PIN: pin,
+      JENIS_SOAL: "PUPUK", 
     }
     this.api.soalPupuk(key, params).then(
       (result: any) => {
@@ -200,13 +201,13 @@ export class PupukComponent implements OnInit, OnDestroy {
     return Array.from({ length: count }, (_, index) => index);
   }
 
-  @HostListener('document:visibilitychange', ['$event'])
-  handleTabFocusChange(event: Event): void {
-    if (document.visibilityState === 'visible') {
-      this.router.navigate([this.directUrl]);
-      localStorage.setItem('setTime', String(this.counter))
-    }
-  }
+  // @HostListener('document:visibilitychange', ['$event'])
+  // handleTabFocusChange(event: Event): void {
+  //   if (document.visibilityState === 'visible') {
+  //     this.router.navigate([this.directUrl]);
+  //     localStorage.setItem('setTime', String(this.counter))
+  //   }
+  // }
 }
 
 @Pipe({

@@ -45,17 +45,11 @@
 }
 
 .sidebar {
-    margin-top: 5rem;
-    box-shadow: rgba(100, 100, 111, 0.112) 0px 7px 29px 0px;
-    height: 6rem;
     width: 100%;
     // position: fixed;
     border-radius: 12px;
-    padding: 20px 10px;
     display: grid;
-    overflow-x: auto;
-    overflow-y: hidden;
-    grid-template-columns: repeat(50, 1fr);
+    grid-template-columns: repeat(10, 1fr);
     gap: 10px;
 }
 
