@@ -12,26 +12,26 @@
             <div class="p-fluid">
                 <div class="field mb-5">
                     <div class="p-float-label">
-                        <input pInputText id="nama-regu" />
+                        <input pInputText id="nama-regu" [(ngModel)]="nama_regu"/>
                         <label for="nama-regu">NAMA REGU</label>
                     </div>
                 </div>
                 <div class="field mb-5">
                     <div class="p-float-label">
-                        <input pInputText id="nama-pangkalan" />
+                        <input pInputText id="nama-pangkalan"  [(ngModel)]="nama_pangkalan" />
                         <label for="nama-pangkalan">NAMA PANGKALAN</label>
                     </div>
                 </div>
                 <div class="field mb-5">
                     <div class="p-float-label">
-                        <input pInputText id="nama-pendamping" />
+                        <input pInputText id="nama-pendamping"  [(ngModel)]="nama_pendamping"/>
                         <label for="nama-pendamping">NAMA PENDAMPING</label>
                     </div>
                 </div>
                 <div class="field mb-5">
                     <div class="p-float-label">
-                        <input pInputText id="nama-kwaran" />
-                        <label for="nama-kwaran">KWARAN</label>
+                        <input pInputText id="nama-kwaran"  [(ngModel)]="nama_kwaran"/>
+                        <label for="nama-kwaran" >KWARAN</label>
                     </div>
                 </div>
                 <div class="field mb-5">
@@ -39,26 +39,35 @@
                         <p-dropdown [options]="kategori" appendTo="body" [(ngModel)]="selectedKategori"
                             optionLabel="name" [showClear]="true"></p-dropdown>
                         <label for="kategori">KATEGORI</label>
+                    </div> 
+                </div>
+                <div class="field mb-5">
+                    <div class="p-float-label">
+                        <input pInputText id="nomor-wa"  [(ngModel)]="nomor_wa"/>
+                        <label for="nomor-wa">NOMOR WHATSAPP</label>
                     </div>
                 </div>
                 <div class="field mb-5">
-                    <p-fileUpload mode="basic" chooseLabel="FOTO ANGGOTA REGU" name="demo[]"
-                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
-                        maxFileSize="100000000"></p-fileUpload>
-
+                    <div class="field">
+                        <div class="upload-file upload-file-button">
+                            <input type="file" (change)="fotoAnggota($event, 0)" id="fotoAnggota-regu" accept="image/jpeg, image/png, image/gif" />
+                            <label for="fotoAnggota-regu" class="text-center">{{ labelFotoanggotaRegu || "UPLOAD FOTO REGU" }}</label>
+                        </div>                                            
+                    </div>
                 </div>
                 <div class="field mb-5">
-                    <p-fileUpload mode="basic" chooseLabel="SURAT TUGAS SEKOLAH" name="demo[]"
-                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
-                        maxFileSize="100000000"></p-fileUpload>
-
+                    <div class="upload-file upload-file-button">
+                         <input type="file" (change)="uploadSuratTugasSekolah($event, 0)" id="surat-tugas-sekolah" accept="file/pdf" />
+                         <label for="surat-tugas-sekolah" class="text-center">{{ labelTugasSekolah || "UPLOAD SURAT TUGAS SEKOLAH" }}</label>
+                    </div>                        
                 </div>
                 <div class="field mb-5">
-                    <p-fileUpload mode="basic" chooseLabel="SURAT TUGAS KWARAN" name="demo[]"
-                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
-                        maxFileSize="100000000"></p-fileUpload>
+                    <div class="upload-file upload-file-button">
+                            <input type="file" (change)="uploadSuratTugasKwaran($event, 0)" id="surat-tugas-kwaran" accept="file/pdf" />
+                            <label for="surat-tugas-kwaran" class="text-center">{{ labelTugasKwaran || "UPLOAD SURAT TUGAS KWARAN" }}</label>
+                    </div>     
                 </div>
-                <div class="field"><button class="p-button p-button-success" pButton pRippel label="DAFTAR"></button>
+                <div class="field"><button class="p-button p-button-success" pButton pRippel label="DAFTAR" (click)="postPendaftaran()"></button>
                 </div>
             </div>
         </div>

@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 })
 export class VerifikasiReguComponent {
 
+  mstPeserta = [];
+  modalVerif = false;
+
   constructor(){}
 
 }

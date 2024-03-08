@@ -24,6 +24,10 @@ import { RegisterAccountComponent } from './components/auth/register-account/reg
 import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menaksir-tinggi.component';
+import { PbbComponent } from './components/juri/pbb/pbb.component';
+import { PetaLapanganComponent } from './components/juri/peta-lapangan/peta-lapangan.component';
+import { BivakComponent } from './components/juri/bivak/bivak.component';
+import { RegisterPesertaComponent } from './components/register-peserta/register-peserta.component';
 
 @NgModule({
     imports: [
@@ -36,6 +40,7 @@ import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menak
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'materi/semboyan', component: GeneratesemboyanComponent },
+                    { path: 'sekretaris/buat-akun-peserta', component: RegisterPesertaComponent },
                     { path: 'pin-session', component: CreatePinSessionComponent },
                     { path: 'verifikasi', component: VerifikasiReguComponent },
                     { path: 'tools/blog', component: BlogComponent },
@@ -47,6 +52,9 @@ import { MenaksirTinggiComponent } from './components/juri/menaksir-tinggi/menak
                 canActivate: [AuthGuard]
             },
             { path: 'juri/menaksir-tinggi', component: MenaksirTinggiComponent },
+            { path: 'juri/bivak', component: BivakComponent },
+            { path: 'juri/pbb', component: PbbComponent },
+            { path: 'juri/perpetaan', component: PetaLapanganComponent },
             { path: 'cat/pupuk/:pages', component: PupukComponent },
             { path: 'cat/sandi/:pages', component: SandiComponent },
             { path: 'cat/semboyan/:pages', component: SemboyanComponent },

@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="card">
     <div class="p-fluid">
         <div class="field">
@@ -9,6 +11,7 @@
                         <div class="flex align-items-center gap-2">
                             <div>{{ sesi.SESSION_PIN }} - {{ sesi.SESSION_NAME }}</div>
                         </div>
+                        <small style="font-size: 10px;">{{sesi.DESCRIPTION}}</small>
                     </ng-template>
                 </p-dropdown>
             </div>
@@ -16,19 +19,17 @@
         <div class="field">
             <label class="font-bold">SOAL SEMAPHORE</label>
         </div>
-        <div class="text-center mb-3 align-items-center ">
-            <!-- <p-image *ngIf="gambarPertanyaan !== null" [src]="gambarPertanyaan" alt="Image" width="100%"
-                [preview]="true"></p-image> -->
-                <video width="320" height="240" controls *ngIf="gambarPertanyaan !== null">
-                    <source [src]="gambarPertanyaan" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
+        <div class="text-center mb-3 align-items-center">
+            <video width="320" height="240" controls *ngIf="gambarPertanyaan !== null">
+                <source [src]="gambarPertanyaan" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
                   
             <p *ngIf="gambarPertanyaan == null">=== PILIH SOAL DALAM BENTUK VIDEO ===</p>
         </div>
         <div class="field">
             <div class="upload-file upload-file-button">
-                <input type="file" (change)="onFileChange($event, 0)" id="fileInput" accept="mp4/*" />
+                <input type="file" (change)="onFileChange($event, 0)" id="fileInput" accept="video/mp4" />
                 <label for="fileInput" class="text-center"><i class="pi pi-video"></i></label>
             </div>
         </div>
@@ -39,19 +40,19 @@
             </div>
         </div>
         <div class="field">
-            <label class="font-bold">SOAL SANDI</label>
+            <label class="font-bold">SOAL MORSE</label>
         </div>
-        <div class="text-center mb-3 align-items-center ">
-            <video width="320" height="240" controls *ngIf="audioMorse !== null">
-                <source [src]="audioMorse" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+        <div class="text-center mb-3 align-items-center">
+            <audio controls *ngIf="audioMorse != null">
+                <source [src]="audioMorse" type="audio/mp3">
+                Your browser does not support the audio tag.
+            </audio>
             <p *ngIf="audioMorse == null">=== PILIH SOAL DALAM BENTUK AUDIO ===</p>
         </div>
         <div class="field">
             <div class="upload-file upload-file-button">
-                <input type="file" (change)="onMorseChange($event, 0)" id="fileInput" accept="mp4/*" />
-                <label for="fileInput" class="text-center"><i class="pi pi-microphone"></i></label>
+                <input type="file" (change)="onMorseChange($event, 0)" id="morseFileInput" accept="audio/mp3" />
+                <label for="morseFileInput" class="text-center"><i class="pi pi-microphone"></i></label>
             </div>
         </div>
         <div class="field">
@@ -61,7 +62,11 @@
             </div>
         </div>
         <div class="field">
-            <button pButton class="p-button-green" label="SIMPAN SOAL" (click)="postSoalSemboyan ()"></button>
+            <button pButton class="p-button-green" label="SIMPAN SOAL" (click)="postSoalSemboyan()"></button>
         </div>
     </div>
 </div>
+
+<p-blockUI [blocked]="blockedDocument">
+    <div class="loader"></div>
+</p-blockUI>

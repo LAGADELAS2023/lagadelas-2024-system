@@ -142,6 +142,7 @@ import { PetaLapanganComponent } from './components/juri/peta-lapangan/peta-lapa
 import { PbbComponent } from './components/juri/pbb/pbb.component';
 import { PopArtComponent } from './components/juri/pop-art/pop-art.component';
 import { KesenianComponent } from './components/juri/kesenian/kesenian.component';
+import { RegisterPesertaComponent } from './components/register-peserta/register-peserta.component';
 
 @NgModule({
     imports: [
@@ -278,7 +279,8 @@ import { KesenianComponent } from './components/juri/kesenian/kesenian.component
         PetaLapanganComponent,
         PbbComponent,
         PopArtComponent,
-        KesenianComponent
+        KesenianComponent,
+        RegisterPesertaComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

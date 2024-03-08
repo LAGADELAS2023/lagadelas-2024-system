@@ -38,8 +38,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'ADMINISTRASI',
                 items: [
                     { label: 'VERIFIKASI REGU', routerLink: ['verifikasi'] },
+                    { label: 'BUAT AKUN REGU', routerLink: ['sekretaris/buat-akun-peserta'] },
                 ],
-                role: ["REGULER", "ADMIN"],
+                role: ["REGULER", "ADMIN", "SEKRETARIS"],
             },
             {
                 label: 'MATERI',

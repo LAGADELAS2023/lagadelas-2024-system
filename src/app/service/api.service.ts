@@ -173,6 +173,26 @@ export class ApiService {
       })
     })
   }
+
+  public sendSemboyan(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}create-semboyan`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public pendaftaran(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}register-peserta`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+
   
   
 }
