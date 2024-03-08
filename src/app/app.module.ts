@@ -137,6 +137,11 @@ import { LoginUserComponent } from './components/auth/login-user/login-user.comp
 import { RegisterAccountComponent } from './components/auth/register-account/register-account.component';
 import { AprovalSoalComponent } from './components/aproval-soal/aproval-soal.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BivakComponent } from './components/juri/bivak/bivak.component';
+import { PetaLapanganComponent } from './components/juri/peta-lapangan/peta-lapangan.component';
+import { PbbComponent } from './components/juri/pbb/pbb.component';
+import { PopArtComponent } from './components/juri/pop-art/pop-art.component';
+import { KesenianComponent } from './components/juri/kesenian/kesenian.component';
 
 @NgModule({
     imports: [
@@ -268,7 +273,12 @@ import { ProfileComponent } from './components/profile/profile.component';
         LoginUserComponent,
         RegisterAccountComponent,
         AprovalSoalComponent,
-        ProfileComponent
+        ProfileComponent,
+        BivakComponent,
+        PetaLapanganComponent,
+        PbbComponent,
+        PopArtComponent,
+        KesenianComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

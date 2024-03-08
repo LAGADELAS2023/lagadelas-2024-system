@@ -17,8 +17,13 @@
             <label class="font-bold">SOAL SEMAPHORE</label>
         </div>
         <div class="text-center mb-3 align-items-center ">
-            <p-image *ngIf="gambarPertanyaan !== null" [src]="gambarPertanyaan" alt="Image" width="100%"
-                [preview]="true"></p-image>
+            <!-- <p-image *ngIf="gambarPertanyaan !== null" [src]="gambarPertanyaan" alt="Image" width="100%"
+                [preview]="true"></p-image> -->
+                <video width="320" height="240" controls *ngIf="gambarPertanyaan !== null">
+                    <source [src]="gambarPertanyaan" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
             <p *ngIf="gambarPertanyaan == null">=== PILIH SOAL DALAM BENTUK VIDEO ===</p>
         </div>
         <div class="field">
@@ -37,24 +42,26 @@
             <label class="font-bold">SOAL SANDI</label>
         </div>
         <div class="text-center mb-3 align-items-center ">
-            <p-image *ngIf="gambarPertanyaan !== null" [src]="gambarPertanyaan" alt="Image" width="100%"
-                [preview]="true"></p-image>
-            <p *ngIf="gambarPertanyaan == null">=== PILIH SOAL DALAM BENTUK AUDIO ===</p>
+            <video width="320" height="240" controls *ngIf="audioMorse !== null">
+                <source [src]="audioMorse" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            <p *ngIf="audioMorse == null">=== PILIH SOAL DALAM BENTUK AUDIO ===</p>
         </div>
         <div class="field">
             <div class="upload-file upload-file-button">
-                <input type="file" (change)="onFileChange($event, 0)" id="fileInput" accept="mp4/*" />
-                <label for="fileInput" class="text-center"><i class="pi pi-audie"></i></label>
+                <input type="file" (change)="onMorseChange($event, 0)" id="fileInput" accept="mp4/*" />
+                <label for="fileInput" class="text-center"><i class="pi pi-microphone"></i></label>
             </div>
         </div>
         <div class="field">
             <div class="flex flex-column gap-2 mb-2">
                 <label class="font-bold">KUNCI JAWABAN <i class="pi pi-lock ml-2"></i> </label>
-                <input type="text" pInputText [(ngModel)]="answerKey">
+                <input type="text" pInputText [(ngModel)]="answerKeyMorse">
             </div>
         </div>
         <div class="field">
-            <button pButton class="p-button-green" label="SIMPAN SOAL" (click)="postSoalSandi()"></button>
+            <button pButton class="p-button-green" label="SIMPAN SOAL" (click)="postSoalSemboyan ()"></button>
         </div>
     </div>
 </div>

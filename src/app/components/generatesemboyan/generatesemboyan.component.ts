@@ -9,20 +9,20 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class GeneratesemboyanComponent implements OnInit{
 
-  gambarPertanyaan: any;
+  gambarPertanyaan: any = null;
+  audioMorse : any = null;
   answerKey: any;
   key: any;
   masterSession = [];
   selectedSession: any;
+  answerKeyMorse : any;
 
-  
   constructor(
     protected api: ApiService,
     private message: MessageService
   ) {
 
   }
-
 
   ngOnInit(): void {
     this.api.sessionGet().then(
@@ -40,33 +40,50 @@ export class GeneratesemboyanComponent implements OnInit{
 
       reader.onload = () => {
         this.gambarPertanyaan = reader.result as string;
+        console.log(this.gambarPertanyaan);
 
       };
     }
   }
 
-  protected postSoalSandi() {
-    const params = {
-      "QUESTION_TEXT": this.key,
-      "SESSION_PIN": this.selectedSession.SESSION_PIN,
-      "QUESTION_IMAGE": this.gambarPertanyaan,
-      "ANSWER_TEXT": this.answerKey
+  onMorseChange(event: any, key): void {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.audioMorse = reader.result as string;
+        console.log(this.audioMorse);
+
+      };
     }
-    this.api.soalSandi(params).then(
-      (result: any) => {
-        this.message.add({
-          severity: 'success',
-          summary: 'SUCCESS',
-          detail: 'Berhasil menambahkan soal sandi'
-        })
-      }).catch(
-        (error: any) => {
-          this.message.add({
-            severity: 'error',
-            summary: 'FAILED',
-            detail: 'Gagal menambahkan soal sandi'
-          })
-        })
+  }
+
+  protected postSoalSemboyan() {
+    // const paramsSemboyan = {
+    //   "QUESTION_TEXT": this.key,
+    //   "SESSION_PIN": this.selectedSession.SESSION_PIN,
+    //   "QUESTION_IMAGE": this.gambarPertanyaan,
+    //   "ANSWER_TEXT": this.answerKey
+    // }
+
+    // this.api.soalSandi(params).then(
+    //   (result: any) => {
+    //     this.message.add({
+    //       severity: 'success',
+    //       summary: 'SUCCESS',
+    //       detail: 'Berhasil menambahkan soal sandi'
+    //     })
+    //   }).catch(
+    //     (error: any) => {
+    //       this.message.add({
+    //         severity: 'error',
+    //         summary: 'FAILED',
+    //         detail: 'Gagal menambahkan soal sandi'
+    //       })
+    //     })
   }
 
 }
