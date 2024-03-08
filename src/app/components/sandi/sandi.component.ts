@@ -18,6 +18,12 @@ export class SandiComponent implements OnInit {
   page: any;
   soal = [];
   responSave = [];
+  account: any
+  key1: "";
+  key2: "";
+  key3: "";
+  key4: "";
+  key5: "";
 
   constructor(
     protected api: ApiService,
@@ -33,26 +39,33 @@ export class SandiComponent implements OnInit {
 
     });
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
+    this.account = JSON.parse(localStorage.getItem('account'));
+
   }
 
   initAPI(key) {
     const pin = localStorage.getItem('pin');
     const params = {
-      SESSION_PIN: pin
+      SESSION_PIN: pin,
+      JENIS_SOAL : "SANDI"
     }
     this.api.getSoalSandi(key, params).then(
       (result: any) => {
         this.soal = result.data['data'];
         this.soal = this.soal.map((element, index) => {
           const nomor_soal = key;
-          return { ...element, TextAnswer: '', nomor_soal };
+          return { ...element, key1: '',key2:'',key3:'',key4:'',key5:'', nomor_soal };
         });
 
         const savedAnswer = JSON.parse(localStorage.getItem('savedAnswer'));
 
         this.soal.forEach(val => {
           const matchingSavedQuestion = savedAnswer.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
-          val.TextAnswer = matchingSavedQuestion.TextAnswer;
+          val.key1 = matchingSavedQuestion.key1;
+          val.key2 = matchingSavedQuestion.key2;
+          val.key3 = matchingSavedQuestion.key3;
+          val.key4 = matchingSavedQuestion.key4;
+          val.key5 = matchingSavedQuestion.key5;
 
         });
       });
@@ -71,7 +84,7 @@ export class SandiComponent implements OnInit {
       const savedAnswer = JSON.parse(savedAnswerString);
       const index = indikator + 1;
 
-      return savedAnswer.some((soal) => soal.nomor_soal == index && soal.TextAnswer !== null && soal.TextAnswer !== '');
+      return savedAnswer.some((soal) => soal.nomor_soal == index && soal.key1 !== null && soal.key1 !== '');
     }
 
     return false;
@@ -94,7 +107,11 @@ export class SandiComponent implements OnInit {
         const existingSoalIndex = savedAnswer.findIndex((item) => item.QUEST_ID === this.soal[i].QUEST_ID);
 
         if (existingSoalIndex !== -1) {
-          savedAnswer[existingSoalIndex].TextAnswer = this.soal[i].TextAnswer;
+          savedAnswer[existingSoalIndex].key1 = this.soal[i].key1;
+          savedAnswer[existingSoalIndex].key2 = this.soal[i].key2;
+          savedAnswer[existingSoalIndex].key3 = this.soal[i].key3;
+          savedAnswer[existingSoalIndex].key4 = this.soal[i].key4;
+          savedAnswer[existingSoalIndex].key5 = this.soal[i].key5;
         } else {
           savedAnswer.push(this.soal[i]);
         }
@@ -104,37 +121,46 @@ export class SandiComponent implements OnInit {
     localStorage.setItem('savedAnswer', JSON.stringify(savedAnswer));
   }
 
+
+
   selesai() {
     let savedAnswer = JSON.parse(localStorage.getItem('savedAnswer')) || [];
     const account = JSON.parse(localStorage.getItem('account'))
 
+    console.log(savedAnswer);
+    
     // Create an array to store promises from the API calls
     let apiPromises = [];
 
     for (let i = 0; i < savedAnswer.length; i++) {
-      const answer = savedAnswer[i].TextAnswer.split(' ')
       let params = {
         "ID_QUESTION": savedAnswer[i].QUEST_ID,
-        "ID_USER": account.ID,
-        "KATA1": answer[0],
-        "KATA2": answer[1],
-        "KATA3": answer[2],
-        "KATA4": answer[3],
-        "KATA5": answer[4]
+        "USER_ID": account.id_user,
+        "KATA1": savedAnswer[i].key1,
+        "KATA2": savedAnswer[i].key2,
+        "KATA3": savedAnswer[i].key3,
+        "KATA4": savedAnswer[i].key4,
+        "KATA5": savedAnswer[i].key5
       }
-
+      console.log(params.KATA1);
+      
       apiPromises.push(this.api.getTotalSkorSandi(params));
     }
     Promise.all(apiPromises)
       .then(() => {
-        const params = {
-          "USERNAME": account.USERNAME,
-          "SESSION_PIN": localStorage.getItem('pin')
-        }
-        this.api.skorSandi(params).then(
-          (result: any) => {
+        // const params = {
+        //   "USERNAME": account.USERNAME,
+        //   "SESSION_PIN": localStorage.getItem('pin')
+        // }
+        // this.api.skorSandi(params).then(
+        //   (result: any) => {
 
-          })
+        //   })
+        this.message.add({
+          severity: "success",
+          summary : "BERHASIL",
+          detail : "Jawaban Berhasil disimpan"
+        })
       })
       .catch((error) => {
         // Handle errors if needed

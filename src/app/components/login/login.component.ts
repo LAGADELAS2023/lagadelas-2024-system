@@ -107,9 +107,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe(() => {
               if (result.data.SESSION_NAME == 'PUPUK-SANDI') {
-                this.router.navigate(['cat/pupuk/1']);
+                this.router.navigate(['cat/pupuk/0']);
               } else {
-                this.router.navigate(['cat/sandi/1']);
+                this.router.navigate(['cat/semboyan']);
               }
             });
         }

@@ -1,4 +1,6 @@
 <p-toast></p-toast>
+<p-blockUI [blocked]="blockedDocument">
+<div class="text-center"><h3 class="font-bold text-white">Mengambil Soal...</h3></div></p-blockUI>
 <app-header></app-header>
 <div>
     <div class="layout">
@@ -68,7 +70,7 @@
                     <hr>
                     <span class="p-input-icon-left">
                         <i class="pi pi-key"></i>
-                        <input type="text" pInputText placeholder="Masukan jawaban Semaphore" />
+                        <input type="text" pInputText placeholder="Masukan jawaban Semaphore" [(ngModel)]="answerSemaphore" />
                     </span>
                     <p style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Dimohon untuk tidak melakukan refersh atau keluar halaman</p>
                 </div>
@@ -90,7 +92,7 @@
                     <hr>
                     <span class="p-input-icon-left">
                         <i class="pi pi-key"></i>
-                        <input type="text" pInputText placeholder="Masukan jawaban Sandi"/>
+                        <input type="text" pInputText placeholder="Masukan jawaban Morse" [(ngModel)]="answerMorse" />
                     </span>
                     <p style="font-size: 12px;color: red;font-style: italic;" class="mt-2">Dimohon untuk tidak melakukan refersh atau keluar halaman</p>
                 </div>
@@ -98,7 +100,7 @@
         </div>
 
         <div class="p-fluid">
-            <button pButton pRipple class="p-button-success" label="SIMPAN JAWABAN"></button>
+            <button pButton pRipple class="p-button-success" label="SIMPAN JAWABAN" (click)="saveJawaban()"></button>
         </div>
     </div>
 </div>

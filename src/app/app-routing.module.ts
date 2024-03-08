@@ -57,7 +57,7 @@ import { RegisterPesertaComponent } from './components/register-peserta/register
             { path: 'juri/perpetaan', component: PetaLapanganComponent },
             { path: 'cat/pupuk/:pages', component: PupukComponent },
             { path: 'cat/sandi/:pages', component: SandiComponent },
-            { path: 'cat/semboyan/:pages', component: SemboyanComponent },
+            { path: 'cat/semboyan', component: SemboyanComponent },
             { path: 'pendaftaran/peserta', component: PendaftaranComponent },
             { path: 'pages/landing', component: LandingComponent },
             { path: 'pages/login', component: LoginComponent },

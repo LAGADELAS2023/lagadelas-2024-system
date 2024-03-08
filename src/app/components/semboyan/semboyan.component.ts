@@ -12,21 +12,25 @@ import { MessageService } from 'primeng/api';
 })
 export class SemboyanComponent implements OnInit {
 
-  counter = 7200;
+  counter = 180;
   tick = 1000;
   countDown: Subscription;
   page: any;
   soal = [];
   responSave = [];
   directUrl = "pages/login";
-  videoSource = "./assets/video/soal_senaphore_1.mp4";
-  audioSource = "./assets/audio/soal_morse.mp3";
+  videoSource = null;
+  audioSource = null;
   video = false;
   audio = false;
   videoCounter = 0;
   audioCounter = 0;
-  answerSandi = "";
+  quest_id_smp = "";
+  quest_id_mr = "";
+  answerMorse = "";
   answerSemaphore = "";
+  blockedDocument = true;
+  account : any;
   
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   @ViewChild('audioPlayer') audioPlayer: ElementRef;
@@ -43,35 +47,29 @@ export class SemboyanComponent implements OnInit {
     const audio = localStorage.getItem('audioCounter');
     const video = localStorage.getItem('videoCounter');
 
-    parseInt(audio) == null ? this.audioCounter = 0 : this.audioCounter = parseInt(audio);
+    Number.isNaN(parseInt(audio)) ? this.audioCounter = 0 : this.audioCounter = parseInt(audio);
     Number.isNaN(parseInt(video)) ? this.videoCounter = 0 : this.videoCounter = parseInt(video);
-    
+    this.account = JSON.parse(localStorage.getItem('account'));
+
     this.activedRouter.params.subscribe(params => {
       this.page = +params['pages'];
-      this.initAPI(this.page);
+      this.initAPI();
     });
-    this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
   }
 
-  initAPI(key) {
+  initAPI() {
     const pin = localStorage.getItem('pin');
     const params = {
       SESSION_PIN: pin
     }
-    this.api.getSoalSandi(key, params).then(
+    this.api.soalSemboyan(params).then(
       (result: any) => {
-        this.soal = result.data['data'];
-        this.soal = this.soal.map((element, index) => {
-          const nomor_soal = key;
-          return { ...element, TextAnswer: '', nomor_soal };
-        });
-
-        const savedAnswer = JSON.parse(localStorage.getItem('savedAnswer'));
-
-        this.soal.forEach(val => {
-          const matchingSavedQuestion = savedAnswer.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
-          val.TextAnswer = matchingSavedQuestion.TextAnswer;
-        });
+        this.blockedDocument = false;
+        this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
+        this.videoSource = result.data[0].QUESTION_IMAGE;
+        this.quest_id_smp = result.data[0].ID_QUESTION;
+        this.audioSource = result.data[1].QUESTION_IMAGE;
+        this.quest_id_mr = result.data[1].ID_QUESTION;
       });
   }
 
@@ -101,6 +99,67 @@ export class SemboyanComponent implements OnInit {
     });
     // Mulai pemutaran video
     this.audioPlayer.nativeElement.play();
+  }
+
+  saveJawaban(){
+    let semaphore = this.answerSemaphore.split(' ');
+    let semboyan = this.answerMorse.split(' ');
+
+    let counter = this.counter; // Satuan menit
+    let seconds = counter * 60;
+
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    let remainingSeconds = seconds % 60;
+
+    // Format output HH:MM:SS
+    let formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+
+    console.log("Waktu dalam format HH:MM:SS:", formattedTime);
+
+    const paramsSemaphore = {
+      "ID_QUESTION": this.quest_id_smp,
+      "USER_ID": this.account.id_user,
+      "COUNTDOWN" : counter,
+      "JENIS_SOAL": "SEMAPHORE",
+      "KATA1": semaphore[1],
+      "KATA2": semaphore[2],
+      "KATA3": semaphore[3],
+      "KATA4": semaphore[4],
+      "KATA5": semaphore[5],
+      "KATA6": semaphore[6],
+      "KATA7": semaphore[7],
+      "KATA8": semaphore[8],
+      "KATA9": semaphore[9],
+      "KATA10": semaphore[10],
+    }
+
+    const paramsMorse = {
+      "ID_QUESTION": this.quest_id_smp,
+      "USER_ID": this.account.id_user,
+      "JENIS_SOAL": "MORSE",
+      "COUNTDOWN" : counter,
+      "KATA1": semboyan[1],
+      "KATA2": semboyan[2],
+      "KATA3": semboyan[3],
+      "KATA4": semboyan[4],
+      "KATA5": semboyan[5],
+      "KATA6": semboyan[6],
+      "KATA7": semboyan[7],
+      "KATA8": semboyan[8],
+      "KATA9": semboyan[9],
+      "KATA10": semboyan[10],
+    }
+
+    this.api.postJawabanSemboyan(paramsSemaphore).then((result : any)=> {
+      this.api.postJawabanSemboyan(paramsMorse).then((result : any)=> {
+        this.message.add({
+          severity : 'success',
+          summary : 'BERHASIL',
+          detail : 'Berhasil menyimpan jawaban',
+        })
+      })
+    })
   }
 
   // @HostListener('document:visibilitychange', ['$event'])

@@ -53,6 +53,15 @@
     gap: 10px;
 }
 
+.sidebar-sandi {
+    width: 100%;
+    // position: fixed;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
 /* Style scrollbar agar tidak terlihat pada browser berbasis WebKit seperti Chrome dan Safari */
 .sidebar::-webkit-scrollbar {
     width: 0.5em;
@@ -83,11 +92,25 @@
     cursor: pointer;
 }
 
+.sidebar-sandi a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-sandi .indikator {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-width: 2px;
+    width: 50px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .active {
     background-color: #4CB9E7;
 }
 
-.skip {
+.ragu {
     background-color: #fbff09;
 }
 

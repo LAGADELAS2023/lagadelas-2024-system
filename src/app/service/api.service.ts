@@ -31,7 +31,7 @@ export class ApiService {
 
   public getSoalSandi(pages, pin) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_public}soal-sandi?page=${pages}`, pin).subscribe({
+      return this.http.post(`${environment.url_public}question?page=${pages}`, pin).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err)
       })
@@ -129,6 +129,15 @@ export class ApiService {
     })
   }
 
+  public postJawabanSemboyan(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}jawaban-semboyan`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
   public skorSandi(params) {
     return new Promise((resolve, reject) => {
       return this.http.post(`${environment.url_public}nilai-sandi`, params).subscribe({
@@ -177,6 +186,15 @@ export class ApiService {
   public sendSemboyan(params) {
     return new Promise((resolve, reject) => {
       return this.http.post(`${environment.url_public}create-semboyan`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public soalSemboyan(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}question-semboyan`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })

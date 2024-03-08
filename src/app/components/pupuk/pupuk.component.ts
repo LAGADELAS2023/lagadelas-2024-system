@@ -16,7 +16,7 @@ import { MessageService } from 'primeng/api';
 export class PupukComponent implements OnInit, OnDestroy {
 
   countDown: Subscription;
-  counter = 0;
+  counter = 1500;
   tick = 1000;
   soal = [];
   directUrl = "pages/login";
@@ -24,6 +24,7 @@ export class PupukComponent implements OnInit, OnDestroy {
   skor = false;
   nilai_akhir: any;
   value: number = 0;
+  account : any;
 
   constructor(
     protected api: ApiService,
@@ -36,79 +37,129 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.activedRouter.params.subscribe(params => {
       this.page = +params['pages'];
       this.initAPI(this.page);
+      this.counterRun(this.page);
 
     });
-    let time: any = localStorage.getItem('setTime');
-
-    if (time == null) {
-      this.counter = 7200;
-      localStorage.setItem('setTime', "7200")
-      this.countDown = timer(0, this.tick).subscribe((count) => {
-        if (this.counter == 0 && count) {
-          if (this.countDown) {
-            this.countDown.unsubscribe();
-          }
-        }
-        --this.counter;
-      });
-    } else {
-      this.counter = ++time;
-      this.countDown = timer(0, this.tick).subscribe((count) => {
-        if (this.counter == 0 && count) {
-          if (this.countDown) {
-            this.countDown.unsubscribe();
-          }
-        }
-        --this.counter;
-      });
-    }
+    this.account = JSON.parse(localStorage.getItem('account'));
+    
   }
   ngOnDestroy() {
     this.countDown = null;
   }
 
   initAPI(key) {
-    const pin = localStorage.getItem('pin');
-    const params = {
-      SESSION_PIN: pin,
-      JENIS_SOAL: "PUPUK", 
+    if (key != 0) {      
+      const pin = localStorage.getItem('pin');
+      const params = {
+        SESSION_PIN: pin,
+        JENIS_SOAL: "PUPUK", 
+      }
+    
+      this.api.soalPupuk(key, params).then(
+        (result: any) => {
+          this.soal = result.data['data'];
+          this.soal = this.soal.map((element, index) => {
+            const nomor_soal = key; // Adjust the formula for numbering
+            return { ...element, selectedOption: null, nomor_soal, status: 0 };
+          });
+    
+          const savedSoalString = localStorage.getItem('savedSoal');
+          if (savedSoalString) { // Check if savedSoalString is not null
+            const savedSoal = JSON.parse(savedSoalString);
+            this.soal.forEach(val => {
+              const matchingSavedQuestion = savedSoal.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
+              if (matchingSavedQuestion) {
+                val.selectedOption = matchingSavedQuestion.selectedOption;
+              } else {
+                localStorage.setItem('savedSoal', JSON.stringify(savedSoal.concat(this.soal)));
+              }
+            });
+    
+            // Update savedSoal with the latest data
+          } else {
+            localStorage.setItem('savedSoal', JSON.stringify(this.soal));
+          }
+    
+          console.log(this.soal);
+        });
     }
-    this.api.soalPupuk(key, params).then(
-      (result: any) => {
-        this.soal = result.data['data'];
-        this.soal = this.soal.map((element, index) => {
-          const nomor_soal = key; // Adjust the formula for numbering
-          return { ...element, selectedOption: null, nomor_soal };
-        });
-
-        const savedSoal = JSON.parse(localStorage.getItem('savedSoal'));
-        this.soal.forEach(val => {
-          const matchingSavedQuestion = savedSoal.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
-          val.selectedOption = matchingSavedQuestion.selectedOption;
-        });
-        console.log(this.soal);
-      });
   }
 
+  counterRun(key){
+     if (key != 0) {     
+      let time: any = localStorage.getItem('setTime');
+      if (time == null) {
+        this.counter = 1500;
+        localStorage.setItem('setTime', "1500")
+        this.countDown = timer(0, this.tick).subscribe((count) => {
+          if (this.counter == 0 && count) {
+            if (this.countDown) {
+              this.countDown.unsubscribe();
+            }
+          }
+          --this.counter;
+        });
+      } else {
+        this.counter = ++time;
+        this.countDown = timer(0, this.tick).subscribe((count) => {
+          if (this.counter == 0 && count) {
+            if (this.countDown) {
+              this.countDown.unsubscribe();
+            }
+          }
+          --this.counter;
+        });
+      }
+    }
+  }
+  
 
-  isIndikatorActive(indikator: number): boolean {
+
+  isIndikatorActive(indikator: number): number {
     const savedSoalString = localStorage.getItem('savedSoal');
 
     if (savedSoalString) {
-      const savedSoal = JSON.parse(savedSoalString);
-      const index = indikator + 1;
+        const savedSoal = JSON.parse(savedSoalString);
+        const index = indikator + 1;
+        const activeSoal = savedSoal.find((soal) => soal.nomor_soal === index && soal.selectedOption != null);
 
-      return savedSoal.some((soal) => soal.nomor_soal == index && soal.selectedOption !== null);
+        if (activeSoal) {
+            return activeSoal.status;
+        }
     }
 
-    return false;
-  }
+    return 0;
+}
 
+
+
+  previusQuestion() {
+    this.page = this.page - 1;
+    this.router.navigate(['../', this.page], { relativeTo: this.activedRouter });
+  }
 
   nextQuestion() {
     this.page = this.page + 1;
     this.router.navigate(['../', this.page], { relativeTo: this.activedRouter });
   }
+
+  raguButton(indikator) {
+    const savedSoalString = localStorage.getItem('savedSoal');
+    let savedSoal = JSON.parse(savedSoalString);
+    const index = indikator;
+
+    // Cari soal dengan nomor yang sesuai
+    const soalToUpdate = savedSoal.find((soal) => soal.nomor_soal === index);
+
+    if (soalToUpdate) {
+        // Update status soal
+        soalToUpdate.status = 2;
+        localStorage.setItem('savedSoal', JSON.stringify(savedSoal));
+        this.page = this.page + 1;
+        this.router.navigate(['../', this.page], { relativeTo: this.activedRouter });
+    }
+}
+
 
   clickIndikator(keypage) {
     this.router.navigate(['../' + Math.ceil((keypage + 1))], { relativeTo: this.activedRouter });
@@ -125,6 +176,7 @@ export class PupukComponent implements OnInit, OnDestroy {
         if (existingSoalIndex !== -1) {
           savedSoal[existingSoalIndex].OPTIONS = this.soal[i].OPTIONS;
           savedSoal[existingSoalIndex].selectedOption = this.soal[i].selectedOption;
+          savedSoal[existingSoalIndex].status = 1;
         } else {
           savedSoal.push(this.soal[i]);
         }
@@ -133,6 +185,7 @@ export class PupukComponent implements OnInit, OnDestroy {
       localStorage.setItem('setTime', JSON.stringify(this.counter));
     } else {
       localStorage.setItem('setTime', JSON.stringify(this.counter));
+      this.soal[0].status = 1;
       localStorage.setItem('savedSoal', JSON.stringify(this.soal));
     }
     this.soal.forEach((val) => {
