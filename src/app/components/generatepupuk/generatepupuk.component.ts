@@ -153,18 +153,19 @@ export class GeneratepupukComponent implements OnInit {
 
       this.api.createSoalPupuk(params).then(
         (result: any) => {
-          counter++
-          if (counter == options.length) {
-            this.message.add({
-              severity: "success",
-              summary: 'SUCCESS',
-              detail: 'Soal berhasil dibuat'
-            })
-            this.QUESTIONTEXT = "";
-            this.OPTIONTEXT1 = "";
-            this.OPTIONTEXT2 = "";
-            this.OPTIONTEXT3 = "";
-          }
+          this.message.add({
+            severity: "success",
+            summary: 'SUCCESS',
+            detail: 'Soal berhasil dibuat'
+          })
+          this.QUESTIONTEXT = "";
+          this.OPTIONTEXT1 = "";
+          this.OPTIONTEXT2 = "";
+          this.OPTIONTEXT3 = "";
+          this.gambarOption1 = null;
+          this.gambarOption2 = null;
+          this.gambarOption3 = null;
+          this.gambarOption4 = null;
           // this.OPTIONTEXT4 = "";
         }).catch(
           (error: any) => {
