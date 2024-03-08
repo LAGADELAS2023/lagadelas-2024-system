@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   constructor() {
     this.createOnline$().subscribe((isOnline) => {
-      console.log(isOnline);
       if (isOnline) {
         this.onlineMessage = 'ONLINE';
         

@@ -45,12 +45,10 @@ export class GeneratepupukComponent implements OnInit {
 
   onUpload(event: UploadEvent) {
     this.message.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-    console.log(event);
 
   }
 
   onFileChange(event: any, key): void {
-    console.log(key);
 
     if (key == 0) {
       const reader = new FileReader();
@@ -61,7 +59,6 @@ export class GeneratepupukComponent implements OnInit {
 
         reader.onload = () => {
           this.gambarPertanyaan = reader.result as string;
-          console.log(this.gambarPertanyaan);
 
         };
       }
@@ -74,7 +71,6 @@ export class GeneratepupukComponent implements OnInit {
 
         reader.onload = () => {
           this.gambarOption1 = reader.result as string;
-          console.log(this.gambarOption1);
 
         };
       }
@@ -87,7 +83,6 @@ export class GeneratepupukComponent implements OnInit {
 
         reader.onload = () => {
           this.gambarOption2 = reader.result as string;
-          console.log(this.gambarOption2);
 
         };
       }
@@ -100,7 +95,6 @@ export class GeneratepupukComponent implements OnInit {
 
         reader.onload = () => {
           this.gambarOption4 = reader.result as string;
-          console.log(this.gambarOption4);
 
         };
       }
@@ -113,7 +107,6 @@ export class GeneratepupukComponent implements OnInit {
 
         reader.onload = () => {
           this.gambarOption3 = reader.result as string;
-          console.log(this.gambarOption3);
 
         };
       }

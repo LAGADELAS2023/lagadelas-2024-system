@@ -164,5 +164,15 @@ export class ApiService {
       })
     })
   }
+
+  public updatePassword(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}update-password`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+  
   
 }

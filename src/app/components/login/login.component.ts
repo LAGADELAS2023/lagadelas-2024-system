@@ -67,7 +67,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onDigitInput(event) {
-    console.log(event);
 
     let element;
 

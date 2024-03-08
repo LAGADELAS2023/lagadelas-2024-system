@@ -30,7 +30,6 @@ export class SandiComponent implements OnInit {
     this.activedRouter.params.subscribe(params => {
       this.page = +params['pages'];
       this.initAPI(this.page);
-      console.log(this.page);
 
     });
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
@@ -50,7 +49,6 @@ export class SandiComponent implements OnInit {
         });
 
         const savedAnswer = JSON.parse(localStorage.getItem('savedAnswer'));
-        console.log(savedAnswer);
 
         this.soal.forEach(val => {
           const matchingSavedQuestion = savedAnswer.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);
@@ -104,7 +102,6 @@ export class SandiComponent implements OnInit {
     }
 
     localStorage.setItem('savedAnswer', JSON.stringify(savedAnswer));
-    console.log(savedAnswer);
   }
 
   selesai() {
@@ -136,7 +133,6 @@ export class SandiComponent implements OnInit {
         }
         this.api.skorSandi(params).then(
           (result: any) => {
-            console.log(result);
 
           })
       })

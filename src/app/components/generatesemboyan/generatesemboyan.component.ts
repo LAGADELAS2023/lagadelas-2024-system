@@ -32,7 +32,6 @@ export class GeneratesemboyanComponent implements OnInit{
   }
 
   onFileChange(event: any, key): void {
-    console.log(key);
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
@@ -41,7 +40,6 @@ export class GeneratesemboyanComponent implements OnInit{
 
       reader.onload = () => {
         this.gambarPertanyaan = reader.result as string;
-        console.log(this.gambarPertanyaan);
 
       };
     }

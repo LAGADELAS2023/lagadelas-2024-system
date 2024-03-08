@@ -94,7 +94,6 @@ export class CreatePinSessionComponent implements OnInit {
       'yyyy-MM-dd'
     );
     this.editDialog = true;
-    console.log(this.selectedRowSession);
 
 
   }

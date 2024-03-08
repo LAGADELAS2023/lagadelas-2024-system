@@ -32,7 +32,6 @@ export class GeneratesandiComponent implements OnInit {
   }
 
   onFileChange(event: any, key): void {
-    console.log(key);
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
@@ -41,38 +40,50 @@ export class GeneratesandiComponent implements OnInit {
 
       reader.onload = () => {
         this.gambarPertanyaan = reader.result as string;
-        console.log(this.gambarPertanyaan);
-
       };
     }
   }
 
   protected postSoalSandi() {
     let answerkeyArray =this.answerKey.split(' ');
-    const params = {
-      "QUESTION_TEXT": this.key,
-      "SESSION_PIN": this.selectedSession.SESSION_PIN,
-      "QUESTION_IMAGE": this.gambarPertanyaan,
-      "K1": answerkeyArray[0],
-      "K2": answerkeyArray[1],
-      "K3": answerkeyArray[2],
-      "K4": answerkeyArray[3],
-      "K5": answerkeyArray[4],
-    }
-    this.api.soalSandi(params).then(
-      (result: any) => {
-        this.message.add({
-          severity: 'success',
-          summary: 'SUCCESS',
-          detail: 'Berhasil menambahkan soal sandi'
-        })
-      }).catch(
-        (error: any) => {
+    if (answerkeyArray.length < 5) {
+      this.message.add({
+        severity: 'error',
+        summary: 'FAILED',
+        detail: 'Kunci jawaban Kurang dari 5 kata'
+      })
+    } else if (answerkeyArray.length > 5){
+      this.message.add({
+        severity: 'error',
+        summary: 'FAILED',
+        detail: 'Kunci jawaban Lebih dari 5 kata'
+      })
+    } else {
+      const params = { 
+        "QUESTION_TEXT": this.key,
+        "SESSION_PIN": this.selectedSession.SESSION_PIN,
+        "QUESTION_IMAGE": this.gambarPertanyaan,
+        "K1": answerkeyArray[0],
+        "K2": answerkeyArray[1],
+        "K3": answerkeyArray[2],
+        "K4": answerkeyArray[3],
+        "K5": answerkeyArray[4],
+      }
+      this.api.soalSandi(params).then(
+        (result: any) => {
           this.message.add({
-            severity: 'error',
-            summary: 'FAILED',
-            detail: 'Gagal menambahkan soal sandi'
+            severity: 'success',
+            summary: 'SUCCESS',
+            detail: 'Berhasil menambahkan soal sandi'
           })
-        })
+        }).catch(
+          (error: any) => {
+            this.message.add({
+              severity: 'error',
+              summary: 'FAILED',
+              detail: 'Gagal menambahkan soal sandi'
+            })
+          })
+    }
   }
 }

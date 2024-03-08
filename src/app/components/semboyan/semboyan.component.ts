@@ -67,7 +67,6 @@ export class SemboyanComponent implements OnInit {
         });
 
         const savedAnswer = JSON.parse(localStorage.getItem('savedAnswer'));
-        console.log(savedAnswer);
 
         this.soal.forEach(val => {
           const matchingSavedQuestion = savedAnswer.find(savedQuestion => savedQuestion.QUEST_ID == val.QUEST_ID);

@@ -36,18 +36,15 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.activedRouter.params.subscribe(params => {
       this.page = +params['pages'];
       this.initAPI(this.page);
-      console.log(this.page);
 
     });
     let time: any = localStorage.getItem('setTime');
-    console.log(time);
 
     if (time == null) {
       this.counter = 7200;
       localStorage.setItem('setTime', "7200")
       this.countDown = timer(0, this.tick).subscribe((count) => {
         if (this.counter == 0 && count) {
-          console.log('timer completed', count, this.counter);
           if (this.countDown) {
             this.countDown.unsubscribe();
           }
@@ -58,7 +55,6 @@ export class PupukComponent implements OnInit, OnDestroy {
       this.counter = ++time;
       this.countDown = timer(0, this.tick).subscribe((count) => {
         if (this.counter == 0 && count) {
-          console.log('timer completed', count, this.counter);
           if (this.countDown) {
             this.countDown.unsubscribe();
           }

@@ -101,7 +101,6 @@ export class RegisterAccountComponent implements OnInit {
     this.visible = true;
     this.selectedAccount = {...account}
     this.selectedAccount.PASSWORD = ''
-    console.log(this.selectedAccount);
   }
 
   updateAccount(){ 
