@@ -113,7 +113,25 @@ export class ApiService {
 
   public getTotalSkor(params) {
     return new Promise((resolve, reject) => {
-      return this.http.post(`${environment.url_public}summary`, params).subscribe({
+      return this.http.post(`${environment.url_public}summary-pupuk`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public getTotalSumarrySandi(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}summary-sandi`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+  public getTotalSumarrySemboyan(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}summary-semboyan`, params).subscribe({
         next: (ress) => resolve(ress),
         error: (err) => reject(err)
       })
@@ -211,6 +229,16 @@ export class ApiService {
   }
 
 
-  
-  
+  public infoLagadelas(params) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(`${environment.url_public}info-lagadelas`, params).subscribe({
+        next: (ress) => resolve(ress),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
+
+
+
 }

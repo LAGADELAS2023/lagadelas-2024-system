@@ -31,6 +31,8 @@ export class AppMenuComponent implements OnInit {
                 label: 'HOME',
                 items: [
                     { label: 'DASHBOARD', routerLink: ['/admin'] },
+                    { label: 'PENGAJUAN PERKAP', routerLink: ['perkap/pengajuan'] },
+                    { label: 'INFORMASI', routerLink: ['humas/informasi'] },
                 ],
                 role: [],
             },
@@ -40,7 +42,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'VERIFIKASI REGU', routerLink: ['verifikasi'] },
                     { label: 'BUAT AKUN REGU', routerLink: ['sekretaris/buat-akun-peserta'] },
                 ],
-                role: ["REGULER", "ADMIN", "SEKRETARIS"],
+                role: ["REGULER", "ADMIN", "SEKRETARIS", "REGULER"],
             },
             {
                 label: 'MATERI',
@@ -53,13 +55,13 @@ export class AppMenuComponent implements OnInit {
                 ],
                 role: ["MATERI", "ADMIN", "REGULER"],
             },
-            // {
-            //     label: 'TOOLS',
-            //     items: [
-            //         { label: 'BLOG', routerLink: ['tools/blog'] },
-            //     ],
-            //     role: [],
-            // },
+            {
+                label: 'PERLENGKAPAN',
+                items: [
+                    { label: 'DAFTAR PENGAJUAN', routerLink: ['perkap/daftar-pengajuan'] },
+                ],
+                role: ["PERLENGKAPAN", "ADMIN", "REGULER"],
+            },
             {
                 label: 'ADMIN ZONE',
                 items: [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
@@ -12,18 +12,21 @@ import { MessageService } from 'primeng/api';
 })
 export class SandiComponent implements OnInit {
 
-  counter = 7200;
+  counter = 0;
   tick = 1000;
   countDown: Subscription;
   page: any;
   soal = [];
   responSave = [];
-  account: any
+  account: any;
+  directUrl = "pages/login";
   key1: "";
   key2: "";
   key3: "";
   key4: "";
   key5: "";
+  nilai_sandi = null;
+  nilai_pupuk = null;
 
   constructor(
     protected api: ApiService,
@@ -38,9 +41,9 @@ export class SandiComponent implements OnInit {
       this.initAPI(this.page);
 
     });
+    this.counter = parseInt(localStorage.getItem('setTime'))
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
     this.account = JSON.parse(localStorage.getItem('account'));
-
   }
 
   initAPI(key) {
@@ -148,24 +151,37 @@ export class SandiComponent implements OnInit {
     }
     Promise.all(apiPromises)
       .then(() => {
-        // const params = {
-        //   "USERNAME": account.USERNAME,
-        //   "SESSION_PIN": localStorage.getItem('pin')
-        // }
-        // this.api.skorSandi(params).then(
-        //   (result: any) => {
-
-        //   })
-        this.message.add({
-          severity: "success",
-          summary : "BERHASIL",
-          detail : "Jawaban Berhasil disimpan"
-        })
+        const params = {
+          "USERNAME": "REGU_"+account.NAME,
+          "SESSION_PIN": localStorage.getItem('pin'),
+          "JENIS_SOAL": "SANDI",
+        }
+        const paramsPupuk = {
+          "USERNAME": "REGU_"+account.NAME,
+          "SESSION_PIN": localStorage.getItem('pin'),
+          "JENIS_SOAL": "PUPUK",
+        }
+        this.api.getTotalSumarrySandi(params).then(
+          (result: any) => {
+            this.nilai_sandi = result.Nilai;
+          })
+        this.api.getTotalSkor(paramsPupuk).then(
+          (result: any) => {
+            this.nilai_pupuk = result.TotalNilaiPuk;
+          })
       })
       .catch((error) => {
         // Handle errors if needed
         console.error('Error:', error);
       });
+  }
+
+  @HostListener('document:visibilitychange', ['$event'])
+  handleTabFocusChange(event: Event): void {
+    if (document.visibilityState === 'visible') {
+      this.router.navigate([this.directUrl]);
+      localStorage.setItem('setTime', String(this.counter))
+    }
   }
 }
 

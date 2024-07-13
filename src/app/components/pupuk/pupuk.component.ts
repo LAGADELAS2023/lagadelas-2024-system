@@ -37,10 +37,33 @@ export class PupukComponent implements OnInit, OnDestroy {
     this.activedRouter.params.subscribe(params => {
       this.page = +params['pages'];
       this.initAPI(this.page);
-      this.counterRun(this.page);
+      // this.counterRun(this.page);
 
     });
     this.account = JSON.parse(localStorage.getItem('account'));
+    let time: any = localStorage.getItem('setTime');
+    if (time == null) {
+      this.counter = 1500;
+      localStorage.setItem('setTime', "1500")
+      this.countDown = timer(0, this.tick).subscribe((count) => {
+        if (this.counter == 0 && count) {
+          if (this.countDown) {
+            this.countDown.unsubscribe();
+          }
+        }
+        --this.counter;
+      });
+    } else {
+      this.counter = ++time;
+      this.countDown = timer(0, this.tick).subscribe((count) => {
+        if (this.counter == 0 && count) {
+          if (this.countDown) {
+            this.countDown.unsubscribe();
+          }
+        }
+        --this.counter;
+      });
+    }
     
   }
   ngOnDestroy() {
@@ -62,7 +85,6 @@ export class PupukComponent implements OnInit, OnDestroy {
             const nomor_soal = key; // Adjust the formula for numbering
             return { ...element, selectedOption: null, nomor_soal, status: 0 };
           });
-    
           const savedSoalString = localStorage.getItem('savedSoal');
           if (savedSoalString) { // Check if savedSoalString is not null
             const savedSoal = JSON.parse(savedSoalString);
@@ -85,33 +107,11 @@ export class PupukComponent implements OnInit, OnDestroy {
     }
   }
 
-  counterRun(key){
-     if (key != 0) {     
-      let time: any = localStorage.getItem('setTime');
-      if (time == null) {
-        this.counter = 1500;
-        localStorage.setItem('setTime', "1500")
-        this.countDown = timer(0, this.tick).subscribe((count) => {
-          if (this.counter == 0 && count) {
-            if (this.countDown) {
-              this.countDown.unsubscribe();
-            }
-          }
-          --this.counter;
-        });
-      } else {
-        this.counter = ++time;
-        this.countDown = timer(0, this.tick).subscribe((count) => {
-          if (this.counter == 0 && count) {
-            if (this.countDown) {
-              this.countDown.unsubscribe();
-            }
-          }
-          --this.counter;
-        });
-      }
-    }
-  }
+  // counterRun(key){
+  //    if (key != 0) {     
+      
+  //   }
+  // }
   
 
 
@@ -250,17 +250,21 @@ export class PupukComponent implements OnInit, OnDestroy {
         })
   }
 
+  selesai(){
+    this.router.navigate(['/cat/sandi/1'])
+  }
+
   generateArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index);
   }
 
-  // @HostListener('document:visibilitychange', ['$event'])
-  // handleTabFocusChange(event: Event): void {
-  //   if (document.visibilityState === 'visible') {
-  //     this.router.navigate([this.directUrl]);
-  //     localStorage.setItem('setTime', String(this.counter))
-  //   }
-  // }
+  @HostListener('document:visibilitychange', ['$event'])
+  handleTabFocusChange(event: Event): void {
+    if (document.visibilityState === 'visible') {
+      this.router.navigate([this.directUrl]);
+      localStorage.setItem('setTime', String(this.counter))
+    }
+  }
 }
 
 @Pipe({

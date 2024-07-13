@@ -1,54 +1,44 @@
-	<p-toast [breakpoints]="{'920px': {width: '90%', right: '0'}}"></p-toast>
-	<p-blockUI [blocked]="blockedDocument">
-		<div class="loader"></div>
-		<p style="color: white;font-weight: bold;font-style: italic;font-size: 2rem;margin-left: 20px;">Loading...</p>
-	</p-blockUI>
-	<section>
-		<div class="leaves">
-			<div class="set">
-				<div><img src="./assets/image/login/leaf_01.png"></div>
-				<div><img src="./assets/image/login/leaf_02.png"></div>
-				<div><img src="./assets/image/login/leaf_03.png"></div>
-				<div><img src="./assets/image/login/leaf_04.png"></div>
-				<div><img src="./assets/image/login/leaf_01.png"></div>
-				<div><img src="./assets/image/login/leaf_02.png"></div>
-				<div><img src="./assets/image/login/leaf_03.png"></div>
-				<div><img src="./assets/image/login/leaf_04.png"></div>
+<p-toast [breakpoints]="{'920px': {width: '90%', right: '0'}}"></p-toast>
+<p-blockUI [blocked]="blockedDocument">
+	<div class="loader"></div>
+	<p style="color: white;font-weight: bold;font-style: italic;font-size: 2rem;margin-left: 20px;">Loading...</p>
+</p-blockUI>
+<div class="flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
+	style="background-image: url('/assets/layout/images/bg-lagadelas.png'); background-repeat: no-repeat; background-size: cover; align-items: baseline !important;">
+	<div style="position:fixed;" class="mt-2 flex flex-column justify-content-around   align-items-center ">
+		<img src="/assets/layout/images/logo-mix.png" alt="logo" class="img-logo-mix">
+		<h3 class="title-login">LAGADELAS INISIATOR</h3>
+		<small class="sub-title-login">Lomba Galang Delapan Belas</small>
+		<div class="mt-2">
+			<q class="font-italic">Inisiatif Praja Muda, Pilar Intelektual Bangsa</q>
+		</div>
+		<div class="grid justify-content-center align-items-center p-2 lg:p-0 lg:mt-7 mt-5">
+			<div class="container">
+				<form [formGroup]="formGroup" (submit)="_login()" class="login mx-3">
+					<h4 class="font-bold">Login Panitia</h4>
+					<div class="inputBox p-fluid">
+						<input pInputText type="text" placeholder="Username" name="username" formControlName="username"
+							[ngClass]="{ 'ng-invalid': formGroup.get('username').invalid && (formGroup.get('username').dirty || formGroup.get('username').touched) }"
+							(input)="conditionCheckUsername()" />
+						<small class="mt-2" style="color: red;text-align: left;" *ngIf="username">Username tidak boleh
+							kosong</small>
+					</div>
+					<div class="inputBox p-fluid">
+						<p-password type="password" placeholder="Password" name="password" formControlName="password"
+							[toggleMask]="true"
+							[ngClass]="{ 'ng-invalid': formGroup.get('password').invalid && (formGroup.get('password').dirty || formGroup.get('password').touched) }"
+							[feedback]="false" (input)="conditionCheckPassword()">
+						</p-password>
+						<small class="mt-2" style="color: red;text-align: left;" *ngIf="password">Password tidak boleh
+							kosong</small>
+					</div>
+					<div class="inputBox p-fluid">
+						<button class="p-button-warning" pButton pRipple label="LOGIN" type="submit"></button>
+					</div>
+				</form>
 			</div>
 		</div>
-		<img src="./assets/image/login/bg.jpg" class="bg">
-		<img src="./assets/image/login/girl.png" class="girl">
-		<img src="./assets/image/login/trees.png" class="trees">
-		<form [formGroup]="formGroup" (submit)="_login()" class="login mx-3">
-            <img src="./assets/image/maskot/figure2_transparant.png" alt="maskot">
-			<h3>LAGADELAS INISIATOR 2024</h3>
-			<div class="inputBox p-fluid">
-				<input pInputText 
-				type="text" 
-				placeholder="Username" 
-				name="username" 
-				formControlName="username" 
-				[ngClass]="{ 'ng-invalid': formGroup.get('username').invalid && (formGroup.get('username').dirty || formGroup.get('username').touched) }" 
-				(input)="conditionCheckUsername()"
-				/>
-						 <small class="mt-2" style="color: red;text-align: left;" *ngIf="username">Username tidak boleh kosong</small>
-			</div>
-			<div class="inputBox p-fluid">
-				<p-password 
-				type="password" 
-				placeholder="Password" 
-				name="password" 
-				formControlName="password" 
-				[toggleMask]="true" 
-				[ngClass]="{ 'ng-invalid': formGroup.get('password').invalid && (formGroup.get('password').dirty || formGroup.get('password').touched) }" 
-				[feedback]="false" 
-				(input)="conditionCheckPassword()">
-			</p-password>
-			<small class="mt-2" style="color: red;text-align: left;" *ngIf="password">Password tidak boleh kosong</small>
-			</div>
-            <div class="inputBox p-fluid">
-				<button class="p-button-warning" pButton pRipple label="LOGIN" type="submit" ></button>
-            </div>
-		</form>
-		
-	</section>
+		<p style="font-size: 10px;color: white;margin-top: 2rem;">&#169; Publisher by Lagadelas 2024 SMP Negeri 18
+			Semarang</p>
+	</div>
+</div>

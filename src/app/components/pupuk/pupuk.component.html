@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <app-header></app-header>
 <div class="grid mr-2 ml-2" style="margin-top: 6rem;">
-    <div class="col-6">
+    <div class="lg:col-6 col-12">
         <div class="card">
             <h4>Informasi Pengerjaan</h4>
             <hr>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="lg:col-6 col-12">
         <div class="card">
             <h4>Sisa Waktu</h4>
             <hr>
@@ -65,7 +65,7 @@
             <button class="col p-button-warning" pButton pRipple label="MULAI MENGERJAKAN" (click)="nextQuestion()"></button>
         </div>
     </div>
-    <div class="col-4" *ngIf="page != 0">
+    <div class="lg:col-4 col-12" *ngIf="page != 0">
         <div class="card">
             <div class="sidebar">
                 <div *ngFor="let i of generateArray(30); let last = last" class="loop">
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="col-8" *ngIf="page != 0">
+    <div class="lg:col-8 col-12" *ngIf="page != 0">
         <div class="card">
             <div class="w-full">
                 <div *ngFor="let item of soal; let outerIndex = index" class="mt-5">
@@ -106,8 +106,8 @@
                         (click)="raguButton(page)"></button>
                     <button *ngIf="page < 30" pButton pRipple class="col p-button-info mr-3" label="NEXT"
                         (click)="nextQuestion()"></button>
-                    <button *ngIf="page == 30" pButton pRipple class="col p-button-warning col-2" label="selesai"
-                        (click)="getSkor()"></button>
+                    <button *ngIf="page == 30" pButton pRipple class="col p-button-success" label="selesai"
+                        (click)="selesai()"></button>
                 </div>
             </div>
         </div>

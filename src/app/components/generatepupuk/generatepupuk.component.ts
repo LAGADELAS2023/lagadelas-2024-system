@@ -141,6 +141,7 @@ export class GeneratepupukComponent implements OnInit {
         QUESTION_TEXT: this.QUESTIONTEXT,
         QUESTION_IMAGE: this.gambarPertanyaan,
         SESSION_PIN: this.selectedSession.SESSION_PIN,
+        JENIS_SOAL: "PUPUK",
         OPTIONS: options,
       };      
 

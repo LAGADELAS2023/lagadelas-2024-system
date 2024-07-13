@@ -13,7 +13,8 @@
                 </div>
                 <div class="field">
                     <label for="divisi" class="font-bold">DIVISI</label>
-                    <p-dropdown [options]="mstDivisi" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" [(ngModel)]="selectedDivisi"></p-dropdown>
+                    <p-dropdown [options]="mstDivisi" optionLabel="name" [filter]="true" filterBy="name"
+                        [showClear]="true" [(ngModel)]="selectedDivisi"></p-dropdown>
                 </div>
             </div>
             <div class="lg:col-6 col-12">
@@ -27,7 +28,8 @@
                 </div>
                 <div class="field">
                     <label for="divisi" class="font-bold">HAK AKSES</label>
-                    <p-dropdown [options]="mstRole" optionLabel="ROLE_NAME" [filter]="true" filterBy="ROLE_NAME" [showClear]="true" [(ngModel)]="selectedRole"></p-dropdown>
+                    <p-dropdown [options]="mstRole" optionLabel="ROLE_NAME" [filter]="true" filterBy="ROLE_NAME"
+                        [showClear]="true" [(ngModel)]="selectedRole"></p-dropdown>
                 </div>
             </div>
             <div class="col-12 p-fluid">
@@ -35,30 +37,23 @@
             </div>
         </div>
         <div class="card">
-            <p-table
-                #dt2
-                [value]="accountList"
-                dataKey="ID"
-                [rowHover]="true"
-                [rows]="10"
-                [showCurrentPageReport]="true"
-                [rowsPerPageOptions]="[10, 25, 50]"
-                [paginator]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [filterDelay]="0"
-                [globalFilterFields]="['FULL_NAME', 'USERNAME', 'DIVISI']"
-            >
+            <p-table #dt2 [value]="accountList" dataKey="ID" [rowHover]="true" [rows]="10"
+                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                [globalFilterFields]="['FULL_NAME', 'USERNAME', 'DIVISI']">
                 <ng-template pTemplate="caption">
                     <div class="table-header lg:flex justify-content-between align-items-center ">
-                        <div>List of Account</div>
+                        <div>DAFTAR AKUN</div>
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" class="w-full"/>
+                            <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" class="w-full" />
                         </span>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
+                        <th>NO</th>
                         <th>NAMA</th>
                         <th>EMAIL</th>
                         <th>DIVISI</th>
@@ -67,8 +62,11 @@
                         <th style="width: 5rem"></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-account>
+                <ng-template pTemplate="body" let-account let-i="rowIndex">
                     <tr class="p-selectable-row">
+                        <td>
+                            {{ i+1 }}
+                        </td>
                         <td>
                             {{ account.FULL_NAME }}
                         </td>
@@ -85,7 +83,8 @@
                             {{ account.USERNAME  }}
                         </td>
                         <td style="text-align: center;display: flex;gap: 10px;justify-content: center;">
-                            <button pButton type="button" class="p-button-warning" icon="pi pi-pencil" (click)="openDialogUpdate(account)"></button>
+                            <button pButton type="button" class="p-button-warning" icon="pi pi-pencil"
+                                (click)="openDialogUpdate(account)"></button>
                             <button pButton type="button" class="p-button-danger" icon="pi pi-trash"></button>
                         </td>
                     </tr>
@@ -100,7 +99,8 @@
     </div>
 </div>
 
-<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false"
+    [resizable]="false">
     <div class="grid p-fluid">
         <div class="lg:col-6 col-12">
             <div class="field">
@@ -113,7 +113,8 @@
             </div>
             <div class="field">
                 <label for="divisi" class="font-bold">DIVISI</label>
-                <p-dropdown [options]="mstDivisi" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" [(ngModel)]="selectedAccount.DIVISI"></p-dropdown>
+                <p-dropdown [options]="mstDivisi" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true"
+                    [(ngModel)]="selectedAccount.DIVISI"></p-dropdown>
             </div>
         </div>
         <div class="lg:col-6 col-12">
@@ -127,7 +128,8 @@
             </div>
             <div class="field">
                 <label for="divisi" class="font-bold">HAK AKSES</label>
-                <p-dropdown [options]="mstRole" optionLabel="ROLE_NAME" [filter]="true" filterBy="ROLE_NAME" [showClear]="true" [(ngModel)]="selectedAccount.ROLE_NAME"></p-dropdown>
+                <p-dropdown [options]="mstRole" optionLabel="ROLE_NAME" [filter]="true" filterBy="ROLE_NAME"
+                    [showClear]="true" [(ngModel)]="selectedAccount.ROLE_NAME"></p-dropdown>
             </div>
         </div>
         <div class="col-12 p-fluid">

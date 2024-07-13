@@ -1,54 +1,52 @@
-  
-  section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  section .bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-  }
-  
-  section .trees {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 100;
-    pointer-events: none;
-  }
-  
-  section .girl {
-    position: absolute;
-    scale: 0.65;
-    pointer-events: none;
-    animation: animateGirl 10s linear infinite;
-  }
-  
-  @keyframes animateGirl {
-    0% {
-      transform: translateX(calc(100% + 100vw));
-    }
-    50% {
-      transform: translateX(calc(-100% - 100vw));
-    }
-    50.01% {
-      transform: translateX(calc(-100% - 100vw)) rotateY(180deg);
-    }
-    100% {
-      transform: translateX(calc(100% + 100vw)) rotateY(180deg);
-    }
-  }
-  
+  // section {
+  //   position: relative;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 100%;
+  //   height: 100vh;
+  //   overflow: hidden;
+  // }
+
+  // section .bg {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   object-fit: cover;
+  //   pointer-events: none;
+  // }
+
+  // section .trees {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   object-fit: cover;
+  //   z-index: 100;
+  //   pointer-events: none;
+  // }
+
+  // section .girl {
+  //   position: absolute;
+  //   scale: 0.65;
+  //   pointer-events: none;
+  //   animation: animateGirl 10s linear infinite;
+  // }
+
+  // @keyframes animateGirl {
+  //   0% {
+  //     transform: translateX(calc(100% + 100vw));
+  //   }
+  //   50% {
+  //     transform: translateX(calc(-100% - 100vw));
+  //   }
+  //   50.01% {
+  //     transform: translateX(calc(-100% - 100vw)) rotateY(180deg);
+  //   }
+  //   100% {
+  //     transform: translateX(calc(100% + 100vw)) rotateY(180deg);
+  //   }
+  // }

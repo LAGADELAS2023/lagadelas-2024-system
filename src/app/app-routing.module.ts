@@ -28,6 +28,9 @@ import { PbbComponent } from './components/juri/pbb/pbb.component';
 import { PetaLapanganComponent } from './components/juri/peta-lapangan/peta-lapangan.component';
 import { BivakComponent } from './components/juri/bivak/bivak.component';
 import { RegisterPesertaComponent } from './components/register-peserta/register-peserta.component';
+import { RequestComponent } from './components/perlengkapan/request/request.component';
+import { ListRequestComponent } from './components/perlengkapan/list-request/list-request.component';
+import { CreateInfoComponent } from './components/create-info/create-info.component';
 
 @NgModule({
     imports: [
@@ -36,10 +39,13 @@ import { RegisterPesertaComponent } from './components/register-peserta/register
                 path: 'admin', component: AppMainComponent,
                 children: [
                     { path: '', component: DashboardComponent },
+                    { path: 'humas/informasi', component: CreateInfoComponent },
                     { path: 'materi/aproval', component: AprovalSoalComponent },
                     { path: 'materi/pupuk', component: GeneratepupukComponent },
                     { path: 'materi/sandi', component: GeneratesandiComponent },
                     { path: 'materi/semboyan', component: GeneratesemboyanComponent },
+                    { path: 'perkap/pengajuan', component: RequestComponent },
+                    { path: 'perkap/daftar-pengajuan', component: ListRequestComponent },
                     { path: 'sekretaris/buat-akun-peserta', component: RegisterPesertaComponent },
                     { path: 'pin-session', component: CreatePinSessionComponent },
                     { path: 'verifikasi', component: VerifikasiReguComponent },
@@ -65,7 +71,7 @@ import { RegisterPesertaComponent } from './components/register-peserta/register
             { path: 'pages/error', component: ErrorComponent },
             { path: 'pages/notfound', component: NotfoundComponent },
             { path: '**', redirectTo: 'auth/user/login' },
-            {path : '', redirectTo: 'auth/user/login', pathMatch: 'full'}
+            { path: '', redirectTo: 'auth/user/login', pathMatch: 'full' }
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
     ],
     exports: [RouterModule]

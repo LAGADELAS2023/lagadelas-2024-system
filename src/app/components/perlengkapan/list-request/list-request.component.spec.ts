@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BivakComponent } from './bivak.component';
+import { ListRequestComponent } from './list-request.component';
 
-describe('BivakComponent', () => {
-  let component: BivakComponent;
-  let fixture: ComponentFixture<BivakComponent>;
+describe('ListRequestComponent', () => {
+  let component: ListRequestComponent;
+  let fixture: ComponentFixture<ListRequestComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BivakComponent]
+      declarations: [ListRequestComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BivakComponent);
+    fixture = TestBed.createComponent(ListRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

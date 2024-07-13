@@ -1,0 +1,21 @@
+<p-toast></p-toast>
+<div class="card">
+    <div class="p-fluid">
+        <h4 class="font-bold">Tambahkan Informasi</h4>
+        <div class="field">
+            <label for="title" class="block font-medium">Judul</label>
+            <input type="text" pInputText [(ngModel)]="title">
+        </div>
+        <div class="field">
+            <label for="title" class="block font-medium">Thumbnail</label>
+            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="thumbnail" [autoResize]="true"
+                (input)="checkThumbnailLength($event)"></textarea>
+            <small class="text-red-500" *ngIf="errorMessage !='' ">{{errorMessage}}</small>
+        </div>
+        <div class="field">
+            <label for="title" class="block font-medium">Konten</label>
+            <p-editor [(ngModel)]="content" [style]="{ height: '320px' }" />
+        </div>
+    </div>
+    <button pButton pRipple class="p-button-info" icon="pi pi-check" label="Publish" (click)="publish()"></button>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BivakComponent } from './bivak.component';
+import { CreateInfoComponent } from './create-info.component';
 
-describe('BivakComponent', () => {
-  let component: BivakComponent;
-  let fixture: ComponentFixture<BivakComponent>;
+describe('CreateInfoComponent', () => {
+  let component: CreateInfoComponent;
+  let fixture: ComponentFixture<CreateInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BivakComponent]
+      declarations: [CreateInfoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BivakComponent);
+    fixture = TestBed.createComponent(CreateInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

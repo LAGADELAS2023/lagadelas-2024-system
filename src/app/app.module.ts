@@ -143,6 +143,9 @@ import { PbbComponent } from './components/juri/pbb/pbb.component';
 import { PopArtComponent } from './components/juri/pop-art/pop-art.component';
 import { KesenianComponent } from './components/juri/kesenian/kesenian.component';
 import { RegisterPesertaComponent } from './components/register-peserta/register-peserta.component';
+import { RequestComponent } from './components/perlengkapan/request/request.component';
+import { ListRequestComponent } from './components/perlengkapan/list-request/list-request.component';
+import { CreateInfoComponent } from './components/create-info/create-info.component';
 
 @NgModule({
     imports: [
@@ -280,7 +283,10 @@ import { RegisterPesertaComponent } from './components/register-peserta/register
         PbbComponent,
         PopArtComponent,
         KesenianComponent,
-        RegisterPesertaComponent
+        RegisterPesertaComponent,
+        RequestComponent,
+        ListRequestComponent,
+        CreateInfoComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
